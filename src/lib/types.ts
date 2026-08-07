@@ -40,8 +40,12 @@ export type SeccionId =
 export interface Producto {
   /** Identificador estable y legible. Se usa como ancla y como nombre de imagen. */
   id: string;
-  sku: string;
-  /** Número de parte del fabricante, el dato con el que buscan los talleres. */
+  /**
+   * Número de parte del fabricante, el dato con el que buscan los talleres.
+   *
+   * No hay SKU interno: sin un inventario detrás, un código propio no
+   * identificaría nada. El OEM sí es universal y le sirve a quien ya lo tiene.
+   */
   oem: string;
   nombre: string;
   descripcion: string;

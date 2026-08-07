@@ -1,7 +1,7 @@
 # Graph Report - C:/Users/pedro/AutopartesRG  (2026-08-07)
 
 ## Corpus Check
-- Corpus is ~49,793 words - fits in a single context window. You may not need a graph.
+- Corpus is ~49,951 words - fits in a single context window. You may not need a graph.
 
 ## Summary
 - 516 nodes · 878 edges · 29 communities (27 shown, 2 thin omitted)

@@ -38,10 +38,10 @@ const normalizar = (valor: string) =>
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "");
 
-/** Texto indexable: nombre, OEM, SKU, marca, modelos, categoría y sección. */
+/** Texto indexable: nombre, OEM, marca, modelos, categoría y sección. */
 function textoBuscable(p: Producto): string {
   return normalizar(
-    [p.nombre, p.oem, p.sku, p.marca, p.categoria, p.seccion, ...p.modelos].join(" ")
+    [p.nombre, p.oem, p.marca, p.categoria, p.seccion, ...p.modelos].join(" ")
   );
 }
 

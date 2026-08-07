@@ -131,10 +131,7 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
                   >
                     {producto.nombre}
                   </h2>
-                  <div className="flex flex-wrap items-center gap-sm">
-                    <BadgeTecnico>OEM: {producto.oem}</BadgeTecnico>
-                    <BadgeTecnico>SKU: {producto.sku}</BadgeTecnico>
-                  </div>
+                  <BadgeTecnico>OEM: {producto.oem}</BadgeTecnico>
                 </div>
 
                 <div className="mt-sm flex items-start gap-sm rounded-lg border border-primary-fixed-dim bg-primary-fixed p-md">

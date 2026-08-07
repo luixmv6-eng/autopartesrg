@@ -1,7 +1,6 @@
 [
   {
     "id": "pastillas-freno-delanteras-ceramicas",
-    "sku": "FR-PD-1042",
     "oem": "04465-YZZED",
     "nombre": "Pastillas de freno delanteras cerámicas",
     "descripcion": "Juego de cuatro pastillas cerámicas de baja emisión de polvo, con placa antichirrido y chaflán de rodaje. Frenada estable en frío y buen comportamiento en tráfico urbano.",
@@ -20,7 +19,6 @@
   },
   {
     "id": "disco-freno-ventilado-275",
-    "sku": "FR-DV-2750",
     "oem": "96534653-BD",
     "nombre": "Disco de freno ventilado 275 mm",
     "descripcion": "Disco delantero ventilado de fundición gris con recubrimiento anticorrosivo en campana y radio. Mecanizado equilibrado para reducir vibración en el pedal.",
@@ -38,7 +36,6 @@
   },
   {
     "id": "bomba-freno-maestra",
-    "sku": "FR-BM-0088",
     "oem": "58510-2S000",
     "nombre": "Bomba de freno maestra",
     "descripcion": "Cilindro maestro tándem con depósito y sensor de nivel. Incluye juego de sellos y tapón. Recorrido de pedal recuperado tras la instalación y purgado.",
@@ -55,7 +52,6 @@
   },
   {
     "id": "amortiguador-delantero-gas",
-    "sku": "SU-AD-3311",
     "oem": "54661-1R000",
     "nombre": "Amortiguador delantero a gas",
     "descripcion": "Amortiguador bitubo presurizado con vástago cromado y guardapolvo incluido. Calibración de serie, pensado para reemplazo por pares en el mismo eje.",
@@ -74,7 +70,6 @@
   },
   {
     "id": "rotula-inferior-suspension",
-    "sku": "SU-RI-0177",
     "oem": "40160-EM30A",
     "nombre": "Rótula inferior de suspensión",
     "descripcion": "Rótula con cuerpo forjado, grasa de larga duración y guardapolvo de neopreno. Elimina el golpeteo en baches y el juego en la dirección.",
@@ -92,7 +87,6 @@
   },
   {
     "id": "kit-bujes-barra-estabilizadora",
-    "sku": "SU-BE-0290",
     "oem": "BBM2-28-156",
     "nombre": "Kit de bujes de barra estabilizadora",
     "descripcion": "Bujes de caucho reforzado con abrazaderas y tornillería. Recupera la respuesta en curva y quita el ruido seco del tren trasero sobre irregularidades.",
@@ -109,7 +103,6 @@
   },
   {
     "id": "filtro-aceite-motor",
-    "sku": "FI-AC-0501",
     "oem": "90915-YZZD2",
     "nombre": "Filtro de aceite de motor",
     "descripcion": "Filtro de flujo total con válvula antirretorno y medio filtrante sintético. Retención fina sin restringir la presión de aceite en arranque en frío.",
@@ -127,7 +120,6 @@
   },
   {
     "id": "filtro-aire-alto-flujo",
-    "sku": "FI-AI-0733",
     "oem": "AB39-9601-AA",
     "nombre": "Filtro de aire de alto flujo",
     "descripcion": "Elemento de panel con marco de poliuretano y sellado perimetral continuo. Buena separación de polvo fino en rutas destapadas.",
@@ -144,7 +136,6 @@
   },
   {
     "id": "bomba-agua-con-polea",
-    "sku": "RE-BA-1180",
     "oem": "25100-2B000",
     "nombre": "Bomba de agua con polea",
     "descripcion": "Bomba remanufacturada con rodamiento y sello mecánico nuevos, probada en banco. Se entrega con junta y polea montada.",
@@ -161,7 +152,6 @@
   },
   {
     "id": "radiador-aluminio",
-    "sku": "RE-RA-2044",
     "oem": "95227748-RD",
     "nombre": "Radiador de aluminio",
     "descripcion": "Núcleo de aluminio con cajas plásticas reforzadas y soportes de goma incluidos. Probado a presión antes del despacho.",
@@ -178,7 +168,6 @@
   },
   {
     "id": "alternador-90a",
-    "sku": "EL-AL-0900",
     "oem": "27060-0T010",
     "nombre": "Alternador 90 A",
     "descripcion": "Alternador remanufacturado con rotor rebobinado, regulador y rodamientos nuevos. Curva de carga verificada en banco a distintas revoluciones.",
@@ -196,7 +185,6 @@
   },
   {
     "id": "motor-arranque-14kw",
-    "sku": "EL-MA-1400",
     "oem": "31100-63J10",
     "nombre": "Motor de arranque 1.4 kW",
     "descripcion": "Unidad usada con carcasa sana, escobillas dentro de tolerancia y bendix con engrane limpio. Probada antes de salir del taller.",
@@ -213,7 +201,6 @@
   },
   {
     "id": "bobina-encendido-individual",
-    "sku": "EL-BE-0342",
     "oem": "55573735-IG",
     "nombre": "Bobina de encendido individual",
     "descripcion": "Bobina tipo lápiz con encapsulado térmico y conector reforzado. Corrige fallos de chispa y tirones a media carga.",
@@ -230,7 +217,6 @@
   },
   {
     "id": "kit-embrague-completo",
-    "sku": "TR-EM-1860",
     "oem": "377141025D",
     "nombre": "Kit de embrague completo",
     "descripcion": "Plato, disco y collarín de un mismo fabricante, con guía de centrado incluida. Recomendado reemplazar junto con el retén de caja.",
@@ -248,7 +234,6 @@
   },
   {
     "id": "cardan-homocinetico-lado-rueda",
-    "sku": "TR-CH-0649",
     "oem": "391015154R",
     "nombre": "Cardán homocinético lado rueda",
     "descripcion": "Junta homocinética con estrías rectificadas, grasa de litio y fuelle termoplástico. Elimina el chasquido al girar con dirección al tope.",
@@ -266,7 +251,6 @@
   },
   {
     "id": "kit-empaquetadura-culata",
-    "sku": "MO-EC-0960",
     "oem": "04111-30040",
     "nombre": "Kit de empaquetadura de culata",
     "descripcion": "Juego completo superior con empaquetadura multicapa metálica, retenes de válvula y sellos de inyector. Requiere planificado de culata verificado.",
@@ -282,7 +266,6 @@
   },
   {
     "id": "turbocompresor-remanufacturado",
-    "sku": "MO-TU-3220",
     "oem": "GB3Q-6K682-AA",
     "nombre": "Turbocompresor remanufacturado",
     "descripcion": "Turbo con cartucho central nuevo, eje balanceado a alta velocidad y actuador calibrado. Se entrega con junta de escape y tornillería.",
@@ -299,7 +282,6 @@
   },
   {
     "id": "farol-delantero-halogeno-derecho",
-    "sku": "CA-FD-1320",
     "oem": "92102-D3010",
     "nombre": "Farol delantero halógeno derecho",
     "descripcion": "Óptica con carcasa nueva, parábola sin oxidación y regulación de altura funcional. Compatible con el arnés original sin adaptaciones.",
@@ -315,7 +297,6 @@
   },
   {
     "id": "parachoques-delantero-sin-pintar",
-    "sku": "CA-PD-0410",
     "oem": "BHN1-50-031",
     "nombre": "Parachoques delantero sin pintar",
     "descripcion": "Pieza en polipropileno con puntos de anclaje reforzados y alojamientos de sensor ya troquelados. Se entrega imprimada, lista para pintar.",
@@ -331,7 +312,6 @@
   },
   {
     "id": "espejo-retrovisor-electrico-izquierdo",
-    "sku": "CA-ER-0480",
     "oem": "96302-3AN0A",
     "nombre": "Espejo retrovisor eléctrico izquierdo",
     "descripcion": "Conjunto usado con motor de reglaje probado, cristal sin rayas y tapa lista para pintar. Conector de siete vías original.",
@@ -348,7 +328,6 @@
   },
   {
     "id": "juego-tapetes-termoformados",
-    "sku": "CA-TA-0155",
     "oem": "PT908-02205",
     "nombre": "Juego de tapetes termoformados",
     "descripcion": "Cuatro piezas en TPE con bordes altos y anclajes originales. Contienen líquidos y se lavan con agua sin deformarse.",
@@ -365,7 +344,6 @@
   },
   {
     "id": "modulo-elevavidrios-conductor",
-    "sku": "EL-EV-0621",
     "oem": "5G0959858B",
     "nombre": "Módulo elevavidrios del conductor",
     "descripcion": "Botonera con circuito impreso nuevo, contactos limpios y función de bajada automática operativa. Encaje directo en el panel de puerta.",

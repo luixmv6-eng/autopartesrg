@@ -93,7 +93,7 @@ La landing (hero y catálogo), la ficha técnica en diálogo, y Nosotros en ruta
    filtros activos; grid de 3 columnas (2 en móvil) con categoría en versalitas,
    nombre, número OEM, franja de compatibilidad y "Ver ficha".
 4. **Ficha técnica**. Cabecera "Ficha Técnica de Autoparte", galería a la
-   izquierda, migas, título, píldoras OEM y SKU, callout de compatibilidad,
+   izquierda, migas, título, píldora con el número OEM, callout de compatibilidad,
    tabla de especificaciones con filas alternas, CTA de WhatsApp con
    vista previa editable del mensaje y repuestos relacionados.
 5. **Nosotros**. En su propia ruta `/nosotros`, fuera de la landing: cabecera con
@@ -166,6 +166,7 @@ interpola**: hay que nombrarlas (`transition-[box-shadow,translate]`) o usar
 | Tema claro y oscuro | Solo claro | Stitch define únicamente tokens de tema claro |
 | Dirección postal en el footer y `PostalAddress` en los datos estructurados | Eliminada; en su lugar, cobertura de despacho y `areaServed` | El comercio no tiene sede física. Declarar una dirección falsa es motivo de acción manual por spam de datos estructurados |
 | Horario de atención en el footer y `openingHours` en el marcado | Eliminados | El sitio no publica horario; la atención se resuelve por WhatsApp |
+| Píldora `SKU:` junto al OEM en la ficha | Eliminada; solo queda el OEM | Sin base de datos de inventario, un código interno no identifica nada. El OEM sí es universal y le sirve a quien ya lo tiene |
 | Enlaces a Términos y Condiciones y Política de Privacidad | Eliminados del footer | Apuntaban a un ancla vacía; enlazar a páginas inexistentes perjudica más que ayuda |
 | Dos modelos de navegación móvil (barra inferior en Home, hamburguesa en Nosotros) | Solo barra inferior | Montar los dos deja cuatro destinos duplicados en la misma pantalla |
 | Colores de estado sueltos y distintos por pantalla (`#2e7d32` vs `#10b981`, `#fbc02d` vs `#f59e0b`) | Tokens `ok` / `warn` únicos | Las maquetas se contradicen entre sí; un solo par de tokens mantiene la lectura constante |

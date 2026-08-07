@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * Píldora técnica para OEM y SKU.
+ * Píldora técnica para el número de parte del fabricante.
  *
  * El catálogo no muestra condición ni disponibilidad: sin un sistema de stock
  * detrás, esas etiquetas prometerían algo que no se puede sostener. Se

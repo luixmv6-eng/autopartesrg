@@ -58,8 +58,7 @@ que registrarlas también en el panel del hosting.
 ```jsonc
 {
   "id": "pastillas-freno-delanteras-ceramicas", // identificador y nombre de imagen
-  "sku": "FR-PD-1042",
-  "oem": "04465-YZZED",               // número de parte, se muestra en tarjeta y ficha
+  "oem": "04465-YZZED",               // número de parte del fabricante
   "nombre": "Pastillas de freno delanteras cerámicas",
   "descripcion": "…",
   "marca": "toyota",                  // ver MARCAS en src/lib/taxonomia.ts
@@ -80,6 +79,22 @@ filtros, los chips y las etiquetas se generan a partir de ahí.
 Los **repuestos relacionados** de la ficha se derivan solos: misma categoría
 primero, luego misma sección y marca (`relacionados()` en `src/lib/productos.ts`).
 
+### Identificadores: OEM, y por qué no hay SKU
+
+El único código que publica el catálogo es el **OEM** (*Original Equipment
+Manufacturer*), el número de parte que asigna el fabricante del vehículo. Es
+universal: cualquier taller lo reconoce y le sirve a quien ya lo tiene apuntado
+de la pieza vieja. Por eso se muestra en la tarjeta, en la ficha y se indexa en
+el buscador.
+
+**No hay SKU** (código interno de inventario). Sin una base de datos de stock
+detrás, un código propio no identificaría nada real: sería ruido en pantalla.
+
+> Los números OEM del catálogo de ejemplo **son inventados**. El formato es
+> plausible por marca, pero no corresponden verificadamente a la pieza que
+> acompañan. Sustitúyelos por los reales antes de publicar: el buscador indexa
+> este campo, así que un OEM equivocado devuelve resultados equivocados.
+
 ### Lo que el catálogo no publica
 
 El catálogo es un **índice de compatibilidad**, no un inventario. No hay en el
@@ -88,8 +103,9 @@ código, ni en los datos, ni en la interfaz:
 - **Precio ni moneda**: sin importes, sin filtro de rango, sin orden por precio.
 - **Condición del repuesto** (nuevo / usado / remanufacturado).
 - **Disponibilidad** (en stock / bajo pedido).
+- **SKU interno**.
 
-Todo eso se confirma por WhatsApp. La razón es la misma en los tres casos: sin
+Todo eso se confirma por WhatsApp. La razón es la misma en todos los casos: sin
 un sistema de inventario detrás, publicarlos sería prometer algo que no se puede
 sostener. Cuando exista ese sistema, se reintroducen añadiendo los campos al
 tipo `Producto` y sus filtros a `taxonomia.ts`.
@@ -173,7 +189,7 @@ comparte pegando el enlace:
 
 | Parámetro | Significado |
 |---|---|
-| `q` | Búsqueda libre: nombre, OEM, SKU, marca, modelo, categoría |
+| `q` | Búsqueda libre: nombre, OEM, marca, modelo, categoría |
 | `marca` | Marcas del vehículo, separadas por coma |
 | `cat` | Categorías del repuesto |
 | `sec` | Secciones del vehículo |
