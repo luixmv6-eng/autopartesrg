@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AutopartesRG - Catálogo de Autopartes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e2e5",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#744400",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#626567",
+                        "on-primary-container": "#a9c1ff",
+                        "surface-variant": "#e2e2e5",
+                        "surface-tint": "#215abd",
+                        "surface-container": "#eeeef0",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#b0c6ff",
+                        "surface-dim": "#dadadc",
+                        "outline-variant": "#c3c6d5",
+                        "on-background": "#1a1c1e",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#2c1700",
+                        "surface-container-low": "#f3f3f6",
+                        "primary-container": "#004aad",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#e0e3e6",
+                        "inverse-primary": "#b0c6ff",
+                        "secondary": "#5b5f61",
+                        "on-primary": "#ffffff",
+                        "surface": "#f9f9fc",
+                        "inverse-on-surface": "#f0f0f3",
+                        "tertiary-fixed-dim": "#ffb86b",
+                        "surface-bright": "#f9f9fc",
+                        "background": "#f9f9fc",
+                        "on-surface-variant": "#434653",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#44474a",
+                        "on-secondary-fixed": "#191c1e",
+                        "secondary-fixed-dim": "#c4c7ca",
+                        "primary-fixed": "#d9e2ff",
+                        "surface-container-high": "#e8e8ea",
+                        "on-primary-fixed": "#001945",
+                        "tertiary": "#543000",
+                        "tertiary-fixed": "#ffdcbc",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#e0e3e6",
+                        "outline": "#737784",
+                        "on-surface": "#1a1c1e",
+                        "primary": "#00357f",
+                        "on-primary-fixed-variant": "#00429b",
+                        "inverse-surface": "#2f3133",
+                        "on-tertiary-container": "#ffb159"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "base": "4px",
+                        "xl": "40px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "gutter": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-technical": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-technical": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant shadow-sm transition-all duration-300" id="mainHeader">
+<div class="flex items-center justify-between px-xl h-16 max-w-container-max mx-auto w-full">
+<div class="flex items-center gap-lg">
+<a class="font-headline-lg text-headline-lg font-bold text-primary flex items-center gap-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">build_circle</span>
+                    AutopartesRG
+                </a>
+<nav class="hidden md:flex items-center gap-md ml-lg">
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70" href="#">Inicio</a>
+<a class="font-label-technical text-label-technical text-primary border-b-2 border-primary pb-1 hover:text-primary transition-colors cursor-pointer active:opacity-70" href="#">Catálogo</a>
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70" href="#">Nosotros</a>
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70" href="#">Contacto</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-4 py-2 border border-outline-variant focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none outline-none font-body-md text-on-surface w-64 focus:ring-0 p-0 text-sm" placeholder="Buscar por número de pieza o nombre..." type="text"/>
+</div>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors cursor-pointer active:opacity-70 p-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+</button>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors cursor-pointer active:opacity-70 p-2">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="md:hidden text-primary p-2" id="mobileMenuBtn">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-16">
+<!-- Hero Section -->
+<section class="relative h-[409px] min-h-[300px] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0 bg-surface-container-highest" data-alt="A macro photography shot of highly engineered metallic engine components, gears, and precision machined surfaces. The lighting is dramatic and technical, creating high contrast reflections on the silver and dark grey metal. The depth of field is shallow, emphasizing the mechanical precision. The overall mood is industrial, professional, and reliable, utilizing a corporate light-mode aesthetic with subtle cool-toned highlights." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAmDvZsMpBIk47aLqx_hbV7Vam_SdO25nlWu6EzjI69IhDOj_pqX6SlD3AfnY1wXW_LYwRo0nrWEkbJc1lau5s5vHw1aGItydBbclJLtGyHY0SqK4bYfJrhA3-Jahmj-g4Mv6PCR4K6_39Kr3-VOjpCAtoUSrqurax3fjh3fOSrogMrb2IkUHh20EQSgEj5CNS_NKay6dxTlE-rmjmlgV9s4cZSgHwSVhdMMAPdgleUcODVL_XoQZxL')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface/90 to-surface/40 z-10"></div>
+<div class="relative z-20 w-full max-w-3xl px-md mx-auto text-center">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-sm">Encuentra la pieza exacta</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Precisión técnica y confiabilidad para tu vehículo.</p>
+<div class="bg-surface-container-lowest p-sm rounded-lg shadow-md border border-outline-variant flex flex-col md:flex-row gap-sm">
+<div class="flex-grow flex items-center px-3 py-2 bg-surface-container-low rounded border border-outline-variant focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-outline mr-2">search</span>
+<input class="bg-transparent border-none w-full focus:ring-0 p-0 font-body-md text-on-surface" placeholder="Ej. Filtro de aceite Corolla 2020" type="text"/>
+</div>
+<div class="flex-shrink-0 flex items-center px-3 py-2 bg-surface-container-low rounded border border-outline-variant focus-within:border-primary transition-colors md:w-48">
+<span class="material-symbols-outlined text-outline mr-2">directions_car</span>
+<input class="bg-transparent border-none w-full focus:ring-0 p-0 font-label-technical text-label-technical text-on-surface" placeholder="VIN / Chasis (Opcional)" type="text"/>
+</div>
+<button class="bg-[#ff6f00] text-white px-lg py-2 rounded font-headline-md text-[16px] leading-[24px] hover:bg-[#e66400] transition-colors flex items-center justify-center gap-xs shadow-sm">
+                        Buscar
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Content Area -->
+<div class="max-w-container-max mx-auto px-md lg:px-xl py-xl flex flex-col md:flex-row gap-xl">
+<!-- SideNavBar (Filters) -->
+<aside class="w-full md:w-72 flex-shrink-0">
+<div class="bg-surface-container-low shadow-sm h-full w-full left-0 rounded-xl overflow-hidden border border-outline-variant/30 sticky top-24">
+<div class="p-md border-b border-outline-variant/30">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Filtros de Búsqueda</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Refina tu selección</p>
+</div>
+<div class="flex flex-col gap-sm p-md h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar">
+<!-- Filter Item -->
+<div class="group">
+<button class="w-full flex items-center justify-between text-on-surface-variant hover:bg-surface-container-highest rounded-lg p-3 transition-all duration-200 ease-in-out font-label-technical text-label-technical">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">directions_car</span>
+<span>Marca</span>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform group-focus-within:rotate-180">expand_more</span>
+</button>
+</div>
+<!-- Active Filter Item -->
+<div>
+<button class="w-full flex items-center justify-between bg-primary-container text-on-primary-container font-semibold rounded-lg p-3 transition-all duration-200 ease-in-out font-label-technical text-label-technical">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">category</span>
+<span>Categoría</span>
+</div>
+<span class="material-symbols-outlined text-sm rotate-180">expand_more</span>
+</button>
+<div class="pl-10 pr-3 py-2 flex flex-col gap-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-md text-sm text-on-surface">Frenos</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-md text-sm text-on-surface">Suspensión</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline-variant text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-md text-sm text-on-surface">Motor</span>
+</label>
+</div>
+</div>
+<div class="group">
+<button class="w-full flex items-center justify-between text-on-surface-variant hover:bg-surface-container-highest rounded-lg p-3 transition-all duration-200 ease-in-out font-label-technical text-label-technical">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span>Sección</span>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform group-focus-within:rotate-180">expand_more</span>
+</button>
+</div>
+<div class="group">
+<button class="w-full flex items-center justify-between text-on-surface-variant hover:bg-surface-container-highest rounded-lg p-3 transition-all duration-200 ease-in-out font-label-technical text-label-technical">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">calendar_today</span>
+<span>Modelo/Año</span>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform group-focus-within:rotate-180">expand_more</span>
+</button>
+</div>
+<div class="group">
+<button class="w-full flex items-center justify-between text-on-surface-variant hover:bg-surface-container-highest rounded-lg p-3 transition-all duration-200 ease-in-out font-label-technical text-label-technical">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">check_circle</span>
+<span>Condición</span>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform group-focus-within:rotate-180">expand_more</span>
+</button>
+</div>
+<div class="group">
+<button class="w-full flex items-center justify-between text-on-surface-variant hover:bg-surface-container-highest rounded-lg p-3 transition-all duration-200 ease-in-out font-label-technical text-label-technical">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Disponibilidad</span>
+</div>
+<span class="material-symbols-outlined text-sm transition-transform group-focus-within:rotate-180">expand_more</span>
+</button>
+</div>
+</div>
+<div class="p-md border-t border-outline-variant/30 bg-surface-container-lowest">
+<button class="w-full py-2 border border-outline text-on-surface-variant rounded font-label-technical text-label-technical hover:bg-surface-container transition-colors">Limpiar Filtros</button>
+</div>
+</div>
+</aside>
+<!-- Catalog Grid -->
+<div class="flex-grow flex flex-col gap-lg">
+<!-- Active Chips -->
+<div class="flex flex-wrap gap-sm items-center pb-sm border-b border-outline-variant/30">
+<span class="font-label-technical text-sm text-on-surface-variant mr-2">Filtros activos:</span>
+<div class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full flex items-center gap-2 font-label-technical text-sm border border-primary/20">
+                        Categoría: Frenos
+                        <button class="text-on-primary-container hover:text-primary transition-colors flex items-center"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<div class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full flex items-center gap-2 font-label-technical text-sm border border-outline-variant">
+                        Condición: Nuevo
+                        <button class="hover:text-error transition-colors flex items-center"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<button class="text-primary font-label-technical text-sm hover:underline ml-auto">Ver 124 resultados</button>
+</div>
+<!-- Product Grid (Bento style hint) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Product Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden hover:shadow-[0px_4px_12px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex flex-col h-full">
+<div class="relative h-48 bg-surface-container-highest border-b border-outline-variant p-4 flex items-center justify-center">
+<img class="object-contain h-full w-full" data-alt="A clean, isolated studio product shot of a shiny, metallic slotted brake disc rotor. The lighting is soft and even, highlighting the machined grooves and technical precision of the metal surface against a plain, light grey background. High resolution, professional automotive catalog style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5oEr8FJBzS3m_-1P1-e4RazBl3LqNTG5NUD53CfMq3HlDjBydjqs1JPnJD-06RO6gQqysWFSVvuiHY0dhBO5R9opJztzIrdQUrfaKUwYiYWlc-z7Q8E796A_I7CV7uityeEEMtJKBradzvUNAvwSvkYvhUzEFfYEMo-IIPZa-upP-SpgSgT7QVPiJubFlyHMtrA5P_hdeTP8vQ8DgtfujzqHoHi5TZfYGp09a1oU9w_1OFgBregas"/>
+<span class="absolute top-2 right-2 bg-[#e8f5e9] text-[#2e7d32] border border-[#a5d6a7] text-[10px] uppercase font-label-technical px-2 py-1 rounded shadow-sm font-bold tracking-wider">Nuevo</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-headline-md text-[16px] leading-[24px] text-on-surface mb-xs line-clamp-2">Disco de Freno Delantero Ventilado Premium</h3>
+<p class="font-label-technical text-xs text-on-surface-variant mb-sm">OEM: <span class="font-mono">43512-02130</span></p>
+<div class="flex items-center gap-2 mb-md bg-surface-container-low p-2 rounded border border-outline-variant/50">
+<span class="material-symbols-outlined text-[#2e7d32] text-sm">check_circle</span>
+<span class="font-body-md text-xs text-on-surface">Compatible: Toyota Corolla 2018-2022</span>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/30 flex items-center justify-between">
+<span class="font-headline-md text-lg text-on-surface font-bold">$45.99</span>
+<button class="bg-transparent border border-primary text-primary hover:bg-primary/5 px-4 py-2 rounded font-label-technical text-sm transition-colors shadow-sm">Ver detalle</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden hover:shadow-[0px_4px_12px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex flex-col h-full">
+<div class="relative h-48 bg-surface-container-highest border-b border-outline-variant p-4 flex items-center justify-center">
+<img class="object-contain h-full w-full" data-alt="A clean, isolated studio product shot of a set of four modern iridium spark plugs. The ceramic insulators are pristine white, and the metal threads gleam under even studio lighting. Shot against a plain, light grey background to emphasize the technical details. High resolution, professional automotive catalog style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDztJ1mJnX4t8s52_-jHw-CSmESfbOZekYOSR9QHcD28Qc02O5wcRcgYSNs0xyIHn4mUwPBtyhmLpD5yYTQhd5hUywUnXdKyBo2GtU5JKUwK6Z-SKtFXJNVsgNJu1fSp2zrqRPn096VuDxizHXn-r-DFsBF_Rv5_s8fReQ3W1PhOTiSGKhjOcZlrvSQqcAfapu5DF8ip6KIvQQfNyFr5gO7XgZL4ORNlTrc5LFbDLk4Dx1XC5fltK7-"/>
+<span class="absolute top-2 right-2 bg-[#e8f5e9] text-[#2e7d32] border border-[#a5d6a7] text-[10px] uppercase font-label-technical px-2 py-1 rounded shadow-sm font-bold tracking-wider">Nuevo</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<h3 class="font-headline-md text-[16px] leading-[24px] text-on-surface mb-xs line-clamp-2">Set Bujías Iridium Alto Rendimiento (x4)</h3>
+<p class="font-label-technical text-xs text-on-surface-variant mb-sm">OEM: <span class="font-mono">90919-01253</span></p>
+<div class="flex items-center gap-2 mb-md bg-surface-container-low p-2 rounded border border-outline-variant/50">
+<span class="material-symbols-outlined text-[#fbc02d] text-sm">warning</span>
+<span class="font-body-md text-xs text-on-surface">Verificar especificaciones de motor</span>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/30 flex items-center justify-between">
+<span class="font-headline-md text-lg text-on-surface font-bold">$28.50</span>
+<button class="bg-transparent border border-primary text-primary hover:bg-primary/5 px-4 py-2 rounded font-label-technical text-sm transition-colors shadow-sm">Ver detalle</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 (Consultar Precio) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden hover:shadow-[0px_4px_12px_rgba(0,0,0,0.05)] transition-shadow duration-300 flex flex-col h-full relative lg:col-span-1 sm:col-span-2 lg:row-span-2">
+<div class="relative h-48 lg:h-64 bg-surface-container-highest border-b border-outline-variant p-4 flex items-center justify-center">
+<img class="object-contain h-full w-full" data-alt="A clean, isolated studio product shot of a complex automotive alternator assembly. The metallic casing, copper coils, and pulley mechanism are clearly visible with high technical detail. Lighting is bright and even, casting soft shadows on a plain, light grey background. High resolution, professional automotive catalog style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUQtHDDVCHc9FkMsUifxaAziB6q4cluO_Tubm5K3F22H46Ry_lSvotGOxohttG4t1KU_MdhyPSdOwgFaXmp2OJg5pP2dmZPTT-krFF2oSeKNTLHSnHbIC7oHsHHdHuMe4S2TYLbAhZz57VphPr1zQ7Z-oWuG1lH4ArBmSiM0bU57LSleP5iOBrIvvc2ShtxoBMRNtxeI93_vHWSd5guJePKUuiQ-W8bZ3tCep9A5jHu4Vo4ucDqoSG"/>
+<span class="absolute top-2 right-2 bg-[#fff3e0] text-[#e65100] border border-[#ffcc80] text-[10px] uppercase font-label-technical px-2 py-1 rounded shadow-sm font-bold tracking-wider">Remanufacturado</span>
+</div>
+<div class="p-md flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-lg leading-tight text-on-surface line-clamp-3">Alternador 12V 90A Sistema de Carga Completo - Serie Pro</h3>
+</div>
+<p class="font-label-technical text-xs text-on-surface-variant mb-sm">OEM: <span class="font-mono">AL-3490-RX</span></p>
+<div class="flex items-center gap-2 mb-md bg-surface-container-low p-2 rounded border border-outline-variant/50">
+<span class="material-symbols-outlined text-[#2e7d32] text-sm">check_circle</span>
+<span class="font-body-md text-xs text-on-surface">Compatible: Múltiples modelos (Ver tabla)</span>
+</div>
+<div class="mt-auto pt-sm border-t border-outline-variant/30 flex flex-col gap-sm">
+<span class="font-label-technical text-sm text-on-surface-variant italic">Precio sujeto a cotización</span>
+<button class="bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-variant px-4 py-3 rounded font-label-technical text-sm transition-colors shadow-sm flex justify-center items-center gap-2 w-full">
+                                    Consultar precio
+                                    <span class="material-symbols-outlined text-sm">forum</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating WhatsApp Button -->
+<a class="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center group" href="#">
+<span class="material-symbols-outlined text-3xl">chat</span>
+<!-- Tooltip -->
+<span class="absolute right-full mr-4 bg-inverse-surface text-inverse-on-surface font-label-technical text-xs px-3 py-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            Asistencia Técnica
+        </span>
+</a>
+<!-- Footer -->
+<footer class="bg-surface-container-high border-t border-outline-variant w-full bottom-0 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg px-xl py-xl max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-1">
+<a class="font-headline-md text-headline-md font-black text-on-surface flex items-center gap-sm mb-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">build_circle</span>
+                    AutopartesRG
+                </a>
+<p class="font-body-md text-sm text-on-surface-variant mb-md">Tu socio técnico en soluciones automotrices. Especialistas en repuestos de alta precisión.</p>
+<div class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-headline-md text-sm font-bold text-on-surface mb-sm">Navegación</h4>
+<ul class="space-y-2 font-label-technical text-label-technical">
+<li><a class="text-on-surface-variant hover:text-primary underline transition-opacity hover:opacity-80" href="#">Inicio</a></li>
+<li><a class="text-primary font-bold transition-opacity hover:opacity-80" href="#">Catálogo</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline transition-opacity hover:opacity-80" href="#">Nosotros</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline transition-opacity hover:opacity-80" href="#">Contacto</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-sm font-bold text-on-surface mb-sm">Legal</h4>
+<ul class="space-y-2 font-label-technical text-label-technical">
+<li><a class="text-on-surface-variant hover:text-primary underline transition-opacity hover:opacity-80" href="#">Términos y Condiciones</a></li>
+<li><a class="text-on-surface-variant hover:text-primary underline transition-opacity hover:opacity-80" href="#">Política de Privacidad</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline-md text-sm font-bold text-on-surface mb-sm">Contacto Técnico</h4>
+<ul class="space-y-3 font-body-md text-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-sm mt-0.5">location_on</span>
+<span>Av. Industrial 4500, Sector Mecánico, C.P. 1020</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">call</span>
+<span class="font-label-technical">+54 11 4455-6677</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">mail</span>
+<span class="font-label-technical">soporte@autopartesrg.com</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-outline-variant/30 py-4 text-center">
+<p class="font-label-technical text-xs text-on-surface-variant">© 2024 AutopartesRG. Todos los derechos reservados.</p>
+</div>
+</footer>
+<script>
+        // Simple script to handle header shadow on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-sm');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

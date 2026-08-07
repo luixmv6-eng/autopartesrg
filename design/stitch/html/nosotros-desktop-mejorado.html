@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nosotros - AutopartesRG</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#e2e2e5",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#744400",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#626567",
+                      "on-primary-container": "#a9c1ff",
+                      "surface-variant": "#e2e2e5",
+                      "surface-tint": "#215abd",
+                      "surface-container": "#eeeef0",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#b0c6ff",
+                      "surface-dim": "#dadadc",
+                      "outline-variant": "#c3c6d5",
+                      "on-background": "#1a1c1e",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#2c1700",
+                      "surface-container-low": "#f3f3f6",
+                      "primary-container": "#004aad",
+                      "on-tertiary-fixed-variant": "#683d00",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#e0e3e6",
+                      "inverse-primary": "#b0c6ff",
+                      "secondary": "#5b5f61",
+                      "on-primary": "#ffffff",
+                      "surface": "#f9f9fc",
+                      "inverse-on-surface": "#f0f0f3",
+                      "tertiary-fixed-dim": "#ffb86b",
+                      "surface-bright": "#f9f9fc",
+                      "background": "#f9f9fc",
+                      "on-surface-variant": "#434653",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#44474a",
+                      "on-secondary-fixed": "#191c1e",
+                      "secondary-fixed-dim": "#c4c7ca",
+                      "primary-fixed": "#d9e2ff",
+                      "surface-container-high": "#e8e8ea",
+                      "on-primary-fixed": "#001945",
+                      "tertiary": "#543000",
+                      "tertiary-fixed": "#ffdcbc",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#e0e3e6",
+                      "outline": "#737784",
+                      "on-surface": "#1a1c1e",
+                      "primary": "#00357f",
+                      "on-primary-fixed-variant": "#00429b",
+                      "inverse-surface": "#2f3133",
+                      "on-tertiary-container": "#ffb159"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xs": "4px",
+                      "base": "4px",
+                      "xl": "40px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "container-max": "1280px",
+                      "gutter": "20px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-technical": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-sm": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-technical": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      }
+              }
+            },
+          }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased overflow-x-hidden flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest fixed top-0 w-full z-50 flat no shadows border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between px-md md:px-xl h-auto md:h-16 max-w-container-max mx-auto py-sm md:py-0">
+<div class="flex items-center justify-between w-full md:w-auto">
+<span class="font-headline-md text-headline-md font-bold text-primary">AutopartesRG</span>
+<div class="flex gap-sm md:hidden text-primary">
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 transition-all hover:text-primary">shopping_cart</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 transition-all hover:text-primary" id="mobile-menu-btn">menu</span>
+</div>
+</div>
+<nav class="hidden md:flex flex-col md:flex-row gap-md md:gap-xl mt-md md:mt-0 pb-sm md:pb-0 w-full md:w-auto" id="mobile-nav">
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-between" href="#">Inicio <span class="material-symbols-outlined md:hidden">chevron_right</span></a>
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-between" href="#">Catálogo <span class="material-symbols-outlined md:hidden">chevron_right</span></a>
+<a class="font-label-technical text-label-technical text-primary border-b-2 border-primary pb-1 hover:text-primary transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-between" href="#">Nosotros <span class="material-symbols-outlined md:hidden">chevron_right</span></a>
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-between" href="#">Contacto <span class="material-symbols-outlined md:hidden">chevron_right</span></a>
+</nav>
+<div class="hidden md:flex gap-md text-primary">
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 transition-all hover:text-primary">shopping_cart</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 transition-all hover:text-primary">account_circle</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-xl px-md max-w-container-max mx-auto flex flex-col gap-xl">
+<!-- Hero Section -->
+<section class="flex flex-col gap-md md:px-xl">
+<h1 class="font-display-lg text-display-lg text-on-surface md:text-center">Nuestra Historia</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant md:text-center md:max-w-3xl md:mx-auto">Proveemos confianza y precisión mecánica en cada repuesto. Conoce el equipo detrás de la eficiencia.</p>
+<div class="w-full h-64 md:h-[400px] rounded-xl overflow-hidden mt-sm border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A brightly lit, modern automotive parts warehouse showing rows of highly organized metal shelving. The space is spotless, reflecting a technical, professional environment. A mechanic in a clean corporate blue uniform is carefully inspecting an engine component. The lighting is crisp and cool, creating a sense of precision and reliability. Corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCbu5cBDt-PyB7kxhWLoG5oueMDMEUCtakpnm3x0zFoTK5e7iXNFFugafzZ4fHAH5uodTFOxvfhL5xmCgKw_KFMKvDt92bA2fwrhsUhmrZn13mGFs1huhaeZNojbTJPeAMLADWjKpdfEAXy1ez7lsggLrqhQz-qV7gr_-KnECaJzSh9CLZOWGcDdEPIq6Ba76LgHGog_N4eUei6LZHTc1bbQ1vKaQG4hu6l0BzWkuuMXeU4DgnHp_8"/>
+</div>
+</section>
+<!-- Values Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md md:gap-lg md:px-xl">
+<div class="bg-surface-container-lowest border border-outline-variant p-md lg:p-lg rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container p-sm rounded-lg" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Calidad OEM</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Solo trabajamos con proveedores certificados para garantizar el rendimiento exacto que tu vehículo requiere.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md lg:p-lg rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container p-sm rounded-lg" data-icon="local_shipping">local_shipping</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Logística Eficiente</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Entregas rápidas y seguras a talleres y particulares, minimizando el tiempo de inactividad de las flotas.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md lg:p-lg rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container p-sm rounded-lg" data-icon="verified">verified</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Soporte Técnico</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Asesoramiento especializado para asegurar la compatibilidad exacta de cada pieza con el número de chasis.</p>
+</div>
+</section>
+<!-- Tabs Navigation -->
+<section class="max-w-container-max w-full mx-auto md:px-xl">
+<div class="flex border-b border-outline-variant mb-lg overflow-x-auto">
+<button class="tab-button font-headline-md text-headline-md px-lg py-sm text-primary border-b-2 border-primary active-tab bg-surface-container-low" data-target="sobre-nosotros">Sobre Nosotros</button>
+<button class="tab-button font-headline-md text-headline-md px-lg py-sm text-on-surface-variant hover:bg-surface-container-highest transition-colors" data-target="mision">Misión</button>
+<button class="tab-button font-headline-md text-headline-md px-lg py-sm text-on-surface-variant hover:bg-surface-container-highest transition-colors" data-target="vision">Visión</button>
+</div>
+<!-- Tab Contents -->
+<div class="tab-content active grid grid-cols-1 md:grid-cols-2 gap-lg" id="sobre-nosotros">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">history</span>
+                        Historia de Precisión
+                    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">
+                        Fundada con la visión de elevar los estándares de repuestos automotrices, nuestra empresa ha crecido adaptándose a las demandas tecnológicas del sector. Cada pieza en nuestro catálogo es seleccionada bajo rigurosos criterios de calidad, reflejando nuestro compromiso con la excelencia mecánica.
+                    </p>
+<ul class="list-disc list-inside font-body-md text-body-md text-on-surface-variant">
+<li>Más de 20 años de experiencia técnica.</li>
+<li>Alianzas estratégicas con fabricantes líderes mundiales.</li>
+<li>Equipo de asesores altamente capacitados.</li>
+</ul>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant shadow-sm h-64 md:h-auto" data-alt="A brightly lit, modern automotive parts warehouse showing highly organized shelving units with pristine metallic car components. A professional team member in a clean blue uniform is inspecting a part on a digital tablet. The setting is clean, clinical, and industrial, conveying efficiency and technical precision in a bright light-mode aesthetic with corporate blue accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBOsetVaCp1CGlfeDXhKkcJ4k6q7uf_whGoTvZa5HLA17ky9q65CioNfjJIOVC3fkZoz197k7BfG06kc7PikyVy2bFhHIttaIw4alBPu1NGDw7VB0Kwtpn05pmMQe1sZKtQORPptpsZRmnHMmtB_vm8eKNVNBqs-VQoSWyTfBTEfWV4GZZ11AuMS_6v0CkStA-tlgakD_-Dksr_nKBKxX6QpNikQ6tZ8CeaNSNI27kTIs-sLSAlsktn')"></div>
+</div>
+<div class="tab-content grid grid-cols-1 md:grid-cols-2 gap-lg" id="mision">
+<div class="rounded-lg overflow-hidden border border-outline-variant shadow-sm h-64 md:h-auto" data-alt="Close-up of a complex, precisely engineered car engine part resting on a clean, technical blueprint. The lighting is crisp and cool, highlighting the metallic textures and perfect machining of the component. The overall mood is professional, reliable, and highly technical, fitting a modern corporate aesthetic with subtle blue and grey tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDsVyn0WfZhZqs9t-7WtT3wqQZR8XhxEUc7ENRxhwxp5g79C1fd3S9QeRP0iVPUWeVleQclZdDZmJ81sxMFgbw-ZS68Szz1wGx0qqOQoQuQxaifpac4pdqsPgOJKsbnYEfi3BmTUM5B1yRq72bLJlBwNXmlZf96izXZ4xGQdLqwe1OhiHq1R7Mq-eigwNs6yGnv-EfV7a-fk3ZvskrORaee9lwMRD9F_ErsfuyFCp_MAA6YzOaY1wNS')"></div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col justify-center">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+                        Nuestra Misión
+                    </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Proveer al sector automotor repuestos de la más alta confiabilidad, garantizando que cada reparación o mantenimiento cumpla con las especificaciones técnicas originales. Nos enfocamos en la eficiencia operativa, asegurando entregas precisas y asesoramiento experto para mantener los vehículos de nuestros clientes en movimiento seguro.
+                    </p>
+</div>
+</div>
+<div class="tab-content grid grid-cols-1 md:grid-cols-2 gap-lg" id="vision">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col justify-center">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">insights</span>
+                        Visión de Futuro
+                    </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Ser reconocidos como el estándar definitivo de calidad en la distribución de autopartes a nivel nacional. Aspiramos a integrar tecnologías avanzadas en nuestros procesos logísticos y de atención al cliente, ofreciendo una experiencia sin fisuras que anticipe las necesidades de un mercado automotriz en constante evolución.
+                    </p>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant shadow-sm h-64 md:h-auto" data-alt="A modern, abstract visualization of a glowing digital network overlaid on a sleek, minimalist automotive chassis. The scene is illuminated in high-key white and corporate blue tones, representing the future of automotive technology and digital integration. The aesthetic is clean, forward-looking, and technologically advanced, suitable for a professional corporate brand." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4PgG3_x3F58Tgc0-vtZgg2zmqOH6e9OktmKJ6PWMmZ4sf0hHW0RoaYoMTPTGcuf_Btd7Qv1pcvaDhKmSr5r_A0fHEX6I8vuMDeSg_f_xKoVCoynWXSrDQ6v2MdAgq2H7c5ErWT5bJ4RFyHZT3qRh8qIoKkPqxy3cJo0dCKWz17zwTlJFSs-PMxnMWPovGSg1dOwJpt--wrDlU77xX-r9ul_JwWWEkybXK2FMBuKzlQPVpZnDtAJCG')"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-high w-full mt-auto border-t border-outline-variant flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg px-md md:px-xl py-xl max-w-container-max mx-auto">
+<div class="flex flex-col gap-sm">
+<span class="font-headline-md text-headline-md font-black text-on-surface">AutopartesRG</span>
+<span class="font-body-md text-body-md text-on-surface-variant mt-sm">© 2024 AutopartesRG. Todos los derechos reservados.</span>
+</div>
+<div class="flex flex-col gap-sm md:pl-xl">
+<h4 class="font-label-technical text-label-technical text-on-surface font-bold uppercase mb-sm">Navegación</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Inicio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Catálogo</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-technical text-label-technical text-on-surface font-bold uppercase mb-sm opacity-0 hidden md:block">Navegación 2</h4>
+<a class="font-body-md text-body-md text-primary font-bold hover:text-primary transition-opacity hover:opacity-80" href="#">Nosotros</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Contacto</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-technical text-label-technical text-on-surface font-bold uppercase mb-sm">Legal</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Términos y Condiciones</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Política de Privacidad</a>
+</div>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active states from all tabs
+                    tabs.forEach(t => {
+                        t.classList.remove('text-primary', 'border-b-2', 'border-primary', 'bg-surface-container-low', 'active-tab');
+                        t.classList.add('text-on-surface-variant', 'hover:bg-surface-container-highest');
+                    });
+
+                    // Hide all content
+                    contents.forEach(c => {
+                        c.classList.remove('active');
+                    });
+
+                    // Add active state to clicked tab
+                    tab.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-highest');
+                    tab.classList.add('text-primary', 'border-b-2', 'border-primary', 'bg-surface-container-low', 'active-tab');
+
+                    // Show corresponding content
+                    const targetId = tab.getAttribute('data-target');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const nav = document.getElementById('mobile-nav');
+                    if (nav.classList.contains('hidden')) {
+                        nav.classList.remove('hidden');
+                        nav.classList.add('flex');
+                    } else {
+                        nav.classList.add('hidden');
+                        nav.classList.remove('flex');
+                    }
+                });
+            }
+        });
+    </script>
+</body></html>

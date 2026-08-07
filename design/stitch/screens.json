@@ -1,0 +1,62 @@
+[
+  {
+    "titulo": "Nosotros (Mobile)",
+    "id": "21b74be50eff429b8097b08d29581621",
+    "dispositivo": "MOBILE",
+    "tamano": "780x3102",
+    "imagen": "screenshots/nosotros-mobile.png",
+    "imagenBytes": 49080,
+    "html": "html/nosotros-mobile.html",
+    "htmlBytes": 13375
+  },
+  {
+    "titulo": "Home / Catálogo (Mobile)",
+    "id": "98ca49a4d2fc4e0ba3d1a9c827cd5f79",
+    "dispositivo": "MOBILE",
+    "tamano": "780x2338",
+    "imagen": "screenshots/home-catalogo-mobile.png",
+    "imagenBytes": 61128,
+    "html": "html/home-catalogo-mobile.html",
+    "htmlBytes": 28015
+  },
+  {
+    "titulo": "Home / Catálogo (Desktop)",
+    "id": "1475a51e93244ab89d2a79a16b2935ec",
+    "dispositivo": "DESKTOP",
+    "tamano": "2560x3632",
+    "imagen": "screenshots/home-catalogo-desktop.png",
+    "imagenBytes": 101058,
+    "html": "html/home-catalogo-desktop.html",
+    "htmlBytes": 28109
+  },
+  {
+    "titulo": "Detalle de Producto (Desktop)",
+    "id": "0301cdedc1d342d59456f6777e342137",
+    "dispositivo": "DESKTOP",
+    "tamano": "2560x2048",
+    "imagen": "screenshots/detalle-de-producto-desktop.png",
+    "imagenBytes": 64807,
+    "html": "html/detalle-de-producto-desktop.html",
+    "htmlBytes": 21511
+  },
+  {
+    "titulo": "Nosotros (Desktop) - Mejorado",
+    "id": "727ef65607f5497b9a14bddddb7e04f7",
+    "dispositivo": "DESKTOP",
+    "tamano": "2560x2268",
+    "imagen": "screenshots/nosotros-desktop-mejorado.png",
+    "imagenBytes": 199647,
+    "html": "html/nosotros-desktop-mejorado.html",
+    "htmlBytes": 23315
+  },
+  {
+    "titulo": "Detalle de Producto (Mobile)",
+    "id": "2d69ae24d54d464faf4a2cbcd0bd046c",
+    "dispositivo": "MOBILE",
+    "tamano": "780x3054",
+    "imagen": "screenshots/detalle-de-producto-mobile.png",
+    "imagenBytes": 30728,
+    "html": "html/detalle-de-producto-mobile.html",
+    "htmlBytes": 19069
+  }
+]

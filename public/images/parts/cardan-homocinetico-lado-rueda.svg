@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <defs>
+    <radialGradient id="v" cx="0.5" cy="0.4" r="0.75">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e2e2e5"/>
+    </radialGradient>
+    <pattern id="r" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#c3c6d5" stroke-opacity="0.4" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#v)"/>
+  <rect width="800" height="600" fill="url(#r)"/>
+  <circle cx="400" cy="238" r="132" fill="#f3f3f6" stroke="#c3c6d5" stroke-width="3"/>
+  <circle cx="400" cy="238" r="82" fill="none" stroke="#004aad" stroke-width="5" stroke-dasharray="20 15" stroke-opacity="0.85"/>
+  <circle cx="400" cy="238" r="30" fill="#00357f" fill-opacity="0.14"/>
+  <text x="400" y="86" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="30" font-weight="700" fill="#00357f" letter-spacing="5">TRANSMISION</text>
+  <text x="400" y="375" text-anchor="middle" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="38" font-weight="600" fill="#434653">Cardán homocinético</text><text x="400" y="421" text-anchor="middle" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="38" font-weight="600" fill="#434653">lado rueda</text>
+  <text x="400" y="512" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="30" fill="#434653" letter-spacing="2">OEM 391015154R</text>
+  <text x="400" y="566" text-anchor="middle" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="24" font-weight="700" fill="#c3c6d5" letter-spacing="3">AUTOPARTESRG</text>
+</svg>

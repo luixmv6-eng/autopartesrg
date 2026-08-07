@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nosotros - AutopartesRG</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e2e5",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#744400",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#626567",
+                        "on-primary-container": "#a9c1ff",
+                        "surface-variant": "#e2e2e5",
+                        "surface-tint": "#215abd",
+                        "surface-container": "#eeeef0",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#b0c6ff",
+                        "surface-dim": "#dadadc",
+                        "outline-variant": "#c3c6d5",
+                        "on-background": "#1a1c1e",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#2c1700",
+                        "surface-container-low": "#f3f3f6",
+                        "primary-container": "#004aad",
+                        "on-tertiary-fixed-variant": "#683d00",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#e0e3e6",
+                        "inverse-primary": "#b0c6ff",
+                        "secondary": "#5b5f61",
+                        "on-primary": "#ffffff",
+                        "surface": "#f9f9fc",
+                        "inverse-on-surface": "#f0f0f3",
+                        "tertiary-fixed-dim": "#ffb86b",
+                        "surface-bright": "#f9f9fc",
+                        "background": "#f9f9fc",
+                        "on-surface-variant": "#434653",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#44474a",
+                        "on-secondary-fixed": "#191c1e",
+                        "secondary-fixed-dim": "#c4c7ca",
+                        "primary-fixed": "#d9e2ff",
+                        "surface-container-high": "#e8e8ea",
+                        "on-primary-fixed": "#001945",
+                        "tertiary": "#543000",
+                        "tertiary-fixed": "#ffdcbc",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#e0e3e6",
+                        "outline": "#737784",
+                        "on-surface": "#1a1c1e",
+                        "primary": "#00357f",
+                        "on-primary-fixed-variant": "#00429b",
+                        "inverse-surface": "#2f3133",
+                        "on-tertiary-container": "#ffb159"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "4px",
+                        "base": "4px",
+                        "xl": "40px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "container-max": "1280px",
+                        "gutter": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-technical": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-technical": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest fixed top-0 w-full z-50 flat no shadows border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between px-md md:px-xl h-auto md:h-16 max-w-container-max mx-auto py-sm md:py-0">
+<div class="flex items-center justify-between w-full md:w-auto">
+<span class="font-headline-md text-headline-md font-bold text-primary">AutopartesRG</span>
+<div class="flex gap-sm md:hidden text-primary">
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 transition-all hover:text-primary" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 transition-all hover:text-primary" data-icon="menu" id="mobile-menu-btn">menu</span>
+</div>
+</div>
+<nav class="hidden md:flex flex-col md:flex-row gap-md md:gap-xl mt-md md:mt-0 pb-sm md:pb-0 w-full md:w-auto" id="mobile-nav">
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-between" href="#">Inicio <span class="material-symbols-outlined md:hidden">chevron_right</span></a>
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-between" href="#">Catálogo <span class="material-symbols-outlined md:hidden">chevron_right</span></a>
+<a class="font-label-technical text-label-technical text-primary border-b-2 border-primary pb-1 hover:text-primary transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-between" href="#">Nosotros <span class="material-symbols-outlined md:hidden">chevron_right</span></a>
+<a class="font-label-technical text-label-technical text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-70 transition-all flex items-center justify-between" href="#">Contacto <span class="material-symbols-outlined md:hidden">chevron_right</span></a>
+</nav>
+<div class="hidden md:flex gap-md text-primary">
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 transition-all hover:text-primary" data-icon="shopping_cart">shopping_cart</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 transition-all hover:text-primary" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<main class="pt-24 pb-xl px-md max-w-container-max mx-auto flex flex-col gap-xl">
+<!-- Hero Section -->
+<section class="flex flex-col gap-md">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Nuestra Historia</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Proveemos confianza y precisión mecánica en cada repuesto. Conoce el equipo detrás de la eficiencia.</p>
+<div class="w-full h-64 rounded-xl overflow-hidden mt-sm border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A brightly lit, modern automotive parts warehouse showing rows of highly organized metal shelving. The space is spotless, reflecting a technical, professional environment. A mechanic in a clean corporate blue uniform is carefully inspecting an engine component. The lighting is crisp and cool, creating a sense of precision and reliability. Corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCbu5cBDt-PyB7kxhWLoG5oueMDMEUCtakpnm3x0zFoTK5e7iXNFFugafzZ4fHAH5uodTFOxvfhL5xmCgKw_KFMKvDt92bA2fwrhsUhmrZn13mGFs1huhaeZNojbTJPeAMLADWjKpdfEAXy1ez7lsggLrqhQz-qV7gr_-KnECaJzSh9CLZOWGcDdEPIq6Ba76LgHGog_N4eUei6LZHTc1bbQ1vKaQG4hu6l0BzWkuuMXeU4DgnHp_8"/>
+</div>
+</section>
+<!-- Values Bento Grid -->
+<section class="grid grid-cols-1 gap-md">
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container p-sm rounded-lg" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Calidad OEM</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Solo trabajamos con proveedores certificados para garantizar el rendimiento exacto que tu vehículo requiere.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container p-sm rounded-lg" data-icon="local_shipping">local_shipping</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Logística Eficiente</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Entregas rápidas y seguras a talleres y particulares, minimizando el tiempo de inactividad de las flotas.</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-xl shadow-sm flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary bg-primary-container p-sm rounded-lg" data-icon="verified">verified</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Soporte Técnico</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Asesoramiento especializado para asegurar la compatibilidad exacta de cada pieza con el número de chasis.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-high w-full bottom-0 border-t border-outline-variant flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg px-md md:px-xl py-xl max-w-container-max mx-auto">
+<div class="flex flex-col gap-sm">
+<span class="font-headline-md text-headline-md font-black text-on-surface">AutopartesRG</span>
+<span class="font-body-md text-body-md text-on-surface-variant mt-sm">© 2024 AutopartesRG. Todos los derechos reservados.</span>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-technical text-label-technical text-on-surface font-bold uppercase mb-sm">Navegación</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Inicio</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Catálogo</a>
+<a class="font-body-md text-body-md text-primary font-bold hover:text-primary transition-opacity hover:opacity-80" href="#">Nosotros</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Contacto</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-technical text-label-technical text-on-surface font-bold uppercase mb-sm">Legal</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Términos y Condiciones</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-opacity hover:opacity-80" href="#">Política de Privacidad</a>
+</div>
+</div>
+</footer>
+<script>
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const nav = document.getElementById('mobile-nav');
+            if (nav.classList.contains('hidden')) {
+                nav.classList.remove('hidden');
+                nav.classList.add('flex');
+            } else {
+                nav.classList.add('hidden');
+                nav.classList.remove('flex');
+            }
+        });
+    </script>
+</body></html>

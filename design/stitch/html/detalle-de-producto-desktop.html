@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalle de Producto - AutopartesRG</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e2e2e5",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#744400",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#626567",
+                    "on-primary-container": "#a9c1ff",
+                    "surface-variant": "#e2e2e5",
+                    "surface-tint": "#215abd",
+                    "surface-container": "#eeeef0",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#b0c6ff",
+                    "surface-dim": "#dadadc",
+                    "outline-variant": "#c3c6d5",
+                    "on-background": "#1a1c1e",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#2c1700",
+                    "surface-container-low": "#f3f3f6",
+                    "primary-container": "#004aad",
+                    "on-tertiary-fixed-variant": "#683d00",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#e0e3e6",
+                    "inverse-primary": "#b0c6ff",
+                    "secondary": "#5b5f61",
+                    "on-primary": "#ffffff",
+                    "surface": "#f9f9fc",
+                    "inverse-on-surface": "#f0f0f3",
+                    "tertiary-fixed-dim": "#ffb86b",
+                    "surface-bright": "#f9f9fc",
+                    "background": "#f9f9fc",
+                    "on-surface-variant": "#434653",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#44474a",
+                    "on-secondary-fixed": "#191c1e",
+                    "secondary-fixed-dim": "#c4c7ca",
+                    "primary-fixed": "#d9e2ff",
+                    "surface-container-high": "#e8e8ea",
+                    "on-primary-fixed": "#001945",
+                    "tertiary": "#543000",
+                    "tertiary-fixed": "#ffdcbc",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#e0e3e6",
+                    "outline": "#737784",
+                    "on-surface": "#1a1c1e",
+                    "primary": "#00357f",
+                    "on-primary-fixed-variant": "#00429b",
+                    "inverse-surface": "#2f3133",
+                    "on-tertiary-container": "#ffb159"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "xs": "4px",
+                    "base": "4px",
+                    "xl": "40px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "container-max": "1280px",
+                    "gutter": "20px"
+            },
+            "fontFamily": {
+                    "display-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg-mobile": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-technical": [
+                            "JetBrains Mono"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-sm": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-technical": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "500"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for technical feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f3f3f6; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c3c6d5; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #737784; 
+        }
+    </style>
+</head>
+<body class="bg-surface-container-high h-screen overflow-hidden flex items-center justify-center font-body-md text-body-md text-on-surface antialiased">
+<!-- Modal Backdrop / Overlay -->
+<div aria-hidden="true" class="fixed inset-0 z-40 bg-on-background/40 backdrop-blur-sm transition-opacity"></div>
+<!-- Modal Container -->
+<main class="relative z-50 w-full max-w-container-max max-h-[972px] mx-auto md:mx-lg lg:mx-xl bg-surface-container-lowest rounded-xl shadow-2xl flex flex-col overflow-hidden border border-outline-variant/30">
+<!-- Header Section -->
+<header class="flex items-center justify-between px-lg py-md border-b border-outline-variant bg-surface-bright shrink-0">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[24px]">verified</span>
+<span class="font-label-technical text-label-technical text-on-surface-variant uppercase tracking-wider">Ficha Técnica de Autoparte</span>
+</div>
+<button aria-label="Cerrar modal" class="p-xs rounded-full hover:bg-surface-container-high text-on-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-[28px] group-hover:text-error transition-colors">close</span>
+</button>
+</header>
+<!-- Scrollable Content Area -->
+<div class="overflow-y-auto flex-1 bg-surface-bright">
+<!-- Product Main Info (Bento-style layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-0 border-b border-outline-variant">
+<!-- Left: Image Gallery (Span 7) -->
+<div class="lg:col-span-7 bg-surface-container-low p-lg lg:p-xl flex items-center justify-center min-h-[400px] lg:border-r border-outline-variant relative group">
+<img alt="Alternador Automotriz" class="object-contain w-full h-full max-h-[500px] mix-blend-multiply drop-shadow-md transition-transform duration-500 group-hover:scale-105" data-alt="A highly detailed, professional studio photograph of a gleaming metallic automotive engine alternator. The part rests on a stark, bright white background, illuminated by soft, high-key studio lighting that emphasizes its mechanical precision, machined metal textures, and pristine condition. The aesthetic is clean, corporate modern, and highly technical, reflecting industrial reliability and high performance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBr4xJvEHg6rODXzfGqcu8gSZyrk6V9JSuyuy69SWZp3DxerEpJ-vX7HqFh8uyH0ekfzZB_M5JlJTOh_8dD-rUNAHUM2hAGyRReGkbW3ZKD7EgpREYd0JJ1idY3pYNTJVxYneXGLUXeidnYrFh0gxGMJwBurbjlS67fbA4CMOu3HSl-2dbqW8Gpoha2aOAGyn-jlK7GobSmWu_2adAWSKEUm7hI-USLZ9h__WGxzjzsZc6j8-Vr4xrn"/>
+<!-- Zoom Icon Hint -->
+<div class="absolute bottom-md right-md bg-surface-container-lowest/80 backdrop-blur-md p-sm rounded-lg border border-outline-variant text-on-surface-variant flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[20px]">zoom_in</span>
+</div>
+</div>
+<!-- Right: Product Details (Span 5) -->
+<div class="lg:col-span-5 p-lg lg:p-xl flex flex-col justify-between bg-surface-container-lowest">
+<div class="flex flex-col gap-md">
+<!-- Breadcrumb / Category -->
+<div class="flex items-center gap-xs font-label-technical text-label-technical text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer transition-colors">Eléctrico</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="hover:text-primary cursor-pointer transition-colors">Alternadores</span>
+</div>
+<!-- Title & OEM -->
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Alternador Valeo 12V 90A</h1>
+<div class="flex items-center gap-sm">
+<span class="bg-surface-container text-on-surface-variant font-label-technical text-label-technical px-sm py-xs rounded-md border border-outline-variant">OEM: 23100-EN00B</span>
+<span class="bg-surface-container text-on-surface-variant font-label-technical text-label-technical px-sm py-xs rounded-md border border-outline-variant">SKU: ALT-VAL-094</span>
+</div>
+</div>
+<!-- Compatibility Status (Traffic Light concept translated to brand theme) -->
+<div class="mt-sm bg-primary-fixed border border-primary-fixed-dim rounded-lg p-md flex items-start gap-sm">
+<span class="material-symbols-outlined filled text-primary mt-xs text-[24px]">check_circle</span>
+<div>
+<h3 class="font-headline-md text-body-md font-bold text-on-primary-fixed">Alta Compatibilidad Confirmada</h3>
+<p class="font-body-md text-body-md text-on-primary-fixed-variant mt-xs">Ajuste perfecto para: <strong>Nissan Versa (2012-2019)</strong>, Nissan March (2012-2020) 1.6L L4.</p>
+</div>
+</div>
+<!-- Technical Specs Table (Zebra Striping) -->
+<div class="mt-md border border-outline-variant rounded-lg overflow-hidden font-label-technical text-label-technical">
+<div class="grid grid-cols-3 bg-surface-container-low p-sm border-b border-outline-variant">
+<div class="col-span-1 text-on-surface-variant">Marca</div>
+<div class="col-span-2 text-on-surface font-semibold">Valeo (Original Equipment)</div>
+</div>
+<div class="grid grid-cols-3 bg-surface-container-lowest p-sm border-b border-outline-variant">
+<div class="col-span-1 text-on-surface-variant">Condición</div>
+<div class="col-span-2 text-on-surface font-semibold flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">new_releases</span> Nuevo
+                                </div>
+</div>
+<div class="grid grid-cols-3 bg-surface-container-low p-sm border-b border-outline-variant">
+<div class="col-span-1 text-on-surface-variant">Sección</div>
+<div class="col-span-2 text-on-surface font-semibold">Motor / Eléctrico</div>
+</div>
+<div class="grid grid-cols-3 bg-surface-container-lowest p-sm">
+<div class="col-span-1 text-on-surface-variant">Disponibilidad</div>
+<div class="col-span-2 text-on-surface font-semibold flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span> En Stock (3 unidades)
+                                </div>
+</div>
+</div>
+</div>
+<!-- Price & CTA Section -->
+<div class="mt-xl pt-lg border-t border-outline-variant flex flex-col gap-md">
+<div class="flex items-end gap-sm">
+<span class="font-display-lg text-display-lg text-on-surface">$2,850.00</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant mb-sm">MXN / pza</span>
+</div>
+<!-- CTA WhatsApp (Accent Orange/Yellow via Theme) -->
+<button class="w-full bg-on-tertiary-container hover:bg-tertiary-fixed-dim text-on-tertiary-fixed font-headline-md text-headline-md py-md px-lg rounded-lg shadow-sm flex items-center justify-center gap-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[24px]">chat</span>
+                            Cotizar por WhatsApp
+                        </button>
+<!-- Preview Text -->
+<div class="bg-surface-container-low border border-outline-variant border-dashed p-sm rounded-lg">
+<p class="font-label-technical text-label-sm text-on-surface-variant italic">
+                                "Hola, estoy interesado en el repuesto: <strong>Alternador Valeo 12V 90A</strong>, para el vehículo: <strong>Nissan Versa (2012-2019)</strong>. Me interesaría cotizar..."
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Related Products Section -->
+<div class="p-lg lg:p-xl bg-surface-bright">
+<div class="flex items-center justify-between mb-lg">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">account_tree</span>
+                        Repuestos Relacionados
+                    </h2>
+<a class="font-label-technical text-label-technical text-primary hover:underline flex items-center gap-xs" href="#">
+                        Ver todo el catálogo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-md">
+<!-- Related Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="bg-surface-container-low rounded-md h-32 flex items-center justify-center p-sm mb-sm relative overflow-hidden">
+<img alt="Tensor de Banda" class="object-contain w-full h-full mix-blend-multiply group-hover:scale-110 transition-transform" data-alt="A clean studio photo of an automotive serpentine belt tensioner on a white background, highlighting its metal and industrial plastic construction with sharp corporate lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-N5-rwo4cJ_x90rC4v59YeR8ympTTZhoTf7lgd65D9SqZmp2SCUNNdZD-iOp-gZyxtnV_RaQieg9YV1VyjGMlaEEASp2Z9__1kQOjEn9atsJsN7lCyC-3KvcW0LNENBpfaFjVs3ZRtFvIDRa_tGdB6zlCWvsL9CM4CbC0XU-dz0DNTL_-oFMEHAC-Bz4cfPf29hCCpQLFOzsDp6X7KTgyYLaq9c-_eJXbn15AtoF9qfJ5fqR-FPFy"/>
+</div>
+<span class="font-label-technical text-label-sm text-on-surface-variant">OEM: 11955-ED000</span>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface line-clamp-2 leading-tight">Tensor de Banda de Accesorios Original</h4>
+<div class="mt-auto pt-sm border-t border-outline-variant flex justify-between items-center">
+<span class="font-headline-md text-[16px] font-bold text-on-surface">$850.00</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Related Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="bg-surface-container-low rounded-md h-32 flex items-center justify-center p-sm mb-sm relative overflow-hidden">
+<img alt="Motor de Arranque" class="object-contain w-full h-full mix-blend-multiply group-hover:scale-110 transition-transform" data-alt="A pristine automotive starter motor isolated on a bright white studio backdrop. The metallic casing reflects strong, clear light, emphasizing technical reliability and robust engineering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpsRTFh0IB3hHFvgUJxKSxpfEyvn8ojzaDkImbw6Ug8rEsZkxol38tmEP06RWv6dQPwfoJttI8kB3wSFxChUmXX-PleT8MW7Q--EI6ia0FML-wKCSxvwJzqQ9177LYMbc0BnUcb-A6FddcpFjRG9rfm1xAanudGt56gatoXd8Ur-vauklPZhK3-6jaeAlirVHXkg7UEICmKLrpN83AX9ZXui22JvbZTDguSiMqGSjempNtNMj7-KKC"/>
+</div>
+<span class="font-label-technical text-label-sm text-on-surface-variant">OEM: 23300-ET80B</span>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface line-clamp-2 leading-tight">Motor de Arranque (Marcha) Hitachi</h4>
+<div class="mt-auto pt-sm border-t border-outline-variant flex justify-between items-center">
+<span class="font-headline-md text-[16px] font-bold text-on-surface">$1,920.00</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Related Item 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="bg-surface-container-low rounded-md h-32 flex items-center justify-center p-sm mb-sm relative overflow-hidden">
+<img alt="Batería LTH" class="object-contain w-full h-full mix-blend-multiply group-hover:scale-110 transition-transform" data-alt="A professional product shot of an automotive battery in a sleek black casing with clean, highly legible technical labels, resting on a stark white background under modern studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC_qTnCqQyzMmLM_33acRX1VvSpsdsrv0tbal2w2I76ooy9dspH6x8vZxDHc3-LZC7D02BSWcHITf5PvTpznvJU4cL-EtBHqTakZZfIEuPFcalfOfbaJ9CcA9ISuPLstOfURc6QmRjW1lDWYjHMm--8HSJFoygy_-V1dCXAjUkZZfDPu_Utd8j0FK6vTUd-_MsKnCf2QuQCNUN7oYk9qiN0EP-nfGHjdJZH3WWp4NTP3GOGzGzI3eb"/>
+</div>
+<span class="font-label-technical text-label-sm text-on-surface-variant">SKU: BAT-LTH-47</span>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface line-clamp-2 leading-tight">Batería LTH Grupo 47 600 CCA</h4>
+<div class="mt-auto pt-sm border-t border-outline-variant flex justify-between items-center">
+<span class="font-headline-md text-[16px] font-bold text-on-surface">$2,100.00</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Related Item 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col gap-sm hover:shadow-md transition-shadow cursor-pointer group">
+<div class="bg-surface-container-low rounded-md h-32 flex items-center justify-center p-sm mb-sm relative overflow-hidden">
+<img alt="Cable de Tierra" class="object-contain w-full h-full mix-blend-multiply group-hover:scale-110 transition-transform" data-alt="Detailed studio photography of an automotive engine ground strap cable with shiny copper connectors and thick black insulation, positioned neatly on a white surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsVHwCfmQ9mg_UIkbn75Ba2MhKUgF0UOe625RQlqfAHA1275yN81omGi9HCoFqub2IPq2Jj1giXOB0A2sPSjUOl69iM2Fco0Z63cibg7WxelWUeb0-8CLvGmRiN_h9Wqv3anKxekwtRi25c5Nv_Hp4miQ4UCUUuQkUN_Sn6iHdKWfu93Rm2NkUyXqO1QQMC-a6_5WfgudvdDO7DuRXUXMGvOmtGGZnRzrbizDZz6pB6pYesYxb2QTl"/>
+</div>
+<span class="font-label-technical text-label-sm text-on-surface-variant">OEM: 24080-ED00A</span>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface line-clamp-2 leading-tight">Cable de Tierra Motor a Chasis</h4>
+<div class="mt-auto pt-sm border-t border-outline-variant flex justify-between items-center">
+<span class="font-headline-md text-[16px] font-bold text-on-surface">$250.00</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

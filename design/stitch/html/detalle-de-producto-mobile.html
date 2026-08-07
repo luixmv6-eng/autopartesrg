@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalle de Producto - AutopartesRG</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#e2e2e5",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-container": "#744400",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#626567",
+                      "on-primary-container": "#a9c1ff",
+                      "surface-variant": "#e2e2e5",
+                      "surface-tint": "#215abd",
+                      "surface-container": "#eeeef0",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#b0c6ff",
+                      "surface-dim": "#dadadc",
+                      "outline-variant": "#c3c6d5",
+                      "on-background": "#1a1c1e",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#2c1700",
+                      "surface-container-low": "#f3f3f6",
+                      "primary-container": "#004aad",
+                      "on-tertiary-fixed-variant": "#683d00",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed": "#e0e3e6",
+                      "inverse-primary": "#b0c6ff",
+                      "secondary": "#5b5f61",
+                      "on-primary": "#ffffff",
+                      "surface": "#f9f9fc",
+                      "inverse-on-surface": "#f0f0f3",
+                      "tertiary-fixed-dim": "#ffb86b",
+                      "surface-bright": "#f9f9fc",
+                      "background": "#f9f9fc",
+                      "on-surface-variant": "#434653",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#44474a",
+                      "on-secondary-fixed": "#191c1e",
+                      "secondary-fixed-dim": "#c4c7ca",
+                      "primary-fixed": "#d9e2ff",
+                      "surface-container-high": "#e8e8ea",
+                      "on-primary-fixed": "#001945",
+                      "tertiary": "#543000",
+                      "tertiary-fixed": "#ffdcbc",
+                      "on-error": "#ffffff",
+                      "secondary-container": "#e0e3e6",
+                      "outline": "#737784",
+                      "on-surface": "#1a1c1e",
+                      "primary": "#00357f",
+                      "on-primary-fixed-variant": "#00429b",
+                      "inverse-surface": "#2f3133",
+                      "on-tertiary-container": "#ffb159"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xs": "4px",
+                      "base": "4px",
+                      "xl": "40px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "container-max": "1280px",
+                      "gutter": "20px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-technical": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-sm": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-technical": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased pb-24">
+<!-- Header (Transactional Context - No full nav, just back) -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant flex items-center px-md h-16 shadow-sm">
+<button aria-label="Volver" class="p-2 -ml-2 text-on-surface-variant active:opacity-70 transition-all rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="arrow_back" data-weight="fill" style="font-variation-settings: 'FILL' 1;">arrow_back</span>
+</button>
+<span class="ml-4 font-headline-md text-headline-md font-bold text-primary">AutopartesRG</span>
+<div class="ml-auto flex items-center gap-sm">
+<button aria-label="Buscar" class="p-2 text-on-surface-variant active:opacity-70 transition-all rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button aria-label="Carrito" class="p-2 text-on-surface-variant active:opacity-70 transition-all rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</button>
+</div>
+</header>
+<main class="pt-16">
+<!-- Image Gallery Area -->
+<section class="relative w-full aspect-square bg-surface-container-lowest border-b border-outline-variant">
+<div class="w-full h-full flex overflow-x-auto snap-x snap-mandatory hide-scrollbar">
+<!-- Image 1 -->
+<div class="min-w-full h-full snap-center relative">
+<img alt="Brake Rotor" class="w-full h-full object-contain p-lg" data-alt="A high-resolution, close-up photograph of a brand new, metallic automotive brake rotor disc. The lighting is studio quality, bright and neutral, highlighting the precision machining grooves and the shiny steel surface against a clean, stark white background. The image evokes a sense of technical reliability and modern engineering standards typical of premium auto parts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGnjqoSWcoFaXrfI1JPDCEWifWbW3Bm2nc_ID81aAn_6rA4vQOGsphX5mS8bBYIoD9ElMDUv5WTk0neqqBP78DzRHjWtRHo8ksde5NRSROWqa3Q0fuoGBz_ReDdVNrsoSAMZaHkbUMY1ADDqNBKrTSJ-6WdknD_hSuS1uU1yXYNcE5XPCMN23xCZar1_IXsoMYG9dSlarXUX7RJVZFgVWqUk_3eWKhocrC3Cerwf_VMHnIKZl6XRRi"/>
+</div>
+<!-- Image 2 -->
+<div class="min-w-full h-full snap-center relative">
+<img alt="Brake Rotor Detail" class="w-full h-full object-contain p-lg" data-alt="A detailed, macro photograph showing the side profile and ventilation fins of a heavy-duty automotive brake disc. Studio lighting creates crisp shadows, emphasizing the metallic texture and robust construction of the part. Set against a pure white background, the image reflects a corporate modern aesthetic focused on mechanical precision and operational efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyb2O12T_2Pkr6RKRTB9a-cLfEZZU5_PG-9ZUvMxxy_VLNamnQyx_L84HXpWFAs0OcCzqQU3uCUZiMyFv4nvHsqxDLFnUOLrtuYvzf54Iy5iNFPhaG96h5EOCo3kb5thCR4UyCQN8vQCxLj3rHmeN-1ihVBZwwfNll5B3Bttp-DkTlgzAqNbyAeEvlDUKKbUP4i18wuGXZ_ZaTasmvj0hAI16KOwVFpRSnhsKq3_pXhY3i93Gt-QFi"/>
+</div>
+</div>
+<!-- Gallery Indicators -->
+<div class="absolute bottom-md left-0 right-0 flex justify-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+</section>
+<!-- Product Info -->
+<section class="p-md bg-surface-container-lowest">
+<div class="flex items-center gap-sm mb-xs">
+<span class="bg-surface-container text-on-surface-variant px-sm py-xs rounded-sm font-label-technical text-label-technical uppercase">Frenos</span>
+<div class="flex items-center gap-xs text-green-700 bg-green-50 px-sm py-xs rounded-sm border border-green-200">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-technical text-label-technical text-xs">Compatible</span>
+</div>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-xs">Disco de Freno Delantero Ventilado Bosch</h1>
+<p class="font-label-technical text-label-technical text-on-surface-variant mb-md">OEM: BD-9042-B</p>
+<div class="flex items-end gap-sm mb-lg">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">$1,250.00</span>
+<span class="text-on-surface-variant text-sm line-through pb-1">$1,450.00</span>
+</div>
+</section>
+<!-- Technical Specs -->
+<section class="mt-md bg-surface-container-lowest p-md border-y border-outline-variant">
+<h2 class="font-headline-md text-headline-md text-on-background mb-md">Especificaciones Técnicas</h2>
+<div class="flex flex-col border border-outline-variant rounded-lg overflow-hidden">
+<div class="flex py-sm px-md bg-surface-container-low border-b border-outline-variant">
+<div class="w-1/2 font-label-technical text-label-technical text-on-surface-variant">Marca</div>
+<div class="w-1/2 font-label-technical text-label-technical text-on-background">Bosch</div>
+</div>
+<div class="flex py-sm px-md bg-surface-container-lowest border-b border-outline-variant">
+<div class="w-1/2 font-label-technical text-label-technical text-on-surface-variant">Tipo</div>
+<div class="w-1/2 font-label-technical text-label-technical text-on-background">Ventilado</div>
+</div>
+<div class="flex py-sm px-md bg-surface-container-low border-b border-outline-variant">
+<div class="w-1/2 font-label-technical text-label-technical text-on-surface-variant">Diámetro Exterior</div>
+<div class="w-1/2 font-label-technical text-label-technical text-on-background">280 mm</div>
+</div>
+<div class="flex py-sm px-md bg-surface-container-lowest border-b border-outline-variant">
+<div class="w-1/2 font-label-technical text-label-technical text-on-surface-variant">Espesor Máximo</div>
+<div class="w-1/2 font-label-technical text-label-technical text-on-background">22 mm</div>
+</div>
+<div class="flex py-sm px-md bg-surface-container-low">
+<div class="w-1/2 font-label-technical text-label-technical text-on-surface-variant">Posición</div>
+<div class="w-1/2 font-label-technical text-label-technical text-on-background">Delantero</div>
+</div>
+</div>
+</section>
+<!-- Related Products -->
+<section class="mt-md bg-surface-container-lowest py-md border-t border-outline-variant">
+<div class="px-md mb-md flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-background">Repuestos Relacionados</h2>
+</div>
+<div class="flex overflow-x-auto gap-md px-md pb-md snap-x hide-scrollbar">
+<!-- Related Item 1 -->
+<div class="min-w-[160px] max-w-[160px] bg-surface-container-lowest border border-outline-variant rounded-lg p-sm snap-start flex flex-col active:bg-surface-container-low transition-colors">
+<div class="w-full aspect-square bg-surface-container-low rounded-md mb-sm flex items-center justify-center p-sm">
+<img alt="Brake Pads" class="w-full h-full object-contain" data-alt="A high-quality studio shot of a set of automotive brake pads arranged neatly on a clean white surface. The dark friction material contrasts with the bright metallic backing plates. The lighting is crisp and even, highlighting the technical nature of the product, fitting a professional modern automotive catalog aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjKiq_sdrLdzecbyI6rrsDVR2lpjDfynMOUkHrAvbj6fFgfq6honyzCPbjxVKHnVuRnTwTWdCZdjk-540XcZPfQYEXKtRoK6rSzXRshfRzQgO0nDxMrIuqazRx8UjQOCd7YOgmlTD_doMoxC6dxBub3Eebuapbyy_jTQXPJvXPqhiVgHhomgU7YkYKXyRKU6QUAHbpb-dtMGyyLDyiuQXKNXGALK8uM1lz58sRvk_3_e5n_VjZiiKe"/>
+</div>
+<h3 class="font-body-md text-body-md text-on-background line-clamp-2 mb-xs leading-tight">Balatas de Cerámica Delanteras</h3>
+<p class="font-label-technical text-label-technical text-on-surface-variant text-xs mb-sm">OEM: BP-Ceramic</p>
+<div class="mt-auto">
+<span class="font-headline-md text-headline-md text-primary">$850.00</span>
+</div>
+</div>
+<!-- Related Item 2 -->
+<div class="min-w-[160px] max-w-[160px] bg-surface-container-lowest border border-outline-variant rounded-lg p-sm snap-start flex flex-col active:bg-surface-container-low transition-colors">
+<div class="w-full aspect-square bg-surface-container-low rounded-md mb-sm flex items-center justify-center p-sm">
+<img alt="Brake Caliper" class="w-full h-full object-contain" data-alt="A detailed, bright photograph of an automotive brake caliper painted in a clean, industrial silver finish. The part is isolated against a pure white background under strong studio lighting, revealing its complex mechanical structure, bolts, and bleed valve, representing operational reliability in a corporate modern style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIoqVNlKXzW4xcN8rPXTqYFzBEZdNQAZYFmrJQchDM4kuoyyuXaDUNLuWmjX1D4AaokHxgqAjjUvbLTyaO5HVifigk-w-qajz7K7HRyw_jGpvAh8sPzHCKShL7LlBQeO5M3ZNyBHfpPuRyhYfzOx2joSSSWKzOky8mbnUcEW_fOEsZNGtYrZtaNn98XAM5ssZJFppbxZAuGr2UqZm6MBzVSM9mYt2XPQDOgjQV2bIqNuKZiIxnkZF_"/>
+</div>
+<h3 class="font-body-md text-body-md text-on-background line-clamp-2 mb-xs leading-tight">Caliper de Freno Izquierdo</h3>
+<p class="font-label-technical text-label-technical text-on-surface-variant text-xs mb-sm">OEM: CL-Izq-102</p>
+<div class="mt-auto">
+<span class="font-headline-md text-headline-md text-primary">$2,100.00</span>
+</div>
+</div>
+<!-- Related Item 3 -->
+<div class="min-w-[160px] max-w-[160px] bg-surface-container-lowest border border-outline-variant rounded-lg p-sm snap-start flex flex-col active:bg-surface-container-low transition-colors">
+<div class="w-full aspect-square bg-surface-container-low rounded-md mb-sm flex items-center justify-center p-sm">
+<img alt="Brake Fluid" class="w-full h-full object-contain" data-alt="A precise studio photograph of a small bottle of high-performance automotive brake fluid. The bottle is modern and cleanly designed, sitting on a stark white background. The bright lighting reflects off the plastic container, conveying a sense of technical maintenance and high standards for professional automotive care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVUmPDA1WKKbfW9N3dQQDB6Nen8UwJclNFO_YveV7LxzWMpcxmklJg1RuGBVVtOswFcRbNB5-N1FSpBkPlw0b4Y1vC4GWLKdrJ99HbHW4A4tnGRp9Beog0POXkLxKPevHoiUL1NL14__2ps0EZtaZoKGuhG1Kq-OjlCqMstFVJFpCMIbKl5iA1uqR07pBuZRnlvYwNMWnVLMTc-O5xkAohdA-bZkE1hfoosFjLv57Uu3PKZoPz9t2g"/>
+</div>
+<h3 class="font-body-md text-body-md text-on-background line-clamp-2 mb-xs leading-tight">Líquido de Frenos DOT 4</h3>
+<p class="font-label-technical text-label-technical text-on-surface-variant text-xs mb-sm">OEM: LF-DOT4</p>
+<div class="mt-auto">
+<span class="font-headline-md text-headline-md text-primary">$150.00</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Fixed Bottom Action Bar -->
+<div class="fixed bottom-0 w-full bg-surface-container-lowest border-t border-outline-variant p-md flex items-center gap-md z-50 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<button class="flex-1 bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-headline-md text-headline-md py-sm px-md rounded-lg flex items-center justify-center gap-sm transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="chat" data-weight="fill" style="font-variation-settings: 'FILL' 1;">chat</span>
+            Cotizar por WhatsApp
+        </button>
+</div>
+</body></html>

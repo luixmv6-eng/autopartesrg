@@ -1,26 +1,604 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===============================================================
+   Sistema de diseño replicado del proyecto de Stitch
+   "AutopartesRG Digital Catalog". Tokens Material 3, tema claro.
+   Los nombres son los mismos que usan las maquetas de Stitch, para
+   que el marcado se traduzca uno a uno.
+   =============================================================== */
+@theme {
+  /* Tipografía */
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Escala tipográfica de Stitch */
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 56px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--font-weight: 600;
+
+  --text-headline-lg-mobile: 24px;
+  --text-headline-lg-mobile--line-height: 32px;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-headline-md: 20px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+
+  --text-label-technical: 14px;
+  --text-label-technical--line-height: 20px;
+  --text-label-technical--letter-spacing: 0.02em;
+  --text-label-technical--font-weight: 500;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--font-weight: 500;
+
+  /*
+   * Espaciado de Stitch.
+   *
+   * OJO: en Tailwind v4 la escala de espaciado también alimenta las utilidades
+   * de tamaño, así que estos nombres secuestran `max-w-xl`, `max-w-md`, `w-lg`
+   * y compañía: `max-w-xl` pasa a valer 40px en vez de 36rem. Para anchos de
+   * medida usa un valor arbitrario (`max-w-[38rem]`) o una talla con número
+   * delante (`max-w-2xl`, `max-w-7xl`), que no colisionan.
+   */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+
+  /* Paleta Material 3 */
+  --color-primary: #00357f;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #004aad;
+  --color-on-primary-container: #a9c1ff;
+  --color-primary-fixed: #d9e2ff;
+  --color-primary-fixed-dim: #b0c6ff;
+  --color-on-primary-fixed: #001945;
+  --color-on-primary-fixed-variant: #00429b;
+  --color-inverse-primary: #b0c6ff;
+
+  --color-secondary: #5b5f61;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #e0e3e6;
+  --color-on-secondary-container: #626567;
+
+  --color-tertiary: #543000;
+  --color-tertiary-container: #744400;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #ffb159;
+  --color-tertiary-fixed: #ffdcbc;
+  --color-tertiary-fixed-dim: #ffb86b;
+  --color-on-tertiary-fixed: #2c1700;
+  --color-on-tertiary-fixed-variant: #683d00;
+
+  --color-background: #f9f9fc;
+  --color-on-background: #1a1c1e;
+  --color-surface: #f9f9fc;
+  --color-surface-bright: #f9f9fc;
+  --color-surface-dim: #dadadc;
+  --color-surface-variant: #e2e2e5;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f3f6;
+  --color-surface-container: #eeeef0;
+  --color-surface-container-high: #e8e8ea;
+  --color-surface-container-highest: #e2e2e5;
+  --color-on-surface: #1a1c1e;
+  --color-on-surface-variant: #434653;
+
+  --color-outline: #737784;
+  --color-outline-variant: #c3c6d5;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-inverse-surface: #2f3133;
+  --color-inverse-on-surface: #f0f0f3;
+
+  /*
+   * Acento naranja del CTA. Stitch lo usa como #ff6f00 con texto blanco,
+   * lo que da 2.7:1 y no pasa AA. Se conserva el naranja exacto y se usa
+   * el mismo texto oscuro que Stitch ya aplica en el CTA de la ficha
+   * (`on-tertiary-fixed`), que da 5.9:1.
+   */
+  --color-accent: #ff6f00;
+  --color-accent-hover: #e66400;
+  --color-on-accent: #2c1700;
+
+  /* Estados. Los verdes y naranjas de Stitch se oscurecen lo justo para AA. */
+  --color-ok: #1b5e20;
+  --color-ok-bg: #e8f5e9;
+  --color-ok-border: #a5d6a7;
+  --color-warn: #bf360c;
+  --color-warn-bg: #fff3e0;
+  --color-warn-border: #ffcc80;
+
+  --color-wa: #25d366;
+  --color-on-wa: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===============================================================
+   Base
+   =============================================================== */
+html {
+  /* El diseño de Stitch es de tema claro. Se fija para toda la página. */
+  color-scheme: light;
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-sans);
+  font-size: var(--text-body-md);
+  line-height: var(--text-body-md--line-height);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+:where(h1, h2, h3, h4) {
+  text-wrap: balance;
+}
+
+:where(p) {
+  text-wrap: pretty;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* Cifras tabulares en años, códigos y contadores */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------
+   Tratamientos tipográficos. Registro técnico y sobrio: titulares
+   con tracking cerrado, etiquetas monoespaciadas en versalitas.
+   --------------------------------------------------------------- */
+
+/* Titular de display: tracking cerrado para que el bloque pese más. */
+.display-tight {
+  letter-spacing: -0.035em;
+  font-weight: 700;
+}
+
+/*
+ * Etiqueta de sección. Monoespaciada, en versalitas y con una regla corta
+ * delante que ancla el bloque a la retícula.
+ */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-label-sm);
+  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-primary);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* ---------------------------------------------------------------
+   Retícula técnica. Da profundidad al hero sin pedir una imagen.
+   --------------------------------------------------------------- */
+.reticula {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-primary) 10%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-primary) 10%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+}
+
+/*
+ * Realce del borde al pasar por encima de una tarjeta. El degradado vive en un
+ * pseudoelemento para poder animar su opacidad sin repintar el borde real.
+ */
+.borde-vivo {
+  position: relative;
+}
+
+.borde-vivo::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    var(--color-primary),
+    color-mix(in srgb, var(--color-primary) 20%, transparent) 45%,
+    transparent 70%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+.borde-vivo:hover::before,
+.borde-vivo:focus-within::before {
+  opacity: 1;
+}
+
+/* ===============================================================
+   Material Symbols. Subconjunto autoalojado, ver
+   scripts/descargar-iconos.mjs
+   =============================================================== */
+.material-symbols-outlined {
+  font-family: var(--font-material-symbols), "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.material-symbols-outlined.filled {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* ===============================================================
+   Barra de desplazamiento técnica, como en las maquetas
+   =============================================================== */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-outline-variant) var(--color-surface-container-low);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-surface-container-low);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
+
+/*
+ * Barra de desplazamiento siempre visible. En el panel de filtros hace falta
+ * que se vea el raíl aunque el puntero esté fuera, para que quede claro que hay
+ * más contenido por debajo.
+ */
+.scrollbar-visible {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-outline) var(--color-surface-container-high);
+  scrollbar-gutter: stable;
+}
+
+.scrollbar-visible::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollbar-visible::-webkit-scrollbar-track {
+  background: var(--color-surface-container-high);
+  border-radius: 999px;
+}
+
+.scrollbar-visible::-webkit-scrollbar-thumb {
+  background: var(--color-outline);
+  border: 2px solid var(--color-surface-container-high);
+  border-radius: 999px;
+}
+
+.scrollbar-visible::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===============================================================
+   Movimiento. Sin librería: transiciones y scroll-driven animations.
+   =============================================================== */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Pulso del botón flotante de WhatsApp, pedido en el encargo original. */
+@keyframes fab-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Barra de progreso de lectura del encabezado. */
+@keyframes progreso-scroll {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Barrido de luz que recorre el hero una vez al cargar. */
+@keyframes barrido {
+  from {
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  to {
+    transform: translateX(220%) skewX(-12deg);
+  }
+}
+
+/* Entrada del hero: cada elemento sube con un desfase corto. */
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+
+    /*
+     * Cada tarjeta entra por sí misma al asomar en el viewport, en vez de que
+     * todo el grid dependa de un único disparo. Al filtrar, el `key` del grid
+     * cambia y la animación se vuelve a ejecutar.
+     */
+    .card-reveal {
+      animation: card-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+
+  /* Progreso de lectura: sin JavaScript, atado al scroll del documento. */
+  @supports (animation-timeline: scroll()) {
+    .barra-progreso {
+      animation: progreso-scroll linear;
+      animation-timeline: scroll(root block);
+      transform-origin: 0 50%;
+    }
+  }
+
+  .hero-entra > * {
+    animation: subir 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-entra > *:nth-child(1) {
+    animation-delay: 60ms;
+  }
+  .hero-entra > *:nth-child(2) {
+    animation-delay: 140ms;
+  }
+  .hero-entra > *:nth-child(3) {
+    animation-delay: 220ms;
+  }
+  .hero-entra > *:nth-child(4) {
+    animation-delay: 300ms;
+  }
+
+  .hero-barrido::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    width: 30%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, #ffffff 26%, transparent),
+      transparent
+    );
+    animation: barrido 2.2s cubic-bezier(0.4, 0, 0.2, 1) 500ms both;
+    pointer-events: none;
+  }
+
+  .card-in {
+    animation: card-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 30ms);
+  }
+
+  .fab-ping {
+    animation: fab-pulse 2.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-surface-container) 25%,
+      var(--color-surface-container-high) 37%,
+      var(--color-surface-container) 63%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+
+  dialog[open] {
+    animation: dialog-in 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  dialog[open].sheet {
+    animation: sheet-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  dialog[open]::backdrop {
+    animation: backdrop-in 200ms ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    background: var(--color-surface-container);
+  }
+}
+
+/* ===============================================================
+   Diálogos nativos
+   =============================================================== */
+dialog::backdrop {
+  background: color-mix(in srgb, var(--color-on-background) 45%, transparent);
+  backdrop-filter: blur(4px);
+}
+
+dialog {
+  color: var(--color-on-surface);
+  max-width: none;
+  max-height: none;
+}
+
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+
+/* El botón flotante estorba mientras hay un diálogo abierto */
+body:has(dialog[open]) .wa-fab {
+  opacity: 0;
+  pointer-events: none;
 }
