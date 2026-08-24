@@ -1,5 +1,6 @@
 import type { Producto } from "./types";
 import { LABEL_MARCA } from "./taxonomia";
+import { MODELO_GENERICO } from "./utils";
 
 /**
  * Número de destino. Se configura en `.env.local` como
@@ -16,9 +17,16 @@ export const MENSAJE_GENERICO = "Hola, quisiera más información sobre sus repu
  *  Me interesaría cotizar el precio y recibir más información."
  */
 export function mensajeCotizacion(producto: Producto, modelo?: string): string {
-  const marca = LABEL_MARCA[producto.marca];
-  const modeloElegido = modelo?.trim() || producto.modelos[0];
-  const vehiculo = modeloElegido ? `${marca} ${modeloElegido}` : marca;
+  // Los repuestos sin aplicación marcada no tienen vehículo que nombrar: en vez
+  // de mandar "para el vehículo: Varios modelos", el mensaje deja el hueco
+  // abierto para que el cliente lo complete. Es el dato que el vendedor
+  // necesita primero, y así la conversación arranca pidiéndolo.
+  const marca = producto.marca === "universal" ? "" : LABEL_MARCA[producto.marca];
+  const modeloElegido = modelo?.trim() || producto.modelos[0] || "";
+  const vehiculo =
+    modeloElegido === MODELO_GENERICO || !modeloElegido
+      ? `${marca} (te indico marca, modelo y año)`.trim()
+      : [marca, modeloElegido].filter(Boolean).join(" ");
   return `Hola, estoy interesado en el repuesto: ${producto.nombre}, para el vehículo: ${vehiculo}. Me interesaría cotizar el precio y recibir más información.`;
 }
 

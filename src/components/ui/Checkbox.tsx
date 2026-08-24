@@ -31,11 +31,11 @@ export function Checkbox({ id, label, checked, onChange, conteo }: CheckboxProps
           checked={checked}
           disabled={deshabilitado}
           onChange={(e) => onChange(e.target.checked)}
-          className="peer size-4 cursor-pointer appearance-none rounded-[3px] border border-outline-variant bg-surface-container-lowest transition-colors checked:border-primary checked:bg-primary disabled:cursor-not-allowed"
+          className="peer size-4 cursor-pointer appearance-none rounded border border-borde-campo bg-surface-container-lowest transition-colors checked:border-primary checked:bg-primary disabled:cursor-not-allowed"
         />
         <Icon
           name="check"
-          size={13}
+          size={16}
           filled
           className="pointer-events-none absolute text-on-primary opacity-0 transition-opacity peer-checked:opacity-100"
         />

@@ -18,7 +18,7 @@ export function BadgeTecnico({
   return (
     <span
       className={cn(
-        "inline-block rounded-md border border-outline-variant bg-surface-container px-sm py-xs font-mono text-label-technical tracking-[0.04em] text-on-surface-variant",
+        "inline-block rounded border border-outline-variant bg-surface-container px-sm py-xs font-mono text-label-technical tracking-[0.04em] text-on-surface-variant",
         className
       )}
     >

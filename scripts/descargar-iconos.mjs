@@ -47,8 +47,29 @@ export const ICONOS = [
   "zoom_in",
 ].sort();
 
+/**
+ * Ejes de la fuente variable, y por qué están casi todos fijos.
+ *
+ * Material Symbols tiene cuatro ejes: `opsz`, `wght`, `FILL` y `GRAD`. Pedir el
+ * rango completo de los cuatro obliga a que cada glifo viaje con los deltas de
+ * interpolación de todos ellos, y eso cuesta caro: 33,2 KB para 29 iconos.
+ *
+ * El sitio solo mueve uno. `globals.css` fija `"wght" 400`, `"GRAD" 0` y
+ * `"opsz" 24` en `.material-symbols-outlined`, y lo único que cambia es `FILL`,
+ * que la clase `.filled` lleva a 1 para el icono de la pestaña activa y el de
+ * compatibilidad confirmada.
+ *
+ * Fijando los tres ejes muertos el subconjunto baja a 5,9 KB. Mismo aspecto,
+ * 27 KB menos en cada primera visita.
+ *
+ * Si algún día hace falta otro peso o tamaño óptico, hay que ampliar el rango
+ * aquí **y** en `globals.css`: pedir el eje sin usarlo solo engorda el fichero,
+ * y usarlo sin pedirlo no hace nada.
+ */
+const EJES = "opsz,wght,FILL,GRAD@24,400,0..1,0";
+
 const url =
-  "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" +
+  `https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:${EJES}` +
   `&icon_names=${ICONOS.join(",")}`;
 
 // Sin User-Agent moderno, Google devuelve formatos antiguos en vez de woff2.

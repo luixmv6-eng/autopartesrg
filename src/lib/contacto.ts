@@ -10,18 +10,18 @@
  * Los valores son de ejemplo: sustitúyelos por los reales antes de publicar.
  */
 export const CONTACTO = {
-  nombre: "AutopartesRG",
+  nombre: "Autopartes ERG",
   descripcion:
     "Catálogo digital de repuestos y autopartes con cotización directa por WhatsApp.",
-  correo: "ventas@autopartesrg.com",
+  correo: "ventas@autopartes-erg.com",
   telefono: "+57 601 742 8890",
   /** Zona a la que se despacha. Sustituye a la dirección física. */
   cobertura: "Cobertura nacional en Colombia",
   pais: "CO",
   redes: [
-    { id: "facebook", nombre: "Facebook", url: "https://facebook.com/autopartesrg" },
-    { id: "instagram", nombre: "Instagram", url: "https://instagram.com/autopartesrg" },
-    { id: "tiktok", nombre: "TikTok", url: "https://tiktok.com/@autopartesrg" },
+    { id: "facebook", nombre: "Facebook", url: "https://facebook.com/autopartaserg" },
+    { id: "instagram", nombre: "Instagram", url: "https://instagram.com/autopartaserg" },
+    { id: "tiktok", nombre: "TikTok", url: "https://tiktok.com/@autopartaserg" },
   ],
 } as const;
 
@@ -37,7 +37,7 @@ export type RedId = (typeof CONTACTO.redes)[number]["id"];
  */
 function resolverSiteUrl(): string {
   const bruto = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (!bruto) return "https://autopartesrg.com";
+  if (!bruto) return "https://autopartes-erg.com";
   try {
     const url = new URL(bruto);
     if (url.protocol !== "https:" && url.protocol !== "http:") {
@@ -48,7 +48,7 @@ function resolverSiteUrl(): string {
     if (process.env.NODE_ENV !== "production") {
       console.warn(`NEXT_PUBLIC_SITE_URL no es una URL válida: ${bruto}`);
     }
-    return "https://autopartesrg.com";
+    return "https://autopartes-erg.com";
   }
 }
 

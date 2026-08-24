@@ -38,10 +38,18 @@ const normalizar = (valor: string) =>
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "");
 
-/** Texto indexable: nombre, OEM, marca, modelos, categoría y sección. */
+/**
+ * Texto indexable: nombre, número de parte, marca, modelos, categoría y sección.
+ *
+ * También la descripción, porque es donde vive el dato que el taller conoce y
+ * que no cabe en el nombre: el código del bloque (`YD22`, `6G72`, `4KH1`), la
+ * marca del repuesto (`Aisin`, `Dayco`, `NSK`) o la referencia del fabricante.
+ * Buscar "4kh1" y no encontrar el kit que lo dice en su propia ficha sería un
+ * fallo del buscador, no del catálogo.
+ */
 function textoBuscable(p: Producto): string {
   return normalizar(
-    [p.nombre, p.oem, p.marca, p.categoria, p.seccion, ...p.modelos].join(" ")
+    [p.nombre, p.oem ?? "", p.descripcion, p.marca, p.categoria, p.seccion, ...p.modelos].join(" ")
   );
 }
 

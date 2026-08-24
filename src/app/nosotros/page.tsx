@@ -5,7 +5,7 @@ import { migasSchema } from "@/lib/seo";
 
 const TITULO = "Nosotros";
 const DESCRIPCION =
-  "Conoce a AutopartesRG: visión, misión e historia del equipo detrás del catálogo de repuestos con compatibilidad verificada.";
+  "Conoce a Autopartes ERG: visión, misión e historia del equipo detrás del catálogo de repuestos con compatibilidad verificada.";
 
 export const metadata: Metadata = {
   title: TITULO,

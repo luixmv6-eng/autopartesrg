@@ -9,7 +9,7 @@
  * cliente hidrata con el mismo valor y, justo después, aplica los filtros reales
  * de la URL. La navegación sigue siendo instantánea y el enlace, compartible.
  */
-const EVENTO = "autopartesrg:urlchange";
+const EVENTO = "autopartes-erg:urlchange";
 
 const oyentes = new Set<() => void>();
 let instantanea = "";

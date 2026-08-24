@@ -1,361 +1,618 @@
 [
   {
-    "id": "pastillas-freno-delanteras-ceramicas",
-    "oem": "04465-YZZED",
-    "nombre": "Pastillas de freno delanteras cerámicas",
-    "descripcion": "Juego de cuatro pastillas cerámicas de baja emisión de polvo, con placa antichirrido y chaflán de rodaje. Frenada estable en frío y buen comportamiento en tráfico urbano.",
-    "marca": "toyota",
-    "modelos": [
-      "Corolla",
-      "Yaris",
-      "Auris"
-    ],
-    "anioDesde": 2014,
-    "anioHasta": 2022,
-    "categoria": "frenos",
-    "seccion": "sistema-frenos",
-    "imagen": "/images/parts/pastillas-freno-delanteras-ceramicas.svg",
-    "destacado": true
-  },
-  {
-    "id": "disco-freno-ventilado-275",
-    "oem": "96534653-BD",
-    "nombre": "Disco de freno ventilado 275 mm",
-    "descripcion": "Disco delantero ventilado de fundición gris con recubrimiento anticorrosivo en campana y radio. Mecanizado equilibrado para reducir vibración en el pedal.",
-    "marca": "chevrolet",
-    "modelos": [
-      "Aveo",
-      "Sail",
-      "Optra"
-    ],
-    "anioDesde": 2012,
-    "anioHasta": 2020,
-    "categoria": "frenos",
-    "seccion": "sistema-frenos",
-    "imagen": "/images/parts/disco-freno-ventilado-275.svg"
-  },
-  {
-    "id": "bomba-freno-maestra",
-    "oem": "58510-2S000",
-    "nombre": "Bomba de freno maestra",
-    "descripcion": "Cilindro maestro tándem con depósito y sensor de nivel. Incluye juego de sellos y tapón. Recorrido de pedal recuperado tras la instalación y purgado.",
-    "marca": "kia",
-    "modelos": [
-      "Sportage",
-      "Carens"
-    ],
-    "anioDesde": 2011,
-    "anioHasta": 2016,
-    "categoria": "frenos",
-    "seccion": "sistema-frenos",
-    "imagen": "/images/parts/bomba-freno-maestra.svg"
-  },
-  {
-    "id": "amortiguador-delantero-gas",
-    "oem": "54661-1R000",
-    "nombre": "Amortiguador delantero a gas",
-    "descripcion": "Amortiguador bitubo presurizado con vástago cromado y guardapolvo incluido. Calibración de serie, pensado para reemplazo por pares en el mismo eje.",
-    "marca": "hyundai",
-    "modelos": [
-      "Accent",
-      "i10",
-      "Grand i10"
-    ],
-    "anioDesde": 2011,
-    "anioHasta": 2019,
-    "categoria": "suspension",
-    "seccion": "tren-delantero",
-    "imagen": "/images/parts/amortiguador-delantero-gas.svg",
-    "destacado": true
-  },
-  {
-    "id": "rotula-inferior-suspension",
-    "oem": "40160-EM30A",
-    "nombre": "Rótula inferior de suspensión",
-    "descripcion": "Rótula con cuerpo forjado, grasa de larga duración y guardapolvo de neopreno. Elimina el golpeteo en baches y el juego en la dirección.",
+    "id": "kit-clutch-volante-nissan-frontier-np300",
+    "nombre": "Kit de clutch completo + volante bimasa Nissan Frontier NP300",
+    "descripcion": "Conjunto LuK/Schaeffler DMF: volante bimasa, prensa, disco y balinera de empuje. El volante se cambia junto con el disco porque un bimasa desgastado le transmite al disco nuevo la misma vibración que acabó con el anterior. Para NP300 de gasolina.",
     "marca": "nissan",
-    "modelos": [
-      "Sentra",
-      "Tiida",
-      "Versa"
-    ],
-    "anioDesde": 2010,
-    "anioHasta": 2018,
-    "categoria": "suspension",
-    "seccion": "tren-delantero",
-    "imagen": "/images/parts/rotula-inferior-suspension.svg"
-  },
-  {
-    "id": "kit-bujes-barra-estabilizadora",
-    "oem": "BBM2-28-156",
-    "nombre": "Kit de bujes de barra estabilizadora",
-    "descripcion": "Bujes de caucho reforzado con abrazaderas y tornillería. Recupera la respuesta en curva y quita el ruido seco del tren trasero sobre irregularidades.",
-    "marca": "mazda",
-    "modelos": [
-      "Mazda 3",
-      "Mazda 2"
-    ],
-    "anioDesde": 2013,
-    "anioHasta": 2021,
-    "categoria": "suspension",
-    "seccion": "tren-trasero",
-    "imagen": "/images/parts/kit-bujes-barra-estabilizadora.svg"
-  },
-  {
-    "id": "filtro-aceite-motor",
-    "oem": "90915-YZZD2",
-    "nombre": "Filtro de aceite de motor",
-    "descripcion": "Filtro de flujo total con válvula antirretorno y medio filtrante sintético. Retención fina sin restringir la presión de aceite en arranque en frío.",
-    "marca": "toyota",
-    "modelos": [
-      "Hilux",
-      "Fortuner",
-      "Innova"
-    ],
+    "modelos": ["Frontier NP300", "NP300 D23 Gasolina"],
     "anioDesde": 2016,
-    "anioHasta": 2024,
-    "categoria": "filtros",
-    "seccion": "motor",
-    "imagen": "/images/parts/filtro-aceite-motor.svg"
-  },
-  {
-    "id": "filtro-aire-alto-flujo",
-    "oem": "AB39-9601-AA",
-    "nombre": "Filtro de aire de alto flujo",
-    "descripcion": "Elemento de panel con marco de poliuretano y sellado perimetral continuo. Buena separación de polvo fino en rutas destapadas.",
-    "marca": "ford",
-    "modelos": [
-      "Ranger",
-      "EcoSport"
-    ],
-    "anioDesde": 2015,
     "anioHasta": 2023,
-    "categoria": "filtros",
-    "seccion": "motor",
-    "imagen": "/images/parts/filtro-aire-alto-flujo.svg"
-  },
-  {
-    "id": "bomba-agua-con-polea",
-    "oem": "25100-2B000",
-    "nombre": "Bomba de agua con polea",
-    "descripcion": "Bomba remanufacturada con rodamiento y sello mecánico nuevos, probada en banco. Se entrega con junta y polea montada.",
-    "marca": "kia",
-    "modelos": [
-      "Rio",
-      "Cerato"
-    ],
-    "anioDesde": 2013,
-    "anioHasta": 2021,
-    "categoria": "refrigeracion",
-    "seccion": "motor",
-    "imagen": "/images/parts/bomba-agua-con-polea.svg"
-  },
-  {
-    "id": "radiador-aluminio",
-    "oem": "95227748-RD",
-    "nombre": "Radiador de aluminio",
-    "descripcion": "Núcleo de aluminio con cajas plásticas reforzadas y soportes de goma incluidos. Probado a presión antes del despacho.",
-    "marca": "chevrolet",
-    "modelos": [
-      "Spark GT",
-      "Beat"
-    ],
-    "anioDesde": 2011,
-    "anioHasta": 2019,
-    "categoria": "refrigeracion",
-    "seccion": "motor",
-    "imagen": "/images/parts/radiador-aluminio.svg"
-  },
-  {
-    "id": "alternador-90a",
-    "oem": "27060-0T010",
-    "nombre": "Alternador 90 A",
-    "descripcion": "Alternador remanufacturado con rotor rebobinado, regulador y rodamientos nuevos. Curva de carga verificada en banco a distintas revoluciones.",
-    "marca": "toyota",
-    "modelos": [
-      "Corolla",
-      "Yaris"
-    ],
-    "anioDesde": 2009,
-    "anioHasta": 2017,
-    "categoria": "electrico",
-    "seccion": "sistema-electrico",
-    "imagen": "/images/parts/alternador-90a.svg",
+    "categoria": "transmision",
+    "seccion": "transmision",
+    "imagen": "/images/parts/kit-clutch-volante-nissan-frontier-np300.jpg",
     "destacado": true
   },
   {
-    "id": "motor-arranque-14kw",
-    "oem": "31100-63J10",
-    "nombre": "Motor de arranque 1.4 kW",
-    "descripcion": "Unidad usada con carcasa sana, escobillas dentro de tolerancia y bendix con engrane limpio. Probada antes de salir del taller.",
-    "marca": "suzuki",
-    "modelos": [
-      "Swift",
-      "Vitara"
-    ],
-    "anioDesde": 2012,
-    "anioHasta": 2020,
-    "categoria": "electrico",
-    "seccion": "sistema-electrico",
-    "imagen": "/images/parts/motor-arranque-14kw.svg"
+    "id": "kit-reparacion-motor-mahle-dmax-diesel",
+    "nombre": "Kit de reparación de motor Mahle Chevrolet D-Max diésel",
+    "descripcion": "Liner kit Mahle de fabricación japonesa: camisa, pistón, bulón, anillos y seguros por cilindro. Referencia IMKT898780MX-KX para bloque Isuzu 4KH1, diámetro 95,40 mm. Se pide por juego de cilindros del motor.",
+    "marca": "chevrolet",
+    "modelos": ["D-Max 2.5 Diésel", "D-Max 3.5"],
+    "anioDesde": 2006,
+    "anioHasta": 2019,
+    "categoria": "motor",
+    "seccion": "motor",
+    "imagen": "/images/parts/kit-reparacion-motor-mahle-dmax-diesel.jpg",
+    "destacado": true
   },
   {
-    "id": "bobina-encendido-individual",
-    "oem": "55573735-IG",
-    "nombre": "Bobina de encendido individual",
-    "descripcion": "Bobina tipo lápiz con encapsulado térmico y conector reforzado. Corrige fallos de chispa y tirones a media carga.",
-    "marca": "chevrolet",
-    "modelos": [
-      "Cruze",
-      "Tracker"
-    ],
+    "id": "culata-nissan-xtrail-t30-yd22",
+    "nombre": "Culata Nissan X-Trail T30 YD22 diésel",
+    "descripcion": "Culata de aluminio para bloque YD22DDTi, con guías y asientos de válvula montados y plano de apoyo rectificado. Se entrega sin empaquetadura ni tornillería de apriete.",
+    "marca": "nissan",
+    "modelos": ["X-Trail T30 YD22 Diésel"],
+    "anioDesde": 2001,
+    "anioHasta": 2007,
+    "categoria": "motor",
+    "seccion": "motor",
+    "imagen": "/images/parts/culata-nissan-xtrail-t30-yd22.jpg",
+    "destacado": true
+  },
+  {
+    "id": "bocin-rueda-delantera-toyota-hilux-vigo-fortuner",
+    "nombre": "Bocín de rueda delantera Toyota Hilux / Vigo / Fortuner",
+    "descripcion": "Cubo de rueda delantero con rodamiento cónico de doble hilera precargado de fábrica y brida de cuatro pernos. Sellado de por vida: no admite reengrase, se reemplaza completo cuando aparece juego o zumbido.",
+    "marca": "toyota",
+    "modelos": ["Hilux", "Hilux Vigo", "Fortuner"],
+    "anioDesde": 2005,
+    "anioHasta": 2015,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/bocin-rueda-delantera-toyota-hilux-vigo-fortuner.jpg",
+    "destacado": true
+  },
+  {
+    "id": "kit-exploradoras-nissan-new-versa",
+    "nombre": "Kit de exploradoras Nissan New Versa",
+    "descripcion": "Juego completo para instalación tipo original: par de faros antiniebla izquierdo y derecho, marcos de bómper, ramal de cableado con relé y fusible, y switch de tablero con el pictograma de fábrica.",
+    "marca": "nissan",
+    "modelos": ["New Versa"],
+    "anioDesde": 2020,
+    "anioHasta": 2024,
+    "categoria": "electrico",
+    "seccion": "exterior",
+    "imagen": "/images/parts/kit-exploradoras-nissan-new-versa.jpg",
+    "destacado": true
+  },
+  {
+    "id": "pastillas-freno-suzuki-swift",
+    "nombre": "Pastillas de freno delanteras Suzuki Swift",
+    "descripcion": "Juego delantero con placa de respaldo perforada y chaflán de rodaje en los extremos. Compuesto de baja emisión de polvo, calibrado para uso urbano.",
+    "marca": "suzuki",
+    "modelos": ["Swift"],
+    "anioDesde": 2020,
+    "anioHasta": 2021,
+    "categoria": "frenos",
+    "seccion": "sistema-frenos",
+    "imagen": "/images/parts/pastillas-freno-suzuki-swift.jpg",
+    "destacado": true
+  },
+
+  {
+    "id": "kit-clutch-aisin-toyota-land-cruiser",
+    "nombre": "Kit de clutch Aisin Toyota Land Cruiser",
+    "descripcion": "Kit Aisin de tres piezas: prensa de diafragma, disco con amortiguadores de torsión y balinera de empuje. Aisin es el proveedor de equipo original de Toyota, así que la carga de pedal y el punto de agarre quedan como de fábrica.",
+    "marca": "toyota",
+    "modelos": ["Land Cruiser", "Land Cruiser Macho"],
+    "anioDesde": 1990,
+    "anioHasta": 2007,
+    "categoria": "transmision",
+    "seccion": "transmision",
+    "imagen": "/images/parts/kit-clutch-aisin-toyota-land-cruiser.jpg"
+  },
+  {
+    "id": "kit-clutch-mazda-bt50-diesel",
+    "nombre": "Kit de clutch Mazda BT-50 diésel",
+    "descripcion": "Prensa y disco de servicio pesado con balinera hidráulica de empuje concéntrico integrada a la prensa. Para BT-50 diésel de cabina sencilla y doble.",
+    "marca": "mazda",
+    "modelos": ["BT-50 Diésel"],
+    "anioDesde": 2007,
+    "anioHasta": 2015,
+    "categoria": "transmision",
+    "seccion": "transmision",
+    "imagen": "/images/parts/kit-clutch-mazda-bt50-diesel.jpg"
+  },
+  {
+    "id": "kit-clutch-nissan-qashqai-j11",
+    "nombre": "Kit de clutch Nissan Qashqai J11",
+    "descripcion": "Kit de tres piezas con actuador hidráulico concéntrico incluido. El actuador va dentro de la campana y no se puede cambiar sin bajar la caja, así que se reemplaza en el mismo servicio aunque todavía no gotee.",
+    "marca": "nissan",
+    "modelos": ["Qashqai J11"],
     "anioDesde": 2014,
     "anioHasta": 2021,
-    "categoria": "electrico",
-    "seccion": "motor",
-    "imagen": "/images/parts/bobina-encendido-individual.svg"
-  },
-  {
-    "id": "kit-embrague-completo",
-    "oem": "377141025D",
-    "nombre": "Kit de embrague completo",
-    "descripcion": "Plato, disco y collarín de un mismo fabricante, con guía de centrado incluida. Recomendado reemplazar junto con el retén de caja.",
-    "marca": "volkswagen",
-    "modelos": [
-      "Gol",
-      "Voyage",
-      "Saveiro"
-    ],
-    "anioDesde": 2010,
-    "anioHasta": 2018,
     "categoria": "transmision",
-    "seccion": "chasis",
-    "imagen": "/images/parts/kit-embrague-completo.svg"
+    "seccion": "transmision",
+    "imagen": "/images/parts/kit-clutch-nissan-qashqai-j11.jpg"
   },
   {
-    "id": "cardan-homocinetico-lado-rueda",
-    "oem": "391015154R",
-    "nombre": "Cardán homocinético lado rueda",
-    "descripcion": "Junta homocinética con estrías rectificadas, grasa de litio y fuelle termoplástico. Elimina el chasquido al girar con dirección al tope.",
-    "marca": "renault",
-    "modelos": [
-      "Logan",
-      "Sandero",
-      "Duster"
-    ],
-    "anioDesde": 2013,
-    "anioHasta": 2022,
-    "categoria": "transmision",
-    "seccion": "tren-delantero",
-    "imagen": "/images/parts/cardan-homocinetico-lado-rueda.svg"
-  },
-  {
-    "id": "kit-empaquetadura-culata",
-    "oem": "04111-30040",
-    "nombre": "Kit de empaquetadura de culata",
-    "descripcion": "Juego completo superior con empaquetadura multicapa metálica, retenes de válvula y sellos de inyector. Requiere planificado de culata verificado.",
+    "id": "balinera-clutch-toyota-45-macho",
+    "nombre": "Balinera de clutch NSK Toyota 4.5 Macho",
+    "descripcion": "Rodamiento de empuje NSK con guía autocentrante y horquillas de retención. Repuesto individual para cuando el disco todavía tiene forro pero la balinera chilla al pisar el embrague.",
     "marca": "toyota",
-    "modelos": [
-      "Hilux 2.5 D4D"
-    ],
-    "anioDesde": 2007,
+    "modelos": ["Macho 4.5", "Land Cruiser 4.5"],
+    "anioDesde": 1993,
+    "anioHasta": 2007,
+    "categoria": "transmision",
+    "seccion": "transmision",
+    "imagen": "/images/parts/balinera-clutch-toyota-45-macho.jpg"
+  },
+  {
+    "id": "guaya-clutch-chevrolet-spark-gt",
+    "nombre": "Guaya de clutch Chevrolet Spark GT",
+    "descripcion": "Cable de accionamiento con funda, regulador de recorrido y terminal de horquilla montados. Se cambia completo: estirar la guaya vieja con el regulador solo corre el punto de agarre hacia el final del pedal.",
+    "marca": "chevrolet",
+    "modelos": ["Spark GT"],
+    "anioDesde": 2011,
+    "anioHasta": 2017,
+    "categoria": "transmision",
+    "seccion": "transmision",
+    "imagen": "/images/parts/guaya-clutch-chevrolet-spark-gt.jpg"
+  },
+  {
+    "id": "bomba-auxiliar-clutch-nissan-frontier-d22",
+    "nombre": "Bomba auxiliar de clutch Nissan Frontier D22 diésel",
+    "descripcion": "Cilindro esclavo de embrague con guardapolvo y vástago regulable. Va atornillado por fuera de la campana, así que se reemplaza sin desmontar la caja.",
+    "marca": "nissan",
+    "modelos": ["Frontier D22 Diésel"],
+    "anioDesde": 1998,
+    "anioHasta": 2015,
+    "categoria": "transmision",
+    "seccion": "transmision",
+    "imagen": "/images/parts/bomba-auxiliar-clutch-nissan-frontier-d22.jpg"
+  },
+  {
+    "id": "soporte-caja-toyota-prado-sumo",
+    "nombre": "Soporte de caja Toyota Prado Sumo",
+    "descripcion": "Travesaño soporte de caja con bloque de caucho vulcanizado y tope de poliuretano. Absorbe el par de reacción de la transmisión; cuando el caucho se agrieta aparece golpeteo al cambiar de marcha.",
+    "marca": "toyota",
+    "modelos": ["Prado Sumo"],
+    "anioDesde": 1996,
+    "anioHasta": 2009,
+    "categoria": "transmision",
+    "seccion": "transmision",
+    "imagen": "/images/parts/soporte-caja-toyota-prado-sumo.jpg"
+  },
+
+  {
+    "id": "culata-suzuki-grand-vitara-20",
+    "nombre": "Culata Suzuki Grand Vitara 2.0",
+    "descripcion": "Culata de aluminio para motor J20A de 16 válvulas, con guías y asientos instalados y plano de apoyo rectificado. Se entrega desnuda: sin árboles de levas, válvulas ni empaquetadura.",
+    "marca": "suzuki",
+    "modelos": ["Grand Vitara 2.0"],
+    "anioDesde": 1998,
     "anioHasta": 2015,
     "categoria": "motor",
     "seccion": "motor",
-    "imagen": "/images/parts/kit-empaquetadura-culata.svg"
+    "imagen": "/images/parts/culata-suzuki-grand-vitara-20.jpg"
   },
   {
-    "id": "turbocompresor-remanufacturado",
-    "oem": "GB3Q-6K682-AA",
-    "nombre": "Turbocompresor remanufacturado",
-    "descripcion": "Turbo con cartucho central nuevo, eje balanceado a alta velocidad y actuador calibrado. Se entrega con junta de escape y tornillería.",
-    "marca": "ford",
-    "modelos": [
-      "Ranger 3.2"
-    ],
-    "anioDesde": 2016,
-    "anioHasta": 2022,
+    "id": "culata-kia-picanto-ion",
+    "nombre": "Culata Kia Picanto Ion 3 cilindros",
+    "descripcion": "Culata armada para motor Kappa de tres cilindros: árbol de levas, balancines de rodillo y taqués hidráulicos ya montados. Entra directo sobre el bloque, solo pide empaquetadura y tornillería nueva.",
+    "marca": "kia",
+    "modelos": ["Picanto Ion"],
+    "anioDesde": 2011,
+    "anioHasta": 2017,
     "categoria": "motor",
     "seccion": "motor",
-    "imagen": "/images/parts/turbocompresor-remanufacturado.svg",
-    "destacado": true
+    "imagen": "/images/parts/culata-kia-picanto-ion.jpg"
   },
   {
-    "id": "farol-delantero-halogeno-derecho",
-    "oem": "92102-D3010",
-    "nombre": "Farol delantero halógeno derecho",
-    "descripcion": "Óptica con carcasa nueva, parábola sin oxidación y regulación de altura funcional. Compatible con el arnés original sin adaptaciones.",
+    "id": "kit-reparacion-motor-isuzu",
+    "nombre": "Kit de reparación de motor Isuzu NKR / NPR / NHR",
+    "descripcion": "Kit Isuzu Genuine Parts: liner sets por cilindro con camisa, pistón y anillos, más juegos de empaquetaduras, retenedores y metales. Todo en caja original de la marca.",
+    "marca": "isuzu",
+    "modelos": ["NKR", "NPR", "NHR", "D-Max"],
+    "anioDesde": 1990,
+    "anioHasta": 2015,
+    "categoria": "motor",
+    "seccion": "motor",
+    "imagen": "/images/parts/kit-reparacion-motor-isuzu.jpg"
+  },
+  {
+    "id": "eje-levas-mitsubishi-v6-3000",
+    "nombre": "Eje de levas Mitsubishi V6 3.0",
+    "descripcion": "Árbol de levas para bloque 6G72 de 12 válvulas, con engrane helicoidal de distribuidor en el extremo. Muñones y lóbulos rectificados a medida estándar.",
+    "marca": "mitsubishi",
+    "modelos": ["Montero V6 3.0", "Montero Sport V6 3.0", "Nativa V6 3.0"],
+    "anioDesde": 1990,
+    "anioHasta": 2010,
+    "categoria": "motor",
+    "seccion": "motor",
+    "imagen": "/images/parts/eje-levas-mitsubishi-v6-3000.jpg"
+  },
+  {
+    "id": "kit-distribucion-ford-fiesta-titanium",
+    "oem": "5M5G-6K254-AB",
+    "nombre": "Kit de distribución Ford Fiesta Titanium original",
+    "descripcion": "Correa dentada Continental y polea tensora Ford original en empaque de agencia. El número de parte corresponde a la tensora; la correa va apareada al mismo juego y las dos se cambian juntas.",
+    "marca": "ford",
+    "modelos": ["Fiesta Titanium", "Fiesta 1.6"],
+    "anioDesde": 2011,
+    "anioHasta": 2019,
+    "categoria": "motor",
+    "seccion": "motor",
+    "imagen": "/images/parts/kit-distribucion-ford-fiesta-titanium.jpg"
+  },
+  {
+    "id": "kit-correa-accesorios-toyota-macho-45",
+    "nombre": "Kit de correas de accesorios Toyota Macho 4.5",
+    "descripcion": "Juego Dayco Heavy Duty de correas en V para alternador, dirección hidráulica y compresor de aire acondicionado. Se reemplazan en juego para que las tres queden con la misma tensión de servicio.",
+    "marca": "toyota",
+    "modelos": ["Macho 4.5", "Land Cruiser 4.5"],
+    "anioDesde": 1993,
+    "anioHasta": 2007,
+    "categoria": "motor",
+    "seccion": "motor",
+    "imagen": "/images/parts/kit-correa-accesorios-toyota-macho-45.jpg"
+  },
+  {
+    "id": "polea-ciguenal-nissan-bluebird-primera",
+    "nombre": "Polea de cigüeñal Nissan Bluebird / Primera",
+    "descripcion": "Damper de cigüeñal con anillo de caucho vulcanizado entre el cubo y la corona acanalada. Absorbe la vibración torsional del cigüeñal: si el caucho se desprende, la polea se bambolea y desalinea todo el juego de correas.",
+    "marca": "nissan",
+    "modelos": ["Bluebird", "Primera"],
+    "anioDesde": 1990,
+    "anioHasta": 2002,
+    "categoria": "motor",
+    "seccion": "motor",
+    "imagen": "/images/parts/polea-ciguenal-nissan-bluebird-primera.jpg"
+  },
+
+  {
+    "id": "inyectores-toyota-45",
+    "nombre": "Inyectores Toyota 4.5 gasolina",
+    "descripcion": "Inyector de riel para motor 1FZ-FE de 4.5 litros, con cuerpo metálico, conector superior y juego de o-rings. Se venden por unidad; en un reemplazo por caudal irregular conviene cambiar los seis.",
+    "marca": "toyota",
+    "modelos": ["Land Cruiser 4.5", "Macho 4.5", "Burbuja 4.5"],
+    "anioDesde": 1993,
+    "anioHasta": 2007,
+    "categoria": "combustible",
+    "seccion": "motor",
+    "imagen": "/images/parts/inyectores-toyota-45.jpg"
+  },
+  {
+    "id": "riel-inyectores-toyota-vigo-2kd",
+    "nombre": "Riel de inyectores Toyota Hilux Vigo 2KD",
+    "descripcion": "Riel common rail para motor 2KD-FTV, con sensor de presión y válvula limitadora montados. Cuatro salidas para las cañerías de alta y toma de retorno en el extremo.",
+    "marca": "toyota",
+    "modelos": ["Hilux Vigo 2KD"],
+    "anioDesde": 2005,
+    "anioHasta": 2015,
+    "categoria": "combustible",
+    "seccion": "motor",
+    "imagen": "/images/parts/riel-inyectores-toyota-vigo-2kd.jpg"
+  },
+  {
+    "id": "bomba-gasolina-alta-presion-chevrolet-traverse",
+    "nombre": "Bomba de gasolina de alta presión Chevrolet Traverse",
+    "descripcion": "Bomba mecánica de alta presión para inyección directa, accionada por el árbol de levas. Incluye el taqué de rodillo y el conector del solenoide de dosificación.",
+    "marca": "chevrolet",
+    "modelos": ["Traverse"],
+    "anioDesde": 2018,
+    "anioHasta": 2023,
+    "categoria": "combustible",
+    "seccion": "motor",
+    "imagen": "/images/parts/bomba-gasolina-alta-presion-chevrolet-traverse.jpg"
+  },
+  {
+    "id": "bomba-gasolina-mitsubishi-lancer",
+    "nombre": "Bomba de gasolina mecánica Mitsubishi Lancer",
+    "descripcion": "Bomba de diafragma accionada por leva, versión de pata izquierda, con las dos empaquetaduras de montaje incluidas. Para Lancer con alimentación por carburador.",
+    "marca": "mitsubishi",
+    "modelos": ["Lancer"],
+    "anioDesde": 1988,
+    "anioHasta": 2003,
+    "categoria": "combustible",
+    "seccion": "motor",
+    "imagen": "/images/parts/bomba-gasolina-mitsubishi-lancer.jpg"
+  },
+  {
+    "id": "cuerpo-aceleracion-renault-clio-megane-symbol",
+    "nombre": "Cuerpo de aceleración Renault Clio / Mégane / Symbol",
+    "descripcion": "Cuerpo de mariposa de accionamiento por cable, con sensor de posición y tope de ralentí. Cuerpo de aluminio con o-ring de admisión incluido.",
+    "marca": "renault",
+    "modelos": ["Clio", "Mégane", "Symbol"],
+    "anioDesde": 1998,
+    "anioHasta": 2016,
+    "categoria": "combustible",
+    "seccion": "motor",
+    "imagen": "/images/parts/cuerpo-aceleracion-renault-clio-megane-symbol.jpg"
+  },
+
+  {
+    "id": "bomba-agua-chevrolet-spark-gt",
+    "nombre": "Bomba de agua Chevrolet Spark GT completa",
+    "descripcion": "Bomba completa con polea acanalada, cuello de salida y tubo de conexión ya montados. Se entrega armada, así que no hay que trasladar piezas de la bomba vieja.",
+    "marca": "chevrolet",
+    "modelos": ["Spark GT"],
+    "anioDesde": 2011,
+    "anioHasta": 2017,
+    "categoria": "refrigeracion",
+    "seccion": "motor",
+    "imagen": "/images/parts/bomba-agua-chevrolet-spark-gt.jpg"
+  },
+  {
+    "id": "bomba-agua-chevrolet-spark-tico-matiz",
+    "nombre": "Bomba de agua Chevrolet Spark / Tico / Matiz",
+    "descripcion": "Bomba para motor de 800 cc con impulsor metálico y empaquetadura de montaje incluida. Sirve para toda la familia del bloque F8C: Tico, Matiz, Spark y Spark Cronos.",
+    "marca": "chevrolet",
+    "modelos": ["Spark", "Spark Cronos", "Tico", "Matiz"],
+    "anioDesde": 1991,
+    "anioHasta": 2017,
+    "categoria": "refrigeracion",
+    "seccion": "motor",
+    "imagen": "/images/parts/bomba-agua-chevrolet-spark-tico-matiz.jpg"
+  },
+  {
+    "id": "bomba-agua-hyundai-i20",
+    "nombre": "Bomba de agua Hyundai i20",
+    "descripcion": "Bomba con impulsor de acero estampado, rodamiento sellado y o-ring de cuerpo montado. Reemplazo directo, sin necesidad de empaquetadura plana.",
     "marca": "hyundai",
-    "modelos": [
-      "Tucson"
-    ],
+    "modelos": ["i20"],
+    "anioDesde": 2009,
+    "anioHasta": 2020,
+    "categoria": "refrigeracion",
+    "seccion": "motor",
+    "imagen": "/images/parts/bomba-agua-hyundai-i20.jpg"
+  },
+  {
+    "id": "motoventilador-volkswagen-amarok",
+    "nombre": "Motoventilador completo Volkswagen Amarok",
+    "descripcion": "Conjunto de electroventilador con carcasa, aspa de siete álabes y motor eléctrico montado. Se entrega completo porque la carcasa hace de conducto: cambiar solo el motor deja fugas de caudal por los costados.",
+    "marca": "volkswagen",
+    "modelos": ["Amarok"],
+    "anioDesde": 2010,
+    "anioHasta": 2022,
+    "categoria": "refrigeracion",
+    "seccion": "motor",
+    "imagen": "/images/parts/motoventilador-volkswagen-amarok.jpg"
+  },
+  {
+    "id": "deposito-auxiliar-radiador-chevrolet-aveo-sail",
+    "nombre": "Depósito auxiliar de radiador Chevrolet Aveo / Sail",
+    "descripcion": "Tanque de expansión en polipropileno translúcido, con las dos boquillas metálicas y las marcas de nivel mínimo y máximo. Se cambia cuando el plástico se cristaliza y empieza a rezumar por las costuras.",
+    "marca": "chevrolet",
+    "modelos": ["Aveo", "Aveo Emotion", "Sail"],
+    "anioDesde": 2004,
+    "anioHasta": 2018,
+    "categoria": "refrigeracion",
+    "seccion": "motor",
+    "imagen": "/images/parts/deposito-auxiliar-radiador-chevrolet-aveo-sail.jpg"
+  },
+  {
+    "id": "tapa-radiador-chevrolet-spark-gt-tracker-sonic",
+    "nombre": "Tapa de radiador Chevrolet Spark GT / Tracker / Sonic",
+    "descripcion": "Tapa de presión calibrada a 140 kPa (20 psi), con válvula de alivio y de vacío. La presión de tarado es lo que sube el punto de ebullición del refrigerante: una tapa vencida hace hervir el sistema antes de tiempo.",
+    "marca": "chevrolet",
+    "modelos": ["Spark GT", "Tracker", "Sonic"],
+    "anioDesde": 2011,
+    "anioHasta": 2022,
+    "categoria": "refrigeracion",
+    "seccion": "motor",
+    "imagen": "/images/parts/tapa-radiador-chevrolet-spark-gt-tracker-sonic.jpg"
+  },
+
+  {
+    "id": "filtro-aire-motor-chevrolet-aveo",
+    "nombre": "Filtro de aire de motor Chevrolet Aveo",
+    "descripcion": "Filtro panel de papel plisado con marco de caucho perimetral. Aplica a toda la familia Aveo, en cualquiera de sus versiones de carrocería.",
+    "marca": "chevrolet",
+    "modelos": ["Aveo", "Aveo Emotion", "Aveo Family"],
+    "anioDesde": 2004,
+    "anioHasta": 2018,
+    "categoria": "filtros",
+    "seccion": "motor",
+    "imagen": "/images/parts/filtro-aire-motor-chevrolet-aveo.jpg"
+  },
+  {
+    "id": "filtro-aire-motor-chevrolet-spark-gt",
+    "nombre": "Filtro de aire de motor Chevrolet Spark GT",
+    "descripcion": "Filtro panel de perfil trapezoidal con sello de caucho moldeado en todo el contorno. Reemplazo directo en la caja porta-filtro de serie.",
+    "marca": "chevrolet",
+    "modelos": ["Spark GT"],
+    "anioDesde": 2011,
+    "anioHasta": 2017,
+    "categoria": "filtros",
+    "seccion": "motor",
+    "imagen": "/images/parts/filtro-aire-motor-chevrolet-spark-gt.jpg"
+  },
+  {
+    "id": "filtro-combustible-nissan-np300-diesel",
+    "nombre": "Filtro de combustible Nissan NP300 diésel",
+    "descripcion": "Filtro Wega FCD-2173 con cabezal, sensor de agua y purga inferior. Separa el agua del gasóleo antes del riel: en motores common rail es lo que protege a los inyectores de un daño irreversible.",
+    "marca": "nissan",
+    "modelos": ["NP300 Frontier Diésel"],
+    "anioDesde": 2015,
+    "anioHasta": 2021,
+    "categoria": "filtros",
+    "seccion": "motor",
+    "imagen": "/images/parts/filtro-combustible-nissan-np300-diesel.jpg"
+  },
+  {
+    "id": "tapa-filtro-aire-chevrolet-dmax-25",
+    "nombre": "Tapa de filtro de aire Chevrolet D-Max 2.5",
+    "descripcion": "Tapa de la caja porta-filtro con las presillas metálicas de cierre y los enganches de bisagra. Repuesto para cuando se parten las orejas de la tapa original y la caja deja de sellar.",
+    "marca": "chevrolet",
+    "modelos": ["D-Max 2.5"],
+    "anioDesde": 2009,
+    "anioHasta": 2014,
+    "categoria": "filtros",
+    "seccion": "motor",
+    "imagen": "/images/parts/tapa-filtro-aire-chevrolet-dmax-25.jpg"
+  },
+
+  {
+    "id": "booster-frenos-nissan-urvan-nv350",
+    "nombre": "Booster de frenos Nissan Urvan NV350",
+    "descripcion": "Servofreno de vacío con brida de cuatro espárragos y vástago de empuje regulable. Multiplica la fuerza del pedal con el vacío del múltiple: cuando el diafragma se rompe, el pedal se pone duro y el recorrido de frenado se alarga.",
+    "marca": "nissan",
+    "modelos": ["Urvan NV350"],
+    "anioDesde": 2013,
+    "anioHasta": 2022,
+    "categoria": "frenos",
+    "seccion": "sistema-frenos",
+    "imagen": "/images/parts/booster-frenos-nissan-urvan-nv350.jpg"
+  },
+
+  {
+    "id": "bocin-delantero-nissan-frontier-np300-d23",
+    "nombre": "Bocín delantero Nissan Frontier NP300 D23 4x4",
+    "descripcion": "Cubo de rueda delantero para versión 4x4, con estriado interior para el eje homocinético y sensor de ABS integrado con su ramal. El sensor va dentro del cubo: no se reemplaza por separado.",
+    "marca": "nissan",
+    "modelos": ["Frontier NP300 D23 4x4"],
+    "anioDesde": 2015,
+    "anioHasta": 2023,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/bocin-delantero-nissan-frontier-np300-d23.jpg"
+  },
+  {
+    "id": "bocin-delantero-toyota-corona",
+    "nombre": "Bocín delantero Toyota Corona",
+    "descripcion": "Cubo de rueda delantero con brida de cuatro espárragos y espiga roscada central. Acabado en zincado amarillo de fábrica.",
+    "marca": "toyota",
+    "modelos": ["Corona"],
+    "anioDesde": 1992,
+    "anioHasta": 1998,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/bocin-delantero-toyota-corona.jpg"
+  },
+  {
+    "id": "rotula-toyota-corona",
+    "nombre": "Rótula de suspensión Toyota Corona",
+    "descripcion": "Rótula inferior GSP con base de tres pernos, incluye tuerca almenada, pasador de seguridad y guardapolvo de repuesto. Corresponde a la aplicación del Corona modelo 1995.",
+    "marca": "toyota",
+    "modelos": ["Corona"],
+    "anioDesde": 1992,
+    "anioHasta": 1998,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/rotula-toyota-corona.jpg"
+  },
+  {
+    "id": "tijeras-nissan-kicks",
+    "nombre": "Tijeras de suspensión Nissan Kicks (par)",
+    "descripcion": "Par de brazos de control inferiores, lado derecho e izquierdo, con bujes y rótula ya prensados. Se venden en par porque cambiar uno solo deja la geometría del eje desigual.",
+    "marca": "nissan",
+    "modelos": ["Kicks"],
     "anioDesde": 2016,
+    "anioHasta": 2024,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/tijeras-nissan-kicks.jpg"
+  },
+  {
+    "id": "portamangueta-nissan-navara",
+    "nombre": "Portamangueta Nissan Navara",
+    "descripcion": "Muñón portamangueta de fundición con alojamiento del cubo de rueda, brazo de dirección y anclajes de caliper. Pieza estructural: se reemplaza cuando queda doblada tras un golpe fuerte contra el andén.",
+    "marca": "nissan",
+    "modelos": ["Navara"],
+    "anioDesde": 2005,
+    "anioHasta": 2015,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/portamangueta-nissan-navara.jpg"
+  },
+  {
+    "id": "brazo-oscilante-chevrolet-spark-tico-matiz",
+    "nombre": "Brazo oscilante Chevrolet Spark / Tico / Matiz",
+    "descripcion": "Brazo de control inferior estampado, con rótula y buje trasero ya montados. Aplica a toda la familia Tico, Matiz, Spark y Spark Cronos.",
+    "marca": "chevrolet",
+    "modelos": ["Spark", "Spark Cronos", "Tico", "Matiz"],
+    "anioDesde": 1991,
+    "anioHasta": 2017,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/brazo-oscilante-chevrolet-spark-tico-matiz.jpg"
+  },
+  {
+    "id": "bujes-tijera-chevrolet-spark-gt",
+    "nombre": "Bujes de tijera Chevrolet Spark GT (par)",
+    "descripcion": "Par de bujes delanteros de tijera con casquillo metálico y cuerpo de caucho vulcanizado. Cambiarlos por par mantiene la misma rigidez en los dos lados del eje.",
+    "marca": "chevrolet",
+    "modelos": ["Spark GT"],
+    "anioDesde": 2011,
+    "anioHasta": 2017,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/bujes-tijera-chevrolet-spark-gt.jpg"
+  },
+  {
+    "id": "buje-tijera-puno-completo-spark-gt",
+    "nombre": "Buje de tijera de puño completo Chevrolet Spark GT (par)",
+    "descripcion": "Par de bujes de puño con soporte metálico integrado, listos para atornillar. Al traer el soporte no hay que prensar el caucho dentro del brazo viejo.",
+    "marca": "chevrolet",
+    "modelos": ["Spark GT"],
+    "anioDesde": 2011,
+    "anioHasta": 2017,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/buje-tijera-puno-completo-spark-gt.jpg"
+  },
+  {
+    "id": "buje-tijera-puno-chevrolet-optra",
+    "nombre": "Buje de tijera de puño Chevrolet Optra (grande metálico)",
+    "descripcion": "Par de bujes traseros de tijera Tecnocaucho, versión grande de camisa metálica. Es el buje que absorbe el frenado del brazo: cuando se rompe, el volante se corre al frenar fuerte.",
+    "marca": "chevrolet",
+    "modelos": ["Optra", "Optra Limited"],
+    "anioDesde": 2004,
+    "anioHasta": 2010,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/buje-tijera-puno-chevrolet-optra.jpg"
+  },
+  {
+    "id": "lagrima-barra-estabilizadora",
+    "nombre": "Lágrima de barra estabilizadora",
+    "descripcion": "Bieleta de barra estabilizadora con rótulas selladas en los dos extremos y tuercas autoblocantes. La aplicación exacta no viene marcada en la pieza: confírmala por WhatsApp con la marca, el modelo y el año de tu vehículo antes de pedirla.",
+    "marca": "universal",
+    "modelos": ["Varios modelos"],
+    "anioDesde": 1995,
+    "anioHasta": 2025,
+    "categoria": "suspension",
+    "seccion": "tren-delantero",
+    "imagen": "/images/parts/lagrima-barra-estabilizadora.jpg"
+  },
+  {
+    "id": "amortiguador-trasero-lexus-con-sensor",
+    "nombre": "Amortiguador trasero Lexus con sensor",
+    "descripcion": "Amortiguador trasero KYB Excel-G a gas, con el ramal del sensor de suspensión adaptativa montado en el cuerpo. La aplicación exacta se confirma por WhatsApp indicando modelo y año.",
+    "marca": "lexus",
+    "modelos": ["Varios modelos"],
+    "anioDesde": 2005,
+    "anioHasta": 2020,
+    "categoria": "suspension",
+    "seccion": "tren-trasero",
+    "imagen": "/images/parts/amortiguador-trasero-lexus-con-sensor.jpg"
+  },
+
+  {
+    "id": "bujia-toyota-hilux-fortuner-4runner",
+    "nombre": "Bujía Denso Toyota Hilux / Fortuner 2.7 / 4Runner 4.0 V6",
+    "descripcion": "Bujía Denso de electrodo fino y aislante de larga vida, referencia de la serie U11. Se vende por unidad; el juego completo depende del número de cilindros del motor.",
+    "marca": "toyota",
+    "modelos": ["Hilux 2.7", "Fortuner 2.7", "4Runner 4.0 V6"],
+    "anioDesde": 2005,
+    "anioHasta": 2020,
+    "categoria": "electrico",
+    "seccion": "motor",
+    "imagen": "/images/parts/bujia-toyota-hilux-fortuner-4runner.jpg"
+  },
+  {
+    "id": "pito-alto-bajo-chevrolet-dmax-25",
+    "nombre": "Pito alto y bajo Hella Chevrolet D-Max 2.5",
+    "descripcion": "Par de bocinas de disco Hella de 12 V, una de 360 Hz y otra de 430 Hz, con sellado antisalpicadura tipo 2B. Las dos frecuencias juntas dan el tono de doble nota de fábrica.",
+    "marca": "chevrolet",
+    "modelos": ["D-Max 2.5"],
+    "anioDesde": 2006,
+    "anioHasta": 2019,
+    "categoria": "electrico",
+    "seccion": "sistema-electrico",
+    "imagen": "/images/parts/pito-alto-bajo-chevrolet-dmax-25.jpg"
+  },
+
+  {
+    "id": "amortiguador-quinta-puerta-nissan-xtrail-t32",
+    "nombre": "Amortiguador de quinta puerta Nissan X-Trail T32 con sensor",
+    "descripcion": "Puntal eléctrico del portón trasero, con husillo interno, motor y ramal de sensor de posición. Es la versión de portón automático: sin el sensor, el módulo no reconoce el recorrido y la puerta se queda a medio abrir.",
+    "marca": "nissan",
+    "modelos": ["X-Trail T32"],
+    "anioDesde": 2014,
     "anioHasta": 2021,
     "categoria": "carroceria",
     "seccion": "exterior",
-    "imagen": "/images/parts/farol-delantero-halogeno-derecho.svg"
-  },
-  {
-    "id": "parachoques-delantero-sin-pintar",
-    "oem": "BHN1-50-031",
-    "nombre": "Parachoques delantero sin pintar",
-    "descripcion": "Pieza en polipropileno con puntos de anclaje reforzados y alojamientos de sensor ya troquelados. Se entrega imprimada, lista para pintar.",
-    "marca": "mazda",
-    "modelos": [
-      "Mazda 3"
-    ],
-    "anioDesde": 2014,
-    "anioHasta": 2019,
-    "categoria": "carroceria",
-    "seccion": "exterior",
-    "imagen": "/images/parts/parachoques-delantero-sin-pintar.svg"
-  },
-  {
-    "id": "espejo-retrovisor-electrico-izquierdo",
-    "oem": "96302-3AN0A",
-    "nombre": "Espejo retrovisor eléctrico izquierdo",
-    "descripcion": "Conjunto usado con motor de reglaje probado, cristal sin rayas y tapa lista para pintar. Conector de siete vías original.",
-    "marca": "nissan",
-    "modelos": [
-      "Versa",
-      "March"
-    ],
-    "anioDesde": 2015,
-    "anioHasta": 2022,
-    "categoria": "carroceria",
-    "seccion": "exterior",
-    "imagen": "/images/parts/espejo-retrovisor-electrico-izquierdo.svg"
-  },
-  {
-    "id": "juego-tapetes-termoformados",
-    "oem": "PT908-02205",
-    "nombre": "Juego de tapetes termoformados",
-    "descripcion": "Cuatro piezas en TPE con bordes altos y anclajes originales. Contienen líquidos y se lavan con agua sin deformarse.",
-    "marca": "toyota",
-    "modelos": [
-      "Yaris",
-      "Corolla"
-    ],
-    "anioDesde": 2018,
-    "anioHasta": 2023,
-    "categoria": "carroceria",
-    "seccion": "interior",
-    "imagen": "/images/parts/juego-tapetes-termoformados.svg"
-  },
-  {
-    "id": "modulo-elevavidrios-conductor",
-    "oem": "5G0959858B",
-    "nombre": "Módulo elevavidrios del conductor",
-    "descripcion": "Botonera con circuito impreso nuevo, contactos limpios y función de bajada automática operativa. Encaje directo en el panel de puerta.",
-    "marca": "volkswagen",
-    "modelos": [
-      "Gol",
-      "Polo"
-    ],
-    "anioDesde": 2012,
-    "anioHasta": 2020,
-    "categoria": "electrico",
-    "seccion": "interior",
-    "imagen": "/images/parts/modulo-elevavidrios-conductor.svg"
+    "imagen": "/images/parts/amortiguador-quinta-puerta-nissan-xtrail-t32.jpg"
   }
 ]

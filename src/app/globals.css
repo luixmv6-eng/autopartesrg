@@ -2,7 +2,7 @@
 
 /* ===============================================================
    Sistema de diseño replicado del proyecto de Stitch
-   "AutopartesRG Digital Catalog". Tokens Material 3, tema claro.
+   "Autopartes ERG Digital Catalog". Tokens Material 3, tema claro.
    Los nombres son los mismos que usan las maquetas de Stitch, para
    que el marcado se traduzca uno a uno.
    =============================================================== */
@@ -11,26 +11,76 @@
   --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
 
-  /* Escala tipográfica de Stitch */
-  --text-display-lg: 48px;
-  --text-display-lg--line-height: 56px;
+  /*
+   * Puntos de corte.
+   *
+   * A los cuatro de Tailwind (sm 40 / md 48 / lg 64 / xl 80) se añaden dos:
+   * `xs` para el móvil pequeño (iPhone SE y similares, 375px) y `3xl` para
+   * monitores anchos, donde el contenido deja de crecer y toca repartir.
+   *
+   * El corte estructural del sitio es `lg`, no `md`: la tableta en vertical
+   * (768px) no tiene sitio para la barra lateral de filtros de 288px más una
+   * retícula de tarjetas legible, así que se queda con el patrón móvil.
+   */
+  --breakpoint-xs: 26rem;
+  --breakpoint-3xl: 120rem;
+
+  /*
+   * Curvas de movimiento.
+   *
+   * `--ease-*` es un namespace de tema de Tailwind v4, así que cada token
+   * genera además su utilidad (`ease-salida`) y se puede usar tanto aquí como
+   * en el marcado. Antes había tres curvas escritas a mano repetidas en seis
+   * sitios: color, tipografía y espaciado tenían tokens y el movimiento no.
+   *
+   * Las de fábrica de CSS son demasiado flojas para movimiento deliberado.
+   *
+   *   salida  entradas y salidas. Arranca rápido, que es lo que hace que la
+   *           interfaz se sienta obediente.
+   *   mov     algo que ya está en pantalla y se desplaza a otro sitio.
+   *   cajon   hojas y cajones. Curva de tipo iOS, sale con cuerpo y frena largo.
+   */
+  --ease-salida: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-mov: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-cajon: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /*
+   * Curva por defecto de cualquier `transition-*` de Tailwind que no declare la
+   * suya. Sin esto, la utilidad suelta cae en la curva de fábrica y el sitio
+   * acaba con dos ritmos distintos según quién escribiera el componente.
+   */
+  --default-transition-timing-function: var(--ease-salida);
+  --default-transition-duration: 180ms;
+
+  /*
+   * Escala tipográfica de Stitch, ahora fluida.
+   *
+   * Los tamaños de Stitch son el extremo de escritorio; el extremo móvil es el
+   * que traían las maquetas pequeñas. Entre 360px y 1280px el tamaño interpola
+   * en vez de saltar en un punto de corte, así que no hay ninguna anchura
+   * intermedia donde el titular quede desproporcionado.
+   *
+   * Solo escala el tramo de titulares. El texto de lectura (`body`, `label`) se
+   * queda fijo a propósito: un cuerpo de 16px es cómodo en cualquier anchura y
+   * hacerlo crecer con el viewport perjudica la medida de línea.
+   *
+   * El interlineado pasa de píxeles a razón para que acompañe al tamaño.
+   */
+  --text-display-lg: clamp(2rem, 1.609rem + 1.739vw, 3rem);
+  --text-display-lg--line-height: 1.1;
   --text-display-lg--letter-spacing: -0.02em;
   --text-display-lg--font-weight: 700;
 
-  --text-headline-lg: 32px;
-  --text-headline-lg--line-height: 40px;
+  --text-headline-lg: clamp(1.5rem, 1.304rem + 0.87vw, 2rem);
+  --text-headline-lg--line-height: 1.25;
   --text-headline-lg--font-weight: 600;
 
-  --text-headline-lg-mobile: 24px;
-  --text-headline-lg-mobile--line-height: 32px;
-  --text-headline-lg-mobile--font-weight: 600;
-
-  --text-headline-md: 20px;
-  --text-headline-md--line-height: 28px;
+  --text-headline-md: clamp(1.125rem, 1.076rem + 0.217vw, 1.25rem);
+  --text-headline-md--line-height: 1.4;
   --text-headline-md--font-weight: 600;
 
-  --text-body-lg: 18px;
-  --text-body-lg--line-height: 28px;
+  --text-body-lg: clamp(1rem, 0.951rem + 0.217vw, 1.125rem);
+  --text-body-lg--line-height: 1.55;
   --text-body-lg--font-weight: 400;
 
   --text-body-md: 16px;
@@ -103,6 +153,20 @@
   --color-outline: #737784;
   --color-outline-variant: #c3c6d5;
 
+  /*
+   * Contorno de control de formulario.
+   *
+   * `outline-variant` (1.70:1) y `panel-borde` (1.50:1) valen para divisores
+   * decorativos, que WCAG exime, pero no para el contorno de un campo: ahí el
+   * borde es lo único que identifica el control, porque el relleno contra su
+   * entorno da 1.03:1, o sea nada. WCAG 1.4.11 pide 3:1.
+   *
+   * Este tono conserva el tinte azul de la zona de herramientas y cumple en las
+   * tres superficies donde hay campos: 3.47:1 sobre blanco, 3.11:1 sobre
+   * `panel` y 3.13:1 sobre `surface-container-low`.
+   */
+  --color-borde-campo: #7d8aa6;
+
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
@@ -129,8 +193,171 @@
   --color-warn-bg: #fff3e0;
   --color-warn-border: #ffcc80;
 
+  /*
+   * Verde de WhatsApp. Es el color de marca y se conserva exacto, pero el
+   * blanco encima da 1.98:1 y no pasa AA ni de lejos.
+   *
+   * Se aplica el mismo criterio ya tomado para el naranja del hero (ver
+   * DESIGN.md §9): mantener el color reconocible y oscurecer el texto. Con
+   * `on-wa` oscuro el par sube a 8.62:1. La alternativa era oscurecer el verde
+   * hasta #075e54, y entonces deja de leerse como WhatsApp.
+   */
   --color-wa: #25d366;
-  --color-on-wa: #ffffff;
+  --color-on-wa: #10281a;
+
+  /*
+   * Superficies azules. Separan las zonas de herramienta (buscador, filtros,
+   * cierre de página) del lienzo neutro donde vive el catálogo.
+   *
+   * El sitio se mantiene en claro de principio a fin: el logotipo lleva la
+   * sigla y el eslogan en gris oscuro, así que sobre un fondo profundo pedía
+   * una placa que lo aislaba del resto de la composición.
+   *
+   * Contrastes sobre `panel`: `on-panel` 12.4:1, `on-panel-suave` 6.6:1.
+   * Sobre blanco: `on-panel-suave` 7.4:1, `primary` 11.6:1.
+   */
+  /*
+   * Elevación en tres niveles, que es lo que dice §3 de DESIGN.md y lo que no
+   * se estaba cumpliendo: había ocho sombras distintas, cinco de la escala de
+   * fábrica de Tailwind y tres escritas a mano.
+   *
+   * Van teñidas del azul de marca en vez de negro puro. Sobre un lienzo
+   * `#f9f9fc` una sombra negra se lee gris sucio; con el tinte de `primary` la
+   * penumbra pertenece a la misma familia que el resto de la paleta.
+   *
+   *   e1  reposo: tarjetas, barra superior, panel de filtros
+   *   e2  algo se ha levantado: hover, menús, botones
+   *   e3  capa superior: diálogos y botón flotante
+   *
+   * `realce` no es un nivel, es el resplandor azul del hover de tarjeta.
+   */
+  --shadow-e1: 0 1px 3px 0 rgb(0 53 127 / 0.10), 0 1px 2px -1px rgb(0 53 127 / 0.08);
+  --shadow-e2: 0 4px 12px -2px rgb(0 53 127 / 0.12), 0 2px 6px -3px rgb(0 53 127 / 0.08);
+  --shadow-e3: 0 24px 48px -12px rgb(0 53 127 / 0.28);
+  --shadow-realce: 0 10px 30px rgb(0 53 127 / 0.12);
+
+  --color-panel: #eef3fc;
+  --color-panel-borde: #c3d4f0;
+  --color-on-panel: #00295f;
+  --color-on-panel-suave: #3f5680;
+}
+
+/* ===============================================================
+   Métricas de layout
+   ---------------------------------------------------------------
+   Van en `:root` y no en `@theme` porque dependen de media queries,
+   que `@theme` no admite. Ser una sola fuente evita que el relleno
+   del contenido, el desplazamiento de los elementos pegajosos y el
+   `scroll-padding` se desincronicen de la altura real de las barras.
+   =============================================================== */
+:root {
+  /* Alto de la cabecera fija. El corte estructural es `lg` (64rem). */
+  --alto-cabecera: 4rem;
+
+  /*
+   * Alto de la barra inferior móvil, con el área segura del dispositivo
+   * incluida. En iPhone con indicador de inicio, `env(safe-area-inset-bottom)`
+   * añade ~34px; sin sumarlos aquí el contenido acaba por debajo del
+   * indicador. Requiere `viewport-fit=cover`, que fija `layout.tsx`.
+   */
+  --alto-barra-inferior: calc(3.75rem + env(safe-area-inset-bottom, 0px));
+
+  /*
+   * Margen lateral del contenido. Interpola de 16px en móvil a 40px en
+   * escritorio, en vez de saltar de golpe en un punto de corte.
+   */
+  --gutter: clamp(1rem, 0.6rem + 1.8vw, 2.5rem);
+
+  /*
+   * Anchura máxima del contenido. Crece en dos escalones para que un monitor
+   * ancho no deje el sitio encajonado en una columna de 1280px con dos
+   * márgenes enormes, pero sin que la medida de línea se dispare.
+   */
+  --ancho-contenido: 80rem;
+
+  /* Diámetro del botón flotante, para reservarle hueco sin números mágicos. */
+  --tamano-fab: 3rem;
+
+  /*
+   * Duraciones. En `:root` y no en `@theme` porque Tailwind v4 no tiene
+   * namespace de duración: `duration-*` toma valores sueltos. Se consumen desde
+   * el marcado con `duration-[var(--dur-media)]`.
+   *
+   * Presupuesto: nada de interfaz por encima de 300ms. Antes había once
+   * duraciones distintas sin escala, incluida una de 600ms en el hover más
+   * frecuente del sitio.
+   */
+  --dur-toque: 120ms; /* respuesta a una pulsación */
+  --dur-rapida: 180ms; /* hover, color, foco */
+  --dur-media: 240ms; /* entrada de diálogos y menús */
+  --dur-panel: 320ms; /* hojas, cajones, despliegues */
+
+  /*
+   * Las salidas van más rápidas que las entradas. Entrando, el movimiento
+   * explica de dónde sale algo y merece tiempo; saliendo, solo estorba.
+   */
+  --dur-salida: 160ms;
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --alto-cabecera: 4.75rem;
+    /* En escritorio no hay barra inferior. */
+    --alto-barra-inferior: 0px;
+    --tamano-fab: 3.5rem;
+  }
+}
+
+@media (min-width: 96rem) {
+  :root {
+    --ancho-contenido: 88rem;
+  }
+}
+
+@media (min-width: 120rem) {
+  :root {
+    --ancho-contenido: 96rem;
+  }
+}
+
+/*
+ * Contenedor del contenido. Sustituye al trío repetido
+ * `mx-auto max-w-7xl px-md md:px-xl`, que fijaba el margen en dos saltos y
+ * dejaba la anchura clavada en 1280px en cualquier monitor.
+ */
+@utility contenedor {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--ancho-contenido);
+  padding-inline: var(--gutter);
+}
+
+/* Igual que `contenedor`, pero sin limitar la anchura: para franjas a sangre. */
+@utility contenedor-fluido {
+  width: 100%;
+  padding-inline: var(--gutter);
+}
+
+/*
+ * Alto del hero.
+ *
+ * Crece con la anchura, no con la altura: atarlo a `svh` haría que en un móvil
+ * alto ocupara la pantalla entera y el catálogo quedara fuera de vista.
+ *
+ * El segundo término sí mira la altura, pero solo como tope: en un teléfono en
+ * horizontal (390px de alto) un hero de 400px sería toda la pantalla. `svh` y
+ * no `vh` para que el tope no dependa de si la barra del navegador está
+ * recogida o desplegada, que es lo que provoca el salto de layout al empezar a
+ * desplazarse en iOS.
+ */
+@utility alto-hero {
+  min-height: max(15rem, min(clamp(19rem, 14rem + 22vw, 27.5rem), 70svh));
+}
+
+@media (min-width: 120rem) {
+  .alto-hero {
+    min-height: 34rem;
+  }
 }
 
 /* ===============================================================
@@ -140,7 +367,12 @@ html {
   /* El diseño de Stitch es de tema claro. Se fija para toda la página. */
   color-scheme: light;
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  /*
+   * Un ancla no debe quedar debajo de la cabecera fija. Se deriva de su alto
+   * real más un respiro, así que sigue siendo exacto en los dos tamaños de
+   * cabecera sin repetir la constante.
+   */
+  scroll-padding-top: calc(var(--alto-cabecera) + 1rem);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -157,6 +389,23 @@ body {
   font-size: var(--text-body-md);
   line-height: var(--text-body-md--line-height);
   -webkit-font-smoothing: antialiased;
+  /*
+   * Red de seguridad contra el desbordamiento horizontal, el fallo de
+   * responsive más habitual y el más molesto: basta un elemento que se pase
+   * unos píxeles para que toda la página se pueda arrastrar de lado.
+   *
+   * `clip` y no `hidden` a propósito: `hidden` convertiría el body en
+   * contenedor de scroll y rompería `position: sticky` de la barra lateral de
+   * filtros y de la cabecera.
+   */
+  overflow-x: clip;
+}
+
+/*
+ * Ningún medio se sale de su columna aunque le falte el atributo de tamaño.
+ */
+:where(img, svg, video, canvas, iframe) {
+  max-width: 100%;
 }
 
 button,
@@ -242,7 +491,11 @@ textarea {
       color-mix(in srgb, var(--color-primary) 10%, transparent) 1px,
       transparent 1px
     );
-  background-size: 56px 56px;
+  /*
+   * La celda crece con el viewport. Fija a 56px, en un monitor ancho la
+   * retícula se lee como una trama fina y pierde el aire de plano técnico.
+   */
+  background-size: clamp(2.25rem, 1.5rem + 3vw, 4.5rem) clamp(2.25rem, 1.5rem + 3vw, 4.5rem);
 }
 
 /*
@@ -371,6 +624,100 @@ textarea {
   display: none;
 }
 
+/*
+ * Carril horizontal con señal de desbordamiento.
+ *
+ * Donde no cabe todo en una fila el contenido se desliza, pero sin barra
+ * visible en móvil un carril cortado a hueso se lee como un final: no hay
+ * forma de saber que queda contenido fuera. Se marca con un degradado en cada
+ * extremo, y ese degradado se apaga al llegar al tope correspondiente.
+ *
+ * El apagado va con una línea de tiempo de scroll nombrada: el carril la
+ * publica y el envoltorio la consume desde `timeline-scope`, porque los velos
+ * viven en el envoltorio (si vivieran dentro del carril se desplazarían con
+ * el contenido en vez de quedarse pegados al borde).
+ *
+ * Sin soporte de `animation-timeline` los velos se quedan fijos, que es peor
+ * que la versión animada pero mejor que no señalizar nada. `opacity` sí
+ * interpola, a diferencia de `mask-image`.
+ */
+@utility carril {
+  position: relative;
+  timeline-scope: --carril-x;
+}
+
+@utility carril-pista {
+  display: flex;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-timeline: --carril-x inline;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carril-pista::-webkit-scrollbar {
+  display: none;
+}
+
+.carril-pista > * {
+  scroll-snap-align: start;
+}
+
+/* Velos de los extremos. No interceptan el puntero. */
+.carril::before,
+.carril::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  width: var(--gutter);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carril::before {
+  inset-inline-start: 0;
+  background: linear-gradient(to right, var(--carril-fondo, var(--color-background)), transparent);
+  opacity: 0;
+}
+
+.carril::after {
+  inset-inline-end: 0;
+  background: linear-gradient(to left, var(--carril-fondo, var(--color-background)), transparent);
+}
+
+@supports (animation-timeline: scroll()) {
+  .carril::before {
+    animation: aparecer-velo linear both;
+    animation-timeline: --carril-x;
+    animation-range: 0 var(--gutter);
+  }
+
+  .carril::after {
+    animation: desaparecer-velo linear both;
+    animation-timeline: --carril-x;
+    animation-range: calc(100% - var(--gutter)) 100%;
+  }
+}
+
+@keyframes aparecer-velo {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes desaparecer-velo {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 /* ===============================================================
    Movimiento. Sin librería: transiciones y scroll-driven animations.
    =============================================================== */
@@ -418,32 +765,14 @@ textarea {
   }
 }
 
-@keyframes dialog-in {
+@keyframes cifra-in {
   from {
     opacity: 0;
-    transform: translateY(14px) scale(0.985);
+    transform: translateY(-4px);
   }
   to {
     opacity: 1;
     transform: none;
-  }
-}
-
-@keyframes sheet-in {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: none;
-  }
-}
-
-@keyframes backdrop-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 
@@ -509,20 +838,20 @@ textarea {
   }
 
   .hero-entra > * {
-    animation: subir 620ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: subir 460ms var(--ease-salida) both;
   }
 
   .hero-entra > *:nth-child(1) {
-    animation-delay: 60ms;
+    animation-delay: 40ms;
   }
   .hero-entra > *:nth-child(2) {
-    animation-delay: 140ms;
+    animation-delay: 100ms;
   }
   .hero-entra > *:nth-child(3) {
-    animation-delay: 220ms;
+    animation-delay: 160ms;
   }
   .hero-entra > *:nth-child(4) {
-    animation-delay: 300ms;
+    animation-delay: 220ms;
   }
 
   .hero-barrido::after {
@@ -536,17 +865,42 @@ textarea {
       color-mix(in srgb, #ffffff 26%, transparent),
       transparent
     );
-    animation: barrido 2.2s cubic-bezier(0.4, 0, 0.2, 1) 500ms both;
+    /* Un haz que recorre una superficie va a velocidad constante. */
+    animation: barrido 2.2s linear 500ms both;
     pointer-events: none;
   }
 
-  .card-in {
-    animation: card-in 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: calc(var(--i, 0) * 30ms);
+  /*
+   * Respaldo de `.card-reveal` para navegadores sin `animation-timeline`.
+   *
+   * Antes esta regla vivía fuera del `@supports` y, al tener la misma
+   * especificidad que `.card-reveal` y venir después, la pisaba: la entrada por
+   * scroll que documenta el proyecto no llegaba a ejecutarse nunca. Se
+   * comprobaba mirando `animationTimeline` en la tarjeta, que valía `auto`.
+   *
+   * Con el respaldo aquí dentro, cada navegador ejecuta exactamente una de las
+   * dos: la de scroll donde hay soporte, la temporal donde no.
+   */
+  @supports not (animation-timeline: view()) {
+    .card-in {
+      animation: card-in var(--dur-panel) var(--ease-salida) both;
+      /* Escalonado corto: 24ms por tarjeta, tope de 8, para que la última fila
+         no se haga esperar. El escalonado es decorativo y nunca debe retrasar
+         la posibilidad de interactuar. */
+      animation-delay: calc(min(var(--i, 0), 8) * 24ms);
+    }
+  }
+
+  /*
+   * Entrada de una cifra que cambia. Corta y sin desplazamiento lateral: la
+   * cifra tiene que quedar legible de inmediato, solo se señala que es nueva.
+   */
+  .cifra-entra {
+    animation: cifra-in var(--dur-media) var(--ease-salida) both;
   }
 
   .fab-ping {
-    animation: fab-pulse 2.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    animation: fab-pulse 2.8s var(--ease-salida) infinite;
   }
 
   .skeleton {
@@ -557,40 +911,140 @@ textarea {
       var(--color-surface-container) 63%
     );
     background-size: 200% 100%;
-    animation: shimmer 1.4s ease-in-out infinite;
+    /* `linear`: el movimiento constante con una curva de aceleración late
+       de forma desigual y se lee como un tirón, no como un barrido. */
+    animation: shimmer 1.4s linear infinite;
+  }
+
+  /*
+   * Desplazamiento de entrada y salida de los diálogos. Solo la parte que se
+   * mueve: la opacidad vive fuera de este bloque porque un fundido sí se
+   * conserva con movimiento reducido.
+   */
+  dialog {
+    translate: 0 14px;
+    scale: 0.985;
+  }
+
+  dialog.sheet {
+    /* La hoja entra desde su propio borde inferior, no desde una distancia
+       fija en píxeles: así el recorrido es correcto a cualquier altura. */
+    translate: 0 100%;
+    scale: 1;
   }
 
   dialog[open] {
-    animation: dialog-in 240ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    translate: none;
+    scale: 1;
   }
 
-  dialog[open].sheet {
-    animation: sheet-in 280ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
+  @starting-style {
+    dialog[open] {
+      translate: 0 14px;
+      scale: 0.985;
+    }
 
-  dialog[open]::backdrop {
-    animation: backdrop-in 200ms ease-out both;
+    dialog[open].sheet {
+      translate: 0 100%;
+    }
   }
 }
 
+/* ---------------------------------------------------------------
+   Movimiento reducido
+   ---------------------------------------------------------------
+   Reducir no es apagar. Se conservan color, opacidad y sombra, que
+   son los que explican qué está pasando; se elimina el
+   desplazamiento, que es lo que marea.
+
+   Antes este bloque solo tocaba el shimmer: todas las animaciones
+   por keyframes estaban dentro de `no-preference` y se apagaban
+   solas, pero las transiciones de hover no, porque son utilidades
+   sueltas de Tailwind. Con la preferencia activa, el hover de
+   tarjeta seguía dando `translate: 0 -4px` y la imagen `scale:
+   1.069`.
+   --------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .skeleton {
     background: var(--color-surface-container);
   }
+
+  /*
+   * El resto se resuelve en el marcado con el variante `motion-safe:`, no con
+   * una regla global.
+   *
+   * Se intentó primero con `* { translate: none !important }` y era demasiado
+   * bruto: también anulaba las transformaciones que **son** la información,
+   * como el `scale-x` del indicador de pestañas, que habría aparecido bajo las
+   * tres a la vez, o el de la barra de progreso de lectura.
+   *
+   * La regla de reparto: si el movimiento adorna, va con `motion-safe:`; si el
+   * movimiento es el dato, se queda.
+   */
 }
 
 /* ===============================================================
    Diálogos nativos
-   =============================================================== */
-dialog::backdrop {
-  background: color-mix(in srgb, var(--color-on-background) 45%, transparent);
-  backdrop-filter: blur(4px);
-}
+   ---------------------------------------------------------------
+   Entran y **salen** con transición, no con keyframes.
 
+   Con keyframes el diálogo aparecía animado y al cerrar se
+   esfumaba de golpe: una animación de entrada no se puede
+   reproducir al revés. La hoja de filtros era lo más llamativo,
+   subía deslizándose y desaparecía sin más.
+
+   Las tres piezas que lo hacen posible: `@starting-style` da el
+   estado del que parte al abrirse, y `overlay`/`display` con
+   `allow-discrete` mantienen el elemento en la capa superior
+   mientras dura la salida en vez de retirarlo en el primer
+   fotograma.
+   =============================================================== */
 dialog {
   color: var(--color-on-surface);
   max-width: none;
   max-height: none;
+
+  opacity: 0;
+  transition:
+    opacity var(--dur-salida) var(--ease-salida),
+    translate var(--dur-salida) var(--ease-cajon),
+    scale var(--dur-salida) var(--ease-salida),
+    overlay var(--dur-salida) allow-discrete,
+    display var(--dur-salida) allow-discrete;
+}
+
+dialog[open] {
+  opacity: 1;
+  /* Entrar cuesta más que salir: entrando el movimiento explica de dónde
+     viene el panel, saliendo solo retrasa volver a lo de antes. */
+  transition-duration: var(--dur-media);
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+  }
+}
+
+dialog::backdrop {
+  background: color-mix(in srgb, var(--color-on-background) 45%, transparent);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition:
+    opacity var(--dur-salida) var(--ease-salida),
+    overlay var(--dur-salida) allow-discrete,
+    display var(--dur-salida) allow-discrete;
+}
+
+dialog[open]::backdrop {
+  opacity: 1;
+  transition-duration: var(--dur-media);
+}
+
+@starting-style {
+  dialog[open]::backdrop {
+    opacity: 0;
+  }
 }
 
 body:has(dialog[open]) {

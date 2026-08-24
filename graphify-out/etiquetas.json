@@ -1,0 +1,359 @@
+{
+  "_ayuda": "Edita solo el campo 'nombre'. Las anclas identifican la comunidad entre reconstrucciones; los ids numéricos de Louvain no son estables y por eso no se usan.",
+  "etiquetas": [
+    {
+      "nombre": "Catálogo, productos y componentes",
+      "nodos": 93,
+      "anclas": [
+        "src_components_catalogo_catalogo",
+        "src_components_catalogo_productomodal",
+        "src_lib_utils_cn",
+        "src_components_catalogo_filtrosidebar",
+        "src_lib_productos",
+        "src_components_ui_icon",
+        "src_lib_utils",
+        "src_components_ui_button"
+      ]
+    },
+    {
+      "nombre": "Cabeceras de seguridad y CSP",
+      "nodos": 57,
+      "anclas": [
+        "src_app_layout",
+        "src_components_layout_footer",
+        "src_components_layout_navbar",
+        "src_lib_contacto",
+        "src_app_nosotros_page",
+        "src_lib_contacto_contacto",
+        "src_lib_seo",
+        "src_lib_jsonld"
+      ]
+    },
+    {
+      "nombre": "Filtros, query string y validación",
+      "nodos": 43,
+      "anclas": [
+        "src_hooks_usefiltros",
+        "src_lib_taxonomia",
+        "src_lib_validarfiltros",
+        "src_hooks_usefiltros_usefiltros",
+        "src_lib_types",
+        "src_lib_urlquery",
+        "src_lib_types_estadofiltros",
+        "src_lib_urlquery_suscribiraquery"
+      ]
+    },
+    {
+      "nombre": "Scripts de generación y verificación",
+      "nodos": 42,
+      "anclas": [
+        "scripts_auditar_responsive",
+        "scripts_generar_placeholders",
+        "scripts_descargar_iconos",
+        "src_components_ui_icon_iconname",
+        "design_material_symbols_subconjunto",
+        "ref_node_path",
+        "ref_node_url",
+        "scripts_auditar_responsive_informar"
+      ]
+    },
+    {
+      "nombre": "Pipeline del grafo de conocimiento",
+      "nodos": 40,
+      "anclas": [
+        "scripts_graphify_reparar",
+        "scripts_reparar_grafo",
+        "scripts_graphify_reparar_main",
+        "readme_reparacion_de_extremos",
+        "scripts_graphify_reparar_emparejar_etiquetas",
+        "scripts_graphify_reparar_guardar_anclas",
+        "scripts_graphify_reparar_materializar_extremos",
+        "readme_grafo_de_conocimiento"
+      ]
+    },
+    {
+      "nombre": "Dependencias del proyecto",
+      "nodos": 39,
+      "anclas": [
+        "package_devdependencies",
+        "package_scripts",
+        "package",
+        "package_dependencies",
+        "package_dependencies_react",
+        "package_dependencies_next",
+        "package_dependencies_react_dom",
+        "package_devdependencies_eslint"
+      ]
+    },
+    {
+      "nombre": "Sistema de diseño y página Nosotros",
+      "nodos": 38,
+      "anclas": [
+        "design_autopartesrg_sistema_de_diseno",
+        "design_responsive_por_espacio_disponible",
+        "design_desviaciones_respecto_a_maquetas",
+        "src_components_layout_logo_logo",
+        "design_paleta_material_3",
+        "design_stitch_readme_maquetas_no_son_produccion",
+        "public_logo_logotipo_autopartes_erg",
+        "design_movimiento_solo_css"
+      ]
+    },
+    {
+      "nombre": "Configuración de TypeScript",
+      "nodos": 29,
+      "anclas": [
+        "tsconfig_compileroptions",
+        "tsconfig_include",
+        "tsconfig_compileroptions_lib",
+        "tsconfig",
+        "tsconfig_exclude",
+        "ref_dom",
+        "ref_dom_iterable",
+        "ref_esnext"
+      ]
+    },
+    {
+      "nombre": "Captura Home/Catálogo escritorio",
+      "nodos": 24,
+      "anclas": [
+        "design_stitch_screenshots_home_catalogo_desktop_screen",
+        "design_stitch_screenshots_home_catalogo_desktop_filter_sidebar",
+        "design_stitch_screenshots_home_catalogo_desktop_header_nav",
+        "design_stitch_screenshots_home_catalogo_desktop_hero_search_form",
+        "design_stitch_screenshots_home_catalogo_desktop_product_card",
+        "design_stitch_screenshots_home_catalogo_desktop_product_grid",
+        "design_stitch_screenshots_home_catalogo_desktop_brand_autopartesrg",
+        "design_stitch_screenshots_home_catalogo_desktop_footer"
+      ]
+    },
+    {
+      "nombre": "Captura Home/Catálogo móvil",
+      "nodos": 23,
+      "anclas": [
+        "design_stitch_screenshots_home_catalogo_mobile_screenshot",
+        "design_stitch_screenshots_home_catalogo_mobile_product_grid",
+        "design_stitch_screenshots_home_catalogo_mobile_vehicle_fitment_system",
+        "design_stitch_screenshots_home_catalogo_mobile_active_filter_chips",
+        "design_stitch_screenshots_home_catalogo_mobile_bottom_nav",
+        "design_stitch_screenshots_home_catalogo_mobile_mobile_first_layout",
+        "design_stitch_screenshots_home_catalogo_mobile_product_card",
+        "design_stitch_screenshots_home_catalogo_mobile_vehicle_selector"
+      ]
+    },
+    {
+      "nombre": "Captura Nosotros escritorio",
+      "nodos": 23,
+      "anclas": [
+        "design_stitch_screenshots_nosotros_desktop_mejorado_nosotros_page",
+        "design_stitch_screenshots_nosotros_desktop_mejorado_value_prop_row",
+        "design_stitch_screenshots_nosotros_desktop_mejorado_primary_nav",
+        "design_stitch_screenshots_nosotros_desktop_mejorado_global_header",
+        "design_stitch_screenshots_nosotros_desktop_mejorado_tab_navigation",
+        "design_stitch_screenshots_nosotros_desktop_mejorado_desktop_layout",
+        "design_stitch_screenshots_nosotros_desktop_mejorado_trust_building_pattern",
+        "design_stitch_screenshots_nosotros_desktop_mejorado"
+      ]
+    },
+    {
+      "nombre": "Captura Ficha de producto escritorio",
+      "nodos": 22,
+      "anclas": [
+        "design_stitch_screenshots_detalle_de_producto_desktop_ficha_tecnica_modal",
+        "design_stitch_screenshots_detalle_de_producto_desktop_whatsapp_quote_cta",
+        "design_stitch_screenshots_detalle_de_producto_desktop_autopartesrg_catalog",
+        "design_stitch_screenshots_detalle_de_producto_desktop_compatibility_callout",
+        "design_stitch_screenshots_detalle_de_producto_desktop_price_display",
+        "design_stitch_screenshots_detalle_de_producto_desktop_related_parts_footer",
+        "design_stitch_screenshots_detalle_de_producto_desktop",
+        "design_stitch_screenshots_detalle_de_producto_desktop_breadcrumb_navigation"
+      ]
+    },
+    {
+      "nombre": "Captura Ficha de producto móvil",
+      "nodos": 21,
+      "anclas": [
+        "design_stitch_screenshots_detalle_de_producto_mobile",
+        "design_stitch_screenshots_detalle_de_producto_mobile_ficha_tecnica_de_producto",
+        "design_stitch_screenshots_detalle_de_producto_mobile_cta_cotizar_por_whatsapp",
+        "design_stitch_screenshots_detalle_de_producto_mobile_top_app_bar",
+        "design_stitch_screenshots_detalle_de_producto_mobile_atributos_de_compatibilidad",
+        "design_stitch_screenshots_detalle_de_producto_mobile_flujo_de_cotizacion_sin_checkout",
+        "design_stitch_screenshots_detalle_de_producto_mobile_jerarquia_visual_mobile_first",
+        "design_stitch_screenshots_detalle_de_producto_mobile_repuestos_relacionados"
+      ]
+    },
+    {
+      "nombre": "Captura Nosotros móvil",
+      "nodos": 18,
+      "anclas": [
+        "design_stitch_screenshots_nosotros_mobile_screen",
+        "design_stitch_screenshots_nosotros_mobile_value_cards",
+        "design_stitch_screenshots_nosotros_mobile_autopartesrg_brand",
+        "design_stitch_screenshots_nosotros_mobile_blue_icon_tile",
+        "design_stitch_screenshots_nosotros_mobile_footer",
+        "design_stitch_screenshots_nosotros_mobile_mobile_header",
+        "design_stitch_screenshots_nosotros_mobile_logistica_eficiente",
+        "design_stitch_screenshots_nosotros_mobile_single_column_layout"
+      ]
+    },
+    {
+      "nombre": "Tokens de diseño de las maquetas",
+      "nodos": 13,
+      "anclas": [
+        "design_stitch_html_home_catalogo_desktop_design_token_system",
+        "design_stitch_html_home_catalogo_desktop_screen",
+        "design_stitch_html_nosotros_desktop_mejorado_screen",
+        "design_stitch_html_nosotros_mobile_screen",
+        "design_stitch_html_home_catalogo_desktop_material_symbols_icon_family",
+        "design_stitch_html_nosotros_desktop_mejorado_values_bento_grid",
+        "design_stitch_html_nosotros_desktop_mejorado_footer",
+        "design_stitch_html_home_catalogo_desktop_footer"
+      ]
+    },
+    {
+      "nombre": "Patrones de ficha de producto",
+      "nodos": 12,
+      "anclas": [
+        "design_stitch_html_detalle_de_producto_desktop_product_detail_modal",
+        "design_stitch_html_detalle_de_producto_mobile_screen",
+        "design_stitch_html_detalle_de_producto_desktop_related_products_grid",
+        "design_stitch_html_detalle_de_producto_desktop_technical_specs_table",
+        "design_stitch_html_detalle_de_producto_desktop_image_gallery_zoom_panel",
+        "design_stitch_html_detalle_de_producto_desktop_screen",
+        "design_stitch_html_detalle_de_producto_mobile_back_header",
+        "design_stitch_html_detalle_de_producto_mobile_related_products_carousel"
+      ]
+    },
+    {
+      "nombre": "Patrones de navegación",
+      "nodos": 11,
+      "anclas": [
+        "design_stitch_html_home_catalogo_mobile_screen",
+        "design_stitch_html_home_catalogo_desktop_top_nav_bar",
+        "design_stitch_html_nosotros_desktop_mejorado_tabs_navigation",
+        "design_stitch_html_home_catalogo_mobile_bottom_navigation_bar",
+        "design_stitch_html_home_catalogo_mobile_top_bar",
+        "design_stitch_html_nosotros_desktop_mejorado_top_nav_bar",
+        "design_stitch_html_nosotros_mobile_collapsible_nav",
+        "design_stitch_html_home_catalogo_desktop_scroll_shadow_header_behavior"
+      ]
+    },
+    {
+      "nombre": "Señalización de compatibilidad y color",
+      "nodos": 10,
+      "anclas": [
+        "design_stitch_html_home_catalogo_desktop_color_token_palette",
+        "design_stitch_html_home_catalogo_desktop_product_card",
+        "design_stitch_html_detalle_de_producto_desktop_compatibility_confirmation_panel",
+        "design_stitch_html_detalle_de_producto_desktop_traffic_light_compatibility_concept",
+        "design_stitch_html_home_catalogo_desktop_product_grid",
+        "design_stitch_html_home_catalogo_desktop_semantic_status_colors",
+        "design_stitch_html_home_catalogo_mobile_compact_product_card",
+        "design_stitch_html_home_catalogo_desktop_primary_color_token"
+      ]
+    },
+    {
+      "nombre": "Patrones de filtrado",
+      "nodos": 8,
+      "anclas": [
+        "design_stitch_html_home_catalogo_mobile_filter_bottom_sheet",
+        "design_stitch_html_home_catalogo_desktop_filter_sidebar",
+        "design_stitch_html_home_catalogo_desktop_hero_search_section",
+        "design_stitch_html_home_catalogo_mobile_search_section",
+        "design_stitch_html_home_catalogo_desktop_active_filter_chips",
+        "design_stitch_html_home_catalogo_mobile_horizontal_filter_chip_rail",
+        "design_stitch_html_nosotros_desktop_mejorado_historia_hero",
+        "design_stitch_html_home_catalogo_mobile_filter_drawer_script"
+      ]
+    },
+    {
+      "nombre": "Exportación de maquetas de Stitch",
+      "nodos": 7,
+      "anclas": [
+        "design_stitch_readme_stitch_export",
+        "design_stitch_readme_list_screens_jsonrpc",
+        "design_stitch_readme_maqueta_detalle_de_producto",
+        "design_stitch_readme_maqueta_home_catalogo",
+        "design_stitch_readme_maqueta_nosotros",
+        "design_stitch_readme_mcp_stitch_referencia_rota",
+        "design_stitch_readme_screens_json"
+      ]
+    },
+    {
+      "nombre": "Reglas de agente y stack",
+      "nodos": 6,
+      "anclas": [
+        "agents_nextjs_agent_rules",
+        "readme_stack_nextjs_16",
+        "agents_generate_agent_files",
+        "claude_claude_md_agents_import",
+        "readme_despliegue_vercel",
+        "readme_variables_de_entorno"
+      ]
+    },
+    {
+      "nombre": "Flujo de cotización por WhatsApp",
+      "nodos": 6,
+      "anclas": [
+        "design_stitch_html_detalle_de_producto_desktop_whatsapp_quote_cta",
+        "design_stitch_html_detalle_de_producto_desktop_whatsapp_first_quoting_flow",
+        "design_stitch_html_detalle_de_producto_mobile_fixed_bottom_action_bar",
+        "design_stitch_html_home_catalogo_desktop_quote_on_request_card_variant",
+        "design_stitch_html_home_catalogo_desktop_tertiary_accent_color_token",
+        "design_stitch_html_detalle_de_producto_desktop_whatsapp_message_preview"
+      ]
+    },
+    {
+      "nombre": "Imagen Open Graph",
+      "nodos": 6,
+      "anclas": [
+        "src_app_opengraph_image",
+        "ref_next_og",
+        "src_app_opengraph_image_alt",
+        "src_app_opengraph_image_contenttype",
+        "src_app_opengraph_image_opengraphimage",
+        "src_app_opengraph_image_size"
+      ]
+    },
+    {
+      "nombre": "Tipografía de las maquetas",
+      "nodos": 5,
+      "anclas": [
+        "design_stitch_html_home_catalogo_desktop_type_scale",
+        "design_stitch_html_home_catalogo_desktop_jetbrains_mono_typeface",
+        "design_stitch_html_nosotros_mobile_historia_hero",
+        "design_stitch_html_home_catalogo_desktop_hanken_grotesk_typeface",
+        "design_stitch_html_home_catalogo_desktop_technical_monospace_labeling"
+      ]
+    },
+    {
+      "nombre": "Configuración de ESLint",
+      "nodos": 5,
+      "anclas": [
+        "eslint_config",
+        "eslint_config_eslintconfig",
+        "ref_eslint_config",
+        "ref_eslint_config_next_core_web_vitals",
+        "ref_eslint_config_next_typescript"
+      ]
+    },
+    {
+      "nombre": "Botón flotante de WhatsApp",
+      "nodos": 3,
+      "anclas": [
+        "design_stitch_html_home_catalogo_desktop_floating_whatsapp_button",
+        "design_stitch_html_home_catalogo_desktop_whatsapp_brand_green_token",
+        "design_stitch_html_home_catalogo_mobile_whatsapp_fab"
+      ]
+    },
+    {
+      "nombre": "Configuración de PostCSS",
+      "nodos": 2,
+      "anclas": [
+        "postcss_config",
+        "postcss_config_config"
+      ]
+    }
+  ]
+}

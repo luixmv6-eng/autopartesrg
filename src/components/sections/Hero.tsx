@@ -32,7 +32,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="hero-barrido relative flex min-h-[340px] items-center justify-center overflow-hidden md:h-[440px]"
+      className="hero-barrido alto-hero relative flex items-center justify-center overflow-hidden"
     >
       {/* Capas de fondo, de atrás hacia delante: imagen, retícula técnica,
           halo radial y velo que garantiza el contraste del texto. */}
@@ -59,23 +59,37 @@ export function Hero() {
         className="absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent"
       />
 
-      <div className="hero-entra relative z-20 mx-auto w-full max-w-3xl px-md py-xl text-center">
+      {/*
+       * La medida crece con la pantalla en tres escalones. Encajonar el hero en
+       * `max-w-3xl` (48rem) dejaba un bloque estrecho perdido en el centro de
+       * un monitor ancho; pasar de ahí sin control estropearía la medida de
+       * línea del subtítulo, así que crece el continente y no el texto.
+       */}
+      <div className="hero-entra contenedor-fluido relative z-20 mx-auto max-w-3xl py-xl text-center xl:max-w-4xl 3xl:max-w-5xl">
         <p className="eyebrow mb-md justify-center">Catálogo técnico</p>
-        <h1 className="display-tight mb-sm text-headline-lg text-on-surface md:text-display-lg">
+        <h1 className="display-tight mb-sm text-display-lg text-on-surface">
           Encuentra la pieza exacta
         </h1>
-        <p className="mb-lg text-body-lg text-on-surface-variant">
+        <p className="mx-auto mb-lg max-w-[42ch] text-balance text-body-lg text-on-surface-variant">
           Precisión técnica y confiabilidad para tu vehículo.
         </p>
 
+        {/*
+         * Retícula en tres etapas en vez del salto único de columna a fila:
+         *   móvil    los tres controles apilados;
+         *   xs+      término y modelo comparten fila, el botón debajo a lo ancho;
+         *   lg+      los tres en línea, con el término llevándose el sobrante.
+         * En tableta vertical la fila de tres apretaba el campo de búsqueda
+         * hasta dejarlo más corto que su propio marcador de posición.
+         */}
         <form
           onSubmit={buscar}
           role="search"
-          className="flex flex-col gap-sm rounded-lg border border-outline-variant bg-surface-container-lowest p-sm shadow-md transition-shadow duration-300 focus-within:border-primary/50 focus-within:shadow-[0_8px_30px_rgba(0,53,127,0.14)] md:flex-row"
+          className="grid gap-sm rounded-lg border border-outline-variant bg-surface-container-lowest p-sm shadow-e2 transition-shadow duration-300 focus-within:border-primary/50 focus-within:shadow-realce xs:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_13rem_auto]"
         >
-          <div className="flex flex-grow items-center rounded border border-outline-variant bg-surface-container-low px-3 py-2 transition-colors focus-within:border-primary">
+          <div className="flex min-w-0 items-center rounded border border-borde-campo bg-surface-container-low px-3 transition-colors focus-within:border-primary">
             <label htmlFor="hero-q" className="sr-only">
-              Buscar repuesto por nombre o número OEM
+              Buscar repuesto por nombre, marca o modelo
             </label>
             <Icon name="search" size={20} className="mr-2 text-outline" />
             <input
@@ -83,12 +97,12 @@ export function Hero() {
               type="search"
               value={termino}
               onChange={(e) => setTermino(e.target.value)}
-              placeholder="Ej. Filtro de aceite Corolla"
-              className="h-9 w-full border-none bg-transparent p-0 text-body-md text-on-surface outline-none placeholder:text-on-surface-variant"
+              placeholder="Ej. Kit de clutch NP300"
+              className="h-11 w-full min-w-0 border-none bg-transparent p-0 text-body-md text-on-surface outline-none placeholder:text-on-surface-variant"
             />
           </div>
 
-          <div className="flex shrink-0 items-center rounded border border-outline-variant bg-surface-container-low px-3 py-2 transition-colors focus-within:border-primary md:w-52">
+          <div className="flex min-w-0 items-center rounded border border-borde-campo bg-surface-container-low px-3 transition-colors focus-within:border-primary">
             <label htmlFor="hero-modelo" className="sr-only">
               Modelo del vehículo, opcional
             </label>
@@ -99,13 +113,13 @@ export function Hero() {
               value={modelo}
               onChange={(e) => setModelo(e.target.value)}
               placeholder="Modelo (opcional)"
-              className="h-9 w-full border-none bg-transparent p-0 font-mono text-label-technical text-on-surface outline-none placeholder:text-on-surface-variant"
+              className="h-11 w-full min-w-0 border-none bg-transparent p-0 font-mono text-label-technical text-on-surface outline-none placeholder:text-on-surface-variant"
             />
           </div>
 
           <button
             type="submit"
-            className="flex h-11 shrink-0 items-center justify-center gap-xs rounded bg-accent px-lg font-mono text-label-technical uppercase tracking-[0.1em] text-on-accent shadow-sm transition-[background-color,transform] hover:bg-accent-hover active:scale-[0.98]"
+            className="flex h-11 items-center justify-center gap-xs rounded bg-accent px-lg font-mono text-label-technical uppercase tracking-[0.1em] text-on-accent shadow-e1 transition-[background-color,transform] hover:bg-accent-hover motion-safe:active:scale-[0.98] xs:col-span-2 lg:col-span-1"
           >
             Buscar
             <Icon name="arrow_forward" size={18} />

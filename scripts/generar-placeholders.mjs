@@ -92,7 +92,7 @@ function svgProducto({ nombre, categoria, oem }) {
   <text x="400" y="86" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="30" font-weight="700" fill="${PRIMARY}" letter-spacing="5">${escapar((ETIQUETAS[categoria] ?? categoria).toUpperCase())}</text>
   ${textos}
   <text x="400" y="512" text-anchor="middle" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="30" fill="${ON_SURFACE_VARIANT}" letter-spacing="2">OEM ${escapar(oem)}</text>
-  <text x="400" y="566" text-anchor="middle" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="24" font-weight="700" fill="${OUTLINE_VARIANT}" letter-spacing="3">AUTOPARTESRG</text>
+  <text x="400" y="566" text-anchor="middle" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="24" font-weight="700" fill="${OUTLINE_VARIANT}" letter-spacing="3">AUTOPARTES ERG</text>
 </svg>
 `;
 }
@@ -183,7 +183,7 @@ function svgNosotros(titulo, acento, ancho = 1600, alto = 460) {
   <g stroke="#ffffff" stroke-opacity="0.22" stroke-width="3" fill="none">${filas.join("")}</g>
   ${cajas}
   <text x="60" y="76" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="26" font-weight="700" fill="#ffffff" fill-opacity="0.72" letter-spacing="5">${escapar(titulo.toUpperCase())}</text>
-  <text x="${ancho - 60}" y="76" text-anchor="end" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="24" font-weight="700" fill="#ffffff" fill-opacity="0.45" letter-spacing="2">AUTOPARTESRG</text>
+  <text x="${ancho - 60}" y="76" text-anchor="end" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="24" font-weight="700" fill="#ffffff" fill-opacity="0.45" letter-spacing="2">AUTOPARTES ERG</text>
 </svg>
 `;
 }

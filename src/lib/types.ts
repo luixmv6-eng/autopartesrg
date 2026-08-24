@@ -1,14 +1,18 @@
 export type MarcaId =
   | "toyota"
   | "chevrolet"
-  | "ford"
-  | "hyundai"
-  | "kia"
   | "nissan"
-  | "mazda"
   | "suzuki"
+  | "kia"
+  | "hyundai"
+  | "ford"
+  | "mazda"
+  | "renault"
   | "volkswagen"
-  | "renault";
+  | "mitsubishi"
+  | "isuzu"
+  | "lexus"
+  | "universal";
 
 export type CategoriaId =
   | "motor"
@@ -18,17 +22,17 @@ export type CategoriaId =
   | "carroceria"
   | "transmision"
   | "filtros"
-  | "refrigeracion";
+  | "refrigeracion"
+  | "combustible";
 
 export type SeccionId =
   | "motor"
-  | "exterior"
-  | "interior"
-  | "chasis"
-  | "sistema-electrico"
-  | "sistema-frenos"
+  | "transmision"
   | "tren-delantero"
-  | "tren-trasero";
+  | "tren-trasero"
+  | "sistema-frenos"
+  | "sistema-electrico"
+  | "exterior";
 
 /**
  * El catálogo es un índice de compatibilidad, no un inventario.
@@ -43,10 +47,13 @@ export interface Producto {
   /**
    * Número de parte del fabricante, el dato con el que buscan los talleres.
    *
-   * No hay SKU interno: sin un inventario detrás, un código propio no
-   * identificaría nada. El OEM sí es universal y le sirve a quien ya lo tiene.
+   * Opcional a propósito. No hay SKU interno: sin un inventario detrás, un
+   * código propio no identificaría nada. El OEM sí es universal, pero solo se
+   * publica cuando consta de verdad; inventarlo sería peor que omitirlo,
+   * porque un taller lo cruzaría contra su despiece y pediría la pieza
+   * equivocada. Donde falta, la referencia se confirma por WhatsApp.
    */
-  oem: string;
+  oem?: string;
   nombre: string;
   descripcion: string;
   marca: MarcaId;
@@ -56,7 +63,7 @@ export interface Producto {
   anioHasta: number;
   categoria: CategoriaId;
   seccion: SeccionId;
-  /** Ruta pública de la imagen. Sustituir por foto real conservando el nombre. */
+  /** Ruta pública de la foto del repuesto. */
   imagen: string;
   destacado?: boolean;
 }

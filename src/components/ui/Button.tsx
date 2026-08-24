@@ -7,19 +7,19 @@ type Tamano = "sm" | "md" | "lg";
 const base =
   "inline-flex items-center justify-center gap-sm rounded-lg font-medium " +
   "transition-[background-color,color,border-color,box-shadow,translate,scale] duration-200 " +
-  "hover:-translate-y-px active:translate-y-0 active:scale-[0.98] " +
+  "motion-safe:hover:-translate-y-px active:translate-y-0 motion-safe:active:scale-[0.98] " +
   "disabled:pointer-events-none disabled:opacity-50 " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 const variantes: Record<Variante, string> = {
-  primary: "bg-primary text-on-primary hover:bg-primary-container shadow-sm",
+  primary: "bg-primary text-on-primary hover:bg-primary-container shadow-e1",
   // Naranja del CTA del hero. Texto oscuro para cumplir contraste AA.
-  accent: "bg-accent text-on-accent hover:bg-accent-hover shadow-sm",
+  accent: "bg-accent text-on-accent hover:bg-accent-hover shadow-e1",
   // CTA de cotización de la ficha técnica, tal como lo define Stitch.
-  cta: "bg-on-tertiary-container text-on-tertiary-fixed hover:bg-tertiary-fixed-dim shadow-sm",
-  outline: "border border-primary text-primary bg-transparent hover:bg-primary/5 shadow-sm",
+  cta: "bg-on-tertiary-container text-on-tertiary-fixed hover:bg-tertiary-fixed-dim shadow-e1",
+  outline: "border border-primary text-primary bg-transparent hover:bg-primary/5 shadow-e1",
   neutral:
-    "bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-variant shadow-sm",
+    "bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-variant shadow-e1",
   ghost: "text-on-surface-variant hover:bg-surface-container-highest",
 };
 

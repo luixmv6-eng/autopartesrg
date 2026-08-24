@@ -13,5 +13,5 @@
   <g stroke="#ffffff" stroke-opacity="0.22" stroke-width="3" fill="none"><rect x="74" y="120" width="242" height="440" rx="8"/><path d="M74 230h242"/><path d="M74 340h242"/><path d="M74 450h242"/><rect x="344" y="146" width="242" height="414" rx="8"/><path d="M344 249.5h242"/><path d="M344 353h242"/><path d="M344 456.5h242"/><rect x="614" y="120" width="242" height="440" rx="8"/><path d="M614 230h242"/><path d="M614 340h242"/><path d="M614 450h242"/><rect x="884" y="146" width="242" height="414" rx="8"/><path d="M884 249.5h242"/><path d="M884 353h242"/><path d="M884 456.5h242"/></g>
   <rect x="90" y="349" width="210" height="98" rx="6" fill="#ffb159" fill-opacity="0.8"/><rect x="900" y="245" width="210" height="98" rx="6" fill="#ffb159" fill-opacity="0.8"/>
   <text x="60" y="76" font-family="'JetBrains Mono',ui-monospace,monospace" font-size="26" font-weight="700" fill="#ffffff" fill-opacity="0.72" letter-spacing="5">MISION</text>
-  <text x="1140" y="76" text-anchor="end" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="24" font-weight="700" fill="#ffffff" fill-opacity="0.45" letter-spacing="2">AUTOPARTESRG</text>
+  <text x="1140" y="76" text-anchor="end" font-family="'Hanken Grotesk',system-ui,sans-serif" font-size="24" font-weight="700" fill="#ffffff" fill-opacity="0.45" letter-spacing="2">AUTOPARTES ERG</text>
 </svg>

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "AutopartesRG, catálogo de autopartes";
+export const alt = "Autopartes ERG, catálogo de autopartes";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -21,24 +21,33 @@ export default function OpengraphImage() {
           fontFamily: "sans-serif",
         }}
       >
+        {/* Marca. El monograma toma el color terracota del logotipo. */}
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
           <div
             style={{
-              width: 56,
-              height: 56,
-              borderRadius: 28,
-              background: "#ffb159",
+              width: 60,
+              height: 60,
+              borderRadius: 12,
+              background: "#763f2f",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#2c1700",
-              fontSize: 28,
+              color: "#ffffff",
+              fontSize: 26,
               fontWeight: 700,
+              letterSpacing: 1,
             }}
           >
-            RG
+            ERG
           </div>
-          <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.5 }}>AutopartesRG</div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.5 }}>
+              Autopartes ERG
+            </div>
+            <div style={{ fontSize: 18, color: "rgba(255,255,255,0.7)" }}>
+              Tienda de repuestos multimarcas
+            </div>
+          </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>

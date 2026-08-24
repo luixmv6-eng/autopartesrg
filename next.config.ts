@@ -90,10 +90,19 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     /**
-     * Las imágenes son SVG propios servidos desde /public. El optimizador los
-     * entrega con su propia CSP y `Content-Disposition: attachment`, así que un
-     * SVG con script no se ejecutaría. Al sustituirlos por fotos se puede
-     * volver a poner en false.
+     * Los repuestos del catálogo ya son fotografías JPEG. Lo único que sigue
+     * siendo SVG son cinco ilustraciones decorativas propias: el fondo del hero
+     * y las cuatro de la página Nosotros.
+     *
+     * Se mantiene la bandera porque esas cinco pasan por el optimizador, pero
+     * el riesgo que el nombre advierte no se materializa aquí: `remotePatterns`
+     * está vacío, así que solo se puede optimizar lo que ya vive en `/public`,
+     * y el sitio no tiene ninguna vía de subida de archivos. Además el
+     * optimizador entrega el SVG con la CSP de abajo (`script-src 'none'`) y
+     * `Content-Disposition: attachment`, de modo que un SVG con script no se
+     * ejecutaría igualmente.
+     *
+     * Al sustituir esas cinco por mapas de bits, ponerlo en false.
      */
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
@@ -103,7 +112,40 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
-    return [{ source: "/:path*", headers: CABECERAS_SEGURIDAD }];
+    return [
+      { source: "/:path*", headers: CABECERAS_SEGURIDAD },
+      {
+        /*
+         * Estáticos de `public/`.
+         *
+         * Next sirve `/_next/static/*` con `immutable` y un año de caché porque
+         * esos nombres llevan hash: si el contenido cambia, cambia la URL. Lo
+         * que hay en `public/` no lleva hash, así que Next se cura en salud y
+         * manda `max-age=0`: cada visita revalida el logotipo y los treinta SVG
+         * del catálogo, y son treinta viajes de ida y vuelta para recibir otros
+         * tantos "304, sigue igual".
+         *
+         * `stale-while-revalidate` resuelve las dos mitades del problema: media
+         * hora de frescura para que la navegación normal no pregunte nada, y
+         * una semana en la que el navegador pinta la copia guardada al instante
+         * mientras comprueba por detrás si hay una nueva. Sustituir una imagen
+         * sigue propagándose solo; lo que desaparece es la espera.
+         *
+         * No se usa `immutable`: los nombres son estables, así que reemplazar
+         * un SVG dejaría a quien ya lo tuviera con el viejo durante un año.
+         */
+        source: "/images/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=1800, stale-while-revalidate=604800" },
+        ],
+      },
+      {
+        source: "/logo.png",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=1800, stale-while-revalidate=604800" },
+        ],
+      },
+    ];
   },
 };
 

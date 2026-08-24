@@ -1,9 +1,9 @@
-# AutopartesRG
+# Autopartes ERG
 
 Landing page y catálogo digital de repuestos automotrices, con captación de leads
 por WhatsApp. Next.js 16 (App Router) + TypeScript + Tailwind CSS v4.
 
-La interfaz implementa el proyecto de Stitch **AutopartesRG Digital Catalog**.
+La interfaz implementa el proyecto de Stitch **Autopartes ERG Digital Catalog**.
 Las maquetas de referencia están en [`design/stitch/`](./design/stitch/README.md)
 y el sistema de diseño resultante, con las desviaciones deliberadas y su motivo,
 en [`DESIGN.md`](./DESIGN.md).
@@ -30,7 +30,8 @@ La aplicación queda en <http://localhost:3000>.
 | `npm run lint` | ESLint, incluidas las reglas del compilador de React |
 | `npm run placeholders` | Regenera las imágenes de marcador de posición |
 | `npm run iconos` | Regenera el subconjunto de Material Symbols |
-| `npm run grafo:verificar` | Comprueba que el grafo de conocimiento no tenga aristas rotas |
+| `npm run grafo:verificar` | Comprueba el grafo: extremos rotos, archivos sin nodos y etiquetas de comunidad |
+| `npm run responsive:auditar` | Recorre el sitio de 320 a 2560px en un navegador real y falla si algo se rompe |
 
 ---
 
@@ -122,6 +123,21 @@ del JSON por una llamada a la fuente real es el único cambio necesario.
 
 `src/components/sections/Nosotros.tsx`: la constante `VALORES` para las tres
 tarjetas y `PESTANAS` para Sobre Nosotros, Misión y Visión.
+
+### Logotipo
+
+`public/logo.png` (PNG con transparencia, 325x277). Lo sirve el componente
+`Logo`, que deduce el ancho de la proporción original y recibe el alto:
+50px en la barra móvil, 60px en escritorio y 88px en el footer.
+
+El archivo ya contiene el nombre y el eslogan, así que **no se acompaña de texto
+al lado**: el nombre accesible viaja en el `alt`. Para sustituirlo basta con
+reemplazar el archivo; si cambia la proporción, ajusta el divisor `325 / 277` en
+`src/components/layout/Logo.tsx`.
+
+> La barra superior mide 76px en escritorio, más de lo habitual, porque el
+> logotipo apila cuatro niveles (herramientas, rótulo, sigla y eslogan) y por
+> debajo de 60px de alto el eslogan deja de leerse.
 
 ### Datos de contacto y redes
 
@@ -256,14 +272,65 @@ npm run start   # puerto 3000, configurable con PORT
 
 Requiere Node 20 o superior, detrás de un proxy inverso con HTTPS.
 
+**Activa Brotli en el proxy.** Es lo más rentable que se puede hacer fuera del
+código: `next start` solo comprime con gzip, y pedirle Brotli devuelve el
+fichero **sin comprimir**. Medido sobre este build, los 213,5 KB de JS y CSS que
+salen con gzip bajan a 184,7 KB con Brotli: **28,8 KB menos, un 13 %**, sin
+tocar una línea. En Vercel, Netlify o Cloudflare pasa solo; en un Node desnudo
+hay que configurarlo.
+
+En nginx:
+
+```nginx
+brotli on;
+brotli_comp_level 6;
+brotli_types text/css application/javascript application/json image/svg+xml;
+```
+
+En Caddy va activado por defecto con `encode zstd gzip br`.
+
+### Peso de la primera visita
+
+Medido sobre la compilación de producción, con todo comprimido:
+
+| | `/` | `/nosotros` |
+|---|---|---|
+| JavaScript | 168,4 KB | 168,4 KB |
+| Fuentes | 73,3 KB | 73,3 KB |
+| HTML | 20,9 KB | 14,1 KB |
+| CSS | 16,7 KB | 16,7 KB |
+| Prefetch de la otra ruta | 14,0 KB | 14,0 KB |
+| Imágenes | 22,5 KB | 6,5 KB |
+| **Total** | **315,8 KB** | **292,9 KB** |
+
+Dónde está el suelo y dónde no:
+
+- **JavaScript.** El trozo mayor son 71,5 KB de `react-dom`. Es el precio del
+  framework y no se recorta desde aquí. Se probó a separar la ficha técnica en
+  su propio trozo con `next/dynamic` y se descartó: solo 3,1 KB del componente
+  son suyos, el resto es código que comparte con la tarjeta.
+- **Fuentes.** 30,6 KB de Hanken y 33,9 KB de JetBrains, más 5,9 KB del
+  subconjunto de iconos. `next/font` sirve el fichero variable de cada familia,
+  así que declarar menos pesos **no reduce la descarga**: se comprobó midiendo.
+  El único recorte posible sería renunciar a la monoespaciada, y es la que da el
+  registro técnico de todo el sitio.
+- **Prefetch.** Next se trae la otra ruta al ver el enlace en la cabecera. Son
+  14 KB antes de que nadie pulse nada, a cambio de que la navegación entre las
+  dos páginas sea instantánea. Con solo dos rutas, el cambio compensa.
+- **Imágenes.** El logotipo son 35 KB de PNG en disco que el optimizador entrega
+  en 2,7 KB de AVIF.
+
 ---
 
 ## Grafo de conocimiento
 
-`graphify-out/` contiene un grafo navegable del proyecto: **532 nodos, 903
-aristas, 26 comunidades** sobre el código, la documentación y las maquetas de
-Stitch. Abre `graphify-out/graph.html` en el navegador, o lee
-`graphify-out/GRAPH_REPORT.md`.
+`graphify-out/` contiene un grafo navegable del proyecto sobre el código, la
+documentación y las maquetas de Stitch. Abre `graphify-out/graph.html` en el
+navegador, o lee `graphify-out/GRAPH_REPORT.md`.
+
+Las cifras (nodos, aristas, comunidades) están en la cabecera de ese informe y
+no se repiten aquí: cambian en cada reconstrucción y duplicarlas solo garantiza
+que una de las dos copias esté mal.
 
 Para consultarlo desde la terminal: `graphify query "<pregunta>"`.
 
@@ -281,12 +348,34 @@ que el grafo pasa a responder también qué archivos importan React o quién lee
 
 ```bash
 python scripts/graphify-reparar.py   # reconstruye y repara
-npm run grafo:verificar              # comprueba que no queden extremos rotos
+npm run grafo:verificar              # comprueba salud, cobertura y etiquetas
 ```
 
 En Windows hace falta el guard `if __name__ == "__main__":` en cualquier script
 que llame a `graphify.extract.extract()`, porque usa `ProcessPoolExecutor` con
 `spawn` y reimporta el módulo en cada worker.
+
+### Nombres de comunidad
+
+Los ids de comunidad que produce Louvain **no son estables entre corridas**, así
+que guardar los nombres por número acaba describiendo grupos de nodos distintos.
+Los nombres viven en `graphify-out/etiquetas.json` anclados a nodos concretos, y
+la reconstrucción los recoloca por solapamiento de anclas.
+
+Cuando aparece una comunidad nueva, el script avisa y la deja como
+`Comunidad N`. Ponle nombre en ese archivo y vuelve a lanzarlo.
+
+### Documentos que desaparecen del grafo
+
+Editar un `.md` invalida su caché semántica. Si se reconstruye sin volver a
+extraerlo, ese archivo **sale del grafo entero**, y sellarlo igualmente en el
+manifiesto haría que `detect_incremental` no volviera a encolarlo nunca. Por eso
+`graphify-reparar.py` solo sella lo que produjo nodos, avisa de lo que quedó sin
+extraer, y `npm run grafo:verificar` falla si algún archivo del manifiesto no
+aporta ni un nodo.
+
+Para reextraer la parte semántica hay que relanzar `/graphify` (o exportar
+`GEMINI_API_KEY`); el AST se recalcula solo.
 
 ---
 
@@ -378,6 +467,50 @@ producción **no** contiene `unsafe-eval`.
 
 ---
 
+## Auditoría de responsive
+
+Los fallos de responsive no aparecen en `tsc` ni en ESLint: compilan
+perfectamente y solo se ven abriendo el sitio en la anchura equivocada. Por eso
+hay una comprobación automática que lo abre de verdad.
+
+```bash
+npm run build
+npm run responsive:auditar
+```
+
+Levanta un servidor de producción en un puerto libre, recorre `/` y `/nosotros`
+en catorce viewports —de 320px al monitor de 2560, con el teléfono en
+horizontal incluido— y sale con código 1 si algo falla, así que sirve tal cual
+en CI. Con `BASE` apunta a un servidor ya en marcha:
+
+```bash
+BASE=http://localhost:3000 npm run responsive:auditar
+```
+
+Comprueba seis cosas, todas ellas fallos que ya se habían colado alguna vez:
+
+| Qué | Por qué |
+|---|---|
+| Desbordamiento horizontal | Basta un elemento que se pase unos píxeles para que toda la página se arrastre de lado |
+| Áreas táctiles de 44px | Con puntero grueso. Ignora los controles que amplían su área con un `::after` estirado |
+| Letra de 10px o más | El mínimo que fija `DESIGN.md` §1 |
+| Barra inferior contra relleno del `body` | Si dejan de cuadrar, la barra fija tapa el final del contenido |
+| Diálogos | Ficha técnica y hoja de filtros, que la pasada de páginas no llega a abrir |
+| Superposiciones | Que ningún flotante tape un control **y** que no se esconda siempre para conseguirlo |
+
+Ese último par de condiciones va junto a propósito. El botón de WhatsApp llegó a
+cubrir media acción "Filtrar" en móvil; ahora se aparta solo, pero esconderlo
+todo el rato sería cambiar un fallo por otro, así que la auditoría también exige
+que siga estando disponible en la mayor parte del recorrido.
+
+En un clon nuevo hay que bajar el navegador una vez:
+
+```bash
+npx playwright install chromium
+```
+
+---
+
 ## Rendimiento y accesibilidad
 
 Medido sobre la compilación de producción de este repositorio:
@@ -388,7 +521,7 @@ Medido sobre la compilación de producción de este repositorio:
 - **CSS**: 68 KB sin comprimir, 12 KB con gzip, en un solo archivo.
 - **JavaScript de primera carga**: unos 193 KB con gzip, de los que cerca de
   112 KB son el runtime de React 19 y del App Router.
-- **Iconos**: 40 KB de woff2 con los 39 glifos usados, en vez de los varios
+- **Iconos**: 33 KB de woff2 con los 29 glifos usados, en vez de los varios
   megabytes de la familia completa. Se carga con `font-display: block` y
   precarga, así que no aparece el nombre del glifo antes de la fuente.
 - **Sin librería de animación ni de componentes**: el motion es CSS nativo

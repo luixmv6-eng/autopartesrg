@@ -60,10 +60,12 @@ function Grupo({
         aria-expanded={abierto}
         aria-controls={idPanel}
         className={cn(
-          "flex w-full items-center justify-between rounded-lg p-3 font-mono text-label-technical uppercase tracking-[0.08em] transition-all duration-200",
+          // Lista explícita: `transition-all` animaba también propiedades de layout
+          // y lo hacía fuera de la GPU.
+          "flex w-full items-center justify-between rounded-lg p-3 font-mono text-label-technical uppercase tracking-[0.08em] transition-[background-color,color] duration-[var(--dur-rapida)]",
           resaltado
             ? "bg-primary-container font-semibold text-on-primary-container"
-            : "text-on-surface-variant hover:bg-surface-container-highest"
+            : "text-on-panel-suave hover:bg-primary-fixed"
         )}
       >
         <span className="flex items-center gap-3">
@@ -78,11 +80,47 @@ function Grupo({
         <Icon
           name="expand_more"
           size={20}
-          className={cn("transition-transform duration-200", abierto && "rotate-180")}
+          className={cn(
+            "transition-transform duration-[var(--dur-rapida)]",
+            abierto && "rotate-180"
+          )}
         />
       </button>
-      <div id={idPanel} hidden={!abierto} className="px-2 py-2">
-        {children}
+
+      {/*
+       * Despliegue animado en lugar del atributo `hidden`, que teletransportaba
+       * el contenido. Es de las interacciones más repetidas del catálogo y era
+       * la única sin ninguna continuidad visual: pulsabas y el panel aparecía
+       * de la nada, empujando todo lo de abajo de golpe.
+       *
+       * La técnica es la retícula de una fila que va de `0fr` a `1fr`: es la
+       * única forma de interpolar hasta una altura automática sin medir el
+       * contenido con JavaScript. Sí toca layout en cada fotograma, a
+       * diferencia de `transform`, pero el subárbol es media docena de
+       * casillas y se prefiere eso a cablear alturas a mano.
+       *
+       * `inert` mientras está plegado: sin el `hidden` de antes, el contenido
+       * seguiría siendo enfocable con el tabulador y visible para un lector de
+       * pantalla aunque mida cero.
+       */}
+      <div
+        id={idPanel}
+        inert={!abierto}
+        className={cn(
+          "grid transition-[grid-template-rows] duration-[var(--dur-panel)] ease-salida",
+          abierto ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        )}
+      >
+        <div className="overflow-hidden">
+          <div
+            className={cn(
+              "px-2 py-2 transition-opacity duration-[var(--dur-rapida)]",
+              abierto ? "opacity-100" : "opacity-0"
+            )}
+          >
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -117,18 +155,19 @@ export function FiltroSidebar({
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="shrink-0 border-b border-outline-variant/30 p-md">
-        <h2 className="text-headline-md font-bold tracking-[-0.01em] text-primary">
-          Filtros de Búsqueda
+      <div className="shrink-0 bg-primary px-md py-md text-on-primary">
+        <h2 className="flex items-center gap-sm text-headline-md font-bold tracking-[-0.01em]">
+          <Icon name="tune" size={20} />
+          Filtros
         </h2>
-        <p className="mt-xs font-mono text-label-sm uppercase tracking-[0.12em] text-on-surface-variant">
+        <p className="mt-xs font-mono text-label-sm uppercase tracking-[0.12em] text-on-primary/70">
           Refina tu selección
         </p>
       </div>
 
       {/* Contenedor con desplazamiento propio: la barra queda siempre visible
           para que se note que hay más contenido por debajo. */}
-      <div className="scrollbar-visible min-h-0 flex-1 overflow-y-auto overscroll-contain p-md">
+      <div className="scrollbar-visible min-h-0 flex-1 overflow-y-auto overscroll-contain bg-panel p-md">
         <div className="flex flex-col gap-sm">
           <Grupo
             titulo="Modelo y año"
@@ -140,7 +179,7 @@ export function FiltroSidebar({
               <div>
                 <label
                   htmlFor={`${uid}-modelo`}
-                  className="mb-1.5 block text-label-sm text-on-surface-variant"
+                  className="mb-1.5 block text-label-sm text-on-panel-suave"
                 >
                   Modelo
                 </label>
@@ -149,14 +188,14 @@ export function FiltroSidebar({
                   type="text"
                   value={filtros.modelo}
                   onChange={(e) => definir("modelo", e.target.value)}
-                  placeholder="Corolla, Ranger, Rio..."
-                  className="h-11 w-full rounded border border-outline-variant bg-surface-container-lowest px-3 text-body-md text-on-surface outline-none transition-colors placeholder:text-on-surface-variant focus:border-primary"
+                  placeholder="Spark GT, Hilux, NP300..."
+                  className="h-11 w-full rounded border border-borde-campo bg-surface-container-lowest px-3 text-body-md text-on-surface outline-none transition-colors placeholder:text-on-surface-variant focus:border-primary"
                 />
               </div>
               <div>
                 <label
                   htmlFor={`${uid}-anio`}
-                  className="mb-1.5 block text-label-sm text-on-surface-variant"
+                  className="mb-1.5 block text-label-sm text-on-panel-suave"
                 >
                   Año del vehículo
                 </label>
@@ -164,7 +203,7 @@ export function FiltroSidebar({
                   id={`${uid}-anio`}
                   value={filtros.anio ?? ""}
                   onChange={(e) => definir("anio", e.target.value ? Number(e.target.value) : null)}
-                  className="tabular h-11 w-full rounded border border-outline-variant bg-surface-container-lowest px-3 text-body-md text-on-surface outline-none transition-colors focus:border-primary"
+                  className="tabular h-11 w-full rounded border border-borde-campo bg-surface-container-lowest px-3 text-body-md text-on-surface outline-none transition-colors focus:border-primary"
                 >
                   <option value="">Cualquier año</option>
                   {anios.map((a) => (
@@ -200,13 +239,13 @@ export function FiltroSidebar({
           ))}
 
           {/* Sin filtro de disponibilidad: la confirma el equipo por WhatsApp. */}
-          <p className="mt-sm rounded-lg border border-dashed border-outline-variant bg-surface-container-low p-3 text-label-sm leading-relaxed text-on-surface-variant">
+          <p className="mt-sm rounded-lg border border-dashed border-panel-borde bg-surface-container-lowest p-3 text-label-sm leading-relaxed text-on-panel-suave">
             La disponibilidad de cada repuesto se confirma por WhatsApp.
           </p>
         </div>
       </div>
 
-      <div className="shrink-0 border-t border-outline-variant/30 bg-surface-container-lowest p-md">
+      <div className="shrink-0 border-t border-panel-borde bg-surface-container-lowest p-md">
         <button
           type="button"
           onClick={limpiar}

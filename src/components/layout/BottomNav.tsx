@@ -49,8 +49,14 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Navegación inferior"
-      className="fixed bottom-0 z-50 flex h-[60px] w-full items-center justify-around border-t border-outline-variant bg-surface-container-lowest md:hidden"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      /*
+       * El alto sale de `--alto-barra-inferior`, la misma variable de la que
+       * el `body` toma su relleno inferior: así no hay forma de que la barra
+       * tape contenido. La variable ya incluye `env(safe-area-inset-bottom)`,
+       * y el relleno propio lo reserva dentro para que los destinos no queden
+       * bajo el indicador de inicio.
+       */
+      className="fixed bottom-0 z-50 flex h-[var(--alto-barra-inferior)] w-full items-stretch justify-around border-t border-outline-variant bg-surface-container-lowest pb-[env(safe-area-inset-bottom,0px)] lg:hidden"
     >
       {DESTINOS.map((d) => {
         const activo = d.ancla
@@ -62,13 +68,15 @@ export function BottomNav() {
             href={d.href}
             aria-current={activo ? "page" : undefined}
             className={cn(
-              "flex h-full w-full flex-col items-center justify-center gap-xs transition-all",
+              // Sin `transition-all`: animaba `border-width`, que provoca reflujo en
+              // cada cambio de sección al desplazarse.
+              "flex h-full w-full flex-col items-center justify-center gap-xs transition-[background-color,color] duration-[var(--dur-rapida)]",
               activo
                 ? "border-t-2 border-primary bg-primary-container/10 text-primary"
                 : "text-on-surface-variant active:opacity-70"
             )}
           >
-            <Icon name={d.icono} size={22} filled={activo} />
+            <Icon name={d.icono} size={24} filled={activo} />
             <span
               className={cn(
                 "font-mono text-[10px] uppercase tracking-[0.08em]",

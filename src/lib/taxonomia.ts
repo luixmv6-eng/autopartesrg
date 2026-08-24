@@ -5,39 +5,57 @@ export interface Opcion<T extends string> {
   label: string;
 }
 
+/**
+ * Las tres taxonomías salen del catálogo real, no al revés.
+ *
+ * Cada opción que se lista aquí aparece como casilla en la barra de filtros,
+ * y una casilla que siempre devuelve cero resultados es ruido: el usuario la
+ * marca, no pasa nada y deja de confiar en el resto. Por eso no hay marcas,
+ * categorías ni secciones "de reserva" esperando a que algún día entre un
+ * repuesto que las use. Cuando el catálogo crezca, se añaden aquí.
+ *
+ * `npm run verificar:taxonomia` comprueba la correspondencia en los dos
+ * sentidos: que ninguna opción esté vacía y que ningún producto apunte a un
+ * identificador que no exista.
+ */
+
 export const MARCAS: Opcion<MarcaId>[] = [
-  { id: "toyota", label: "Toyota" },
   { id: "chevrolet", label: "Chevrolet" },
   { id: "ford", label: "Ford" },
   { id: "hyundai", label: "Hyundai" },
+  { id: "isuzu", label: "Isuzu" },
   { id: "kia", label: "Kia" },
-  { id: "nissan", label: "Nissan" },
+  { id: "lexus", label: "Lexus" },
   { id: "mazda", label: "Mazda" },
-  { id: "suzuki", label: "Suzuki" },
-  { id: "volkswagen", label: "Volkswagen" },
+  { id: "mitsubishi", label: "Mitsubishi" },
+  { id: "nissan", label: "Nissan" },
   { id: "renault", label: "Renault" },
+  { id: "suzuki", label: "Suzuki" },
+  { id: "toyota", label: "Toyota" },
+  { id: "volkswagen", label: "Volkswagen" },
+  { id: "universal", label: "Universal / varias" },
 ];
 
 export const CATEGORIAS: Opcion<CategoriaId>[] = [
   { id: "motor", label: "Motor" },
+  { id: "transmision", label: "Transmisión y embrague" },
+  { id: "suspension", label: "Suspensión y dirección" },
   { id: "frenos", label: "Frenos" },
-  { id: "suspension", label: "Suspensión" },
-  { id: "electrico", label: "Eléctrico" },
-  { id: "carroceria", label: "Carrocería" },
-  { id: "transmision", label: "Transmisión" },
-  { id: "filtros", label: "Filtros" },
   { id: "refrigeracion", label: "Refrigeración" },
+  { id: "combustible", label: "Alimentación y combustible" },
+  { id: "electrico", label: "Eléctrico" },
+  { id: "filtros", label: "Filtros" },
+  { id: "carroceria", label: "Carrocería" },
 ];
 
 export const SECCIONES: Opcion<SeccionId>[] = [
   { id: "motor", label: "Motor" },
-  { id: "exterior", label: "Exterior" },
-  { id: "interior", label: "Interior" },
-  { id: "chasis", label: "Chasis" },
-  { id: "sistema-electrico", label: "Sistema eléctrico" },
-  { id: "sistema-frenos", label: "Sistema de frenos" },
+  { id: "transmision", label: "Caja y embrague" },
   { id: "tren-delantero", label: "Tren delantero" },
   { id: "tren-trasero", label: "Tren trasero" },
+  { id: "sistema-frenos", label: "Sistema de frenos" },
+  { id: "sistema-electrico", label: "Sistema eléctrico" },
+  { id: "exterior", label: "Exterior" },
 ];
 
 export const ORDENES: Opcion<OrdenId>[] = [

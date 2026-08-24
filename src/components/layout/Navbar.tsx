@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Logo } from "./Logo";
 import { Icon } from "@/components/ui/Icon";
 import { useFiltros } from "@/hooks/useFiltros";
+import { CONTACTO } from "@/lib/contacto";
 import { cn } from "@/lib/utils";
 
 /**
@@ -99,28 +100,28 @@ export function Navbar() {
     <header
       className={cn(
         "fixed top-0 z-50 w-full border-b border-outline-variant bg-surface-container-lowest transition-shadow duration-300",
-        elevado ? "shadow-md" : "shadow-sm"
+        elevado ? "shadow-e2" : "shadow-e1"
       )}
     >
-      <div className="mx-auto flex h-14 w-full max-w-7xl items-center justify-between px-md md:h-16 md:px-xl">
-        {/* En móvil la navegación vive en la barra inferior (BottomNav). Aquí
+      <div className="contenedor flex h-[var(--alto-cabecera)] items-center justify-between gap-sm">
+        {/* Hasta `lg` la navegación vive en la barra inferior (BottomNav). Aquí
             no se repite: las maquetas de Stitch traían dos modelos distintos
             (barra inferior en Home, hamburguesa en Nosotros) y montar los dos
-            deja cuatro destinos duplicados en la misma pantalla. */}
-        <div className="flex items-center gap-lg">
-          <Link href="/" aria-label="AutopartesRG, ir al inicio">
-            <span className="hidden md:block">
-              <Logo tamanoTexto="text-headline-lg font-bold tracking-[-0.02em]" tamanoIcono={28} />
-            </span>
-            <span className="block md:hidden">
-              <Logo
-                tamanoTexto="text-headline-lg-mobile tracking-[-0.02em]"
-                mostrarIcono={false}
-              />
-            </span>
+            deja cuatro destinos duplicados en la misma pantalla.
+            El corte es `lg` y no `md` porque en tableta vertical los cuatro
+            destinos, el logotipo y el buscador no caben sin apretarse. */}
+        <div className="flex min-w-0 items-center gap-lg">
+          <Link
+            href="/"
+            aria-label={`${CONTACTO.nombre}, ir al inicio`}
+            /* `min-h-11`: con el logotipo a 40px de alto el enlace se quedaba
+               en un objetivo táctil de 40, por debajo del mínimo de 44. */
+            className="flex min-h-11 shrink-0 items-center"
+          >
+            <Logo prioridad className="h-10 xs:h-[2.75rem] lg:h-[3.75rem]" />
           </Link>
 
-          <nav aria-label="Navegación principal" className="ml-lg hidden md:block">
+          <nav aria-label="Navegación principal" className="hidden lg:block xl:ml-lg">
             <ul className="flex items-center gap-md">
               {DESTINOS.map((d) =>
                 d.id === "nosotros" ? (
@@ -133,7 +134,17 @@ export function Navbar() {
                       {d.label}
                       <Icon name="expand_more" size={16} />
                     </Link>
-                    <ul className="invisible absolute left-0 top-full w-48 translate-y-1 rounded-lg border border-outline-variant bg-surface-container-lowest p-xs opacity-0 shadow-lg transition-[opacity,transform] duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    {/*
+                     * `visibility` entra en la lista de transición. Sin ella el
+                     * submenú tenía entrada pero no salida: al retirar el ratón
+                     * la visibilidad saltaba a `hidden` en el acto y el fundido
+                     * de salida no llegaba a verse nunca.
+                     *
+                     * La salida va más corta que la entrada, como debe ser:
+                     * entrando el movimiento explica de dónde sale el panel,
+                     * saliendo solo estorba.
+                     */}
+                    <ul className="invisible absolute left-0 top-full w-48 origin-top rounded-lg border border-outline-variant bg-surface-container-lowest p-xs opacity-0 shadow-e2 transition-[opacity,translate,scale,visibility] duration-[var(--dur-salida)] ease-salida motion-safe:-translate-y-1 motion-safe:scale-95 group-hover:visible group-hover:opacity-100 group-hover:duration-[var(--dur-media)] motion-safe:group-hover:translate-y-0 motion-safe:group-hover:scale-100 group-focus-within:visible group-focus-within:opacity-100 motion-safe:group-focus-within:translate-y-0 motion-safe:group-focus-within:scale-100">
                       {SUB_NOSOTROS.map((sub) => (
                         <li key={sub.href}>
                           <Link
@@ -162,12 +173,18 @@ export function Navbar() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-sm">
-          {/* Buscador siempre alcanzable, sea cual sea la posición de scroll */}
+        <div className="flex shrink-0 items-center gap-sm">
+          {/*
+           * Buscador siempre alcanzable, sea cual sea la posición de scroll.
+           * En línea a partir de `xl`, que es donde sobra anchura junto a los
+           * cuatro destinos; por debajo se pliega en el botón de al lado.
+           * El campo se mide en `ch` para que su anchura la fije el texto que
+           * debe caber, no un número redondo de píxeles.
+           */}
           <form
             onSubmit={buscar}
             role="search"
-            className="hidden items-center rounded-full border border-outline-variant bg-surface-container-low px-4 py-2 transition-all focus-within:border-primary focus-within:ring-1 focus-within:ring-primary lg:flex"
+            className="hidden items-center rounded-full border border-borde-campo bg-surface-container-low px-4 py-2 transition-[border-color,box-shadow] duration-[var(--dur-rapida)] focus-within:border-primary focus-within:ring-1 focus-within:ring-primary xl:flex"
           >
             <label htmlFor="buscador-nav" className="sr-only">
               Buscar por número OEM o nombre de repuesto
@@ -178,8 +195,14 @@ export function Navbar() {
               type="search"
               value={termino}
               onChange={(e) => setTermino(e.target.value)}
-              placeholder="Buscar por número de pieza o nombre..."
-              className="w-56 border-none bg-transparent p-0 text-body-md text-on-surface outline-none placeholder:text-on-surface-variant focus:w-64"
+              /* El marcador de posición cabe entero: uno más largo se cortaba
+                 a media palabra, que es peor que decir menos. */
+              placeholder="Buscar por OEM o nombre"
+              /* Anchura fija: al enfocarlo se ensanchaba animando `width`, que
+                 recalcula el layout de toda la cabecera y empuja el logotipo.
+                 El campo ya cabe entero, así que el ensanchado no aportaba
+                 nada que compensara el coste. */
+              className="w-[24ch] border-none bg-transparent p-0 text-body-md text-on-surface outline-none placeholder:text-on-surface-variant 2xl:w-[32ch]"
             />
           </form>
 
@@ -189,7 +212,7 @@ export function Navbar() {
             aria-expanded={buscadorAbierto}
             aria-controls="buscador-compacto"
             aria-label="Abrir buscador"
-            className="-mr-2 grid size-11 place-items-center rounded-full text-primary transition-colors hover:bg-surface-container-low lg:hidden"
+            className="-mr-2 grid size-11 place-items-center rounded-full text-primary transition-colors hover:bg-surface-container-low xl:hidden"
           >
             <Icon name="search" />
           </button>
@@ -202,16 +225,37 @@ export function Navbar() {
         <div className="barra-progreso h-full w-full origin-left scale-x-0 bg-gradient-to-r from-primary to-accent" />
       </div>
 
-      {buscadorAbierto && (
-        <div
-          id="buscador-compacto"
-          className="border-t border-outline-variant bg-surface-container-lowest px-md py-sm lg:hidden"
-        >
-          <form onSubmit={buscar} role="search" className="mx-auto flex max-w-7xl gap-sm">
+      {/*
+       * El panel de búsqueda se despliega en vez de aparecer.
+       *
+       * Antes era un render condicional: al pulsar la lupa el panel se
+       * materializaba de golpe y empujaba la página entera hacia abajo de un
+       * fotograma al siguiente, que en un móvil se lee como un fallo de la
+       * página, no como una respuesta a lo que acabas de tocar.
+       *
+       * Se queda siempre montado y colapsado a `0fr`, con `inert` para que ni
+       * el tabulador ni un lector de pantalla lleguen a un campo que no está.
+       */}
+      <div
+        id="buscador-compacto"
+        inert={!buscadorAbierto}
+        className={cn(
+          "grid transition-[grid-template-rows] duration-[var(--dur-panel)] ease-salida xl:hidden",
+          buscadorAbierto ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        )}
+      >
+        <div className="overflow-hidden">
+          <div
+            className={cn(
+              "border-t border-outline-variant bg-surface-container-lowest py-sm transition-opacity duration-[var(--dur-rapida)]",
+              buscadorAbierto ? "opacity-100" : "opacity-0"
+            )}
+          >
+          <form onSubmit={buscar} role="search" className="contenedor flex gap-sm">
             <label htmlFor="buscador-compacto-input" className="sr-only">
               Buscar por número OEM o nombre de repuesto
             </label>
-            <div className="flex flex-grow items-center rounded-lg border border-outline-variant bg-surface-container-low px-sm">
+            <div className="flex flex-grow items-center rounded-lg border border-borde-campo bg-surface-container-low px-sm">
               <Icon name="search" size={20} className="mr-sm text-on-surface-variant" />
               <input
                 id="buscador-compacto-input"
@@ -230,8 +274,9 @@ export function Navbar() {
               Buscar
             </button>
           </form>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

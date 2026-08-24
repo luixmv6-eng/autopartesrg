@@ -10,9 +10,22 @@ import { serializarJsonLd } from "@/lib/jsonld";
 import { organizacionSchema, sitioSchema } from "@/lib/seo";
 import "./globals.css";
 
+/*
+ * Pesos declarados: 400 cuerpo, 500 etiquetas, 600 titulares, 700 display. El
+ * 800 estaba pedido y no lo usaba nadie.
+ *
+ * Quitarlo no ahorra bytes —`next/font` sirve el fichero variable de la familia
+ * y el array `weight` solo decide qué reglas `@font-face` se emiten—, pero
+ * declarar un peso que no se usa invita a usarlo sin querer y a que la escala
+ * tipográfica se desordene. Medido: el woff2 pesa lo mismo con 800 y sin él.
+ *
+ * Coste real de las dos familias: 30,6 KB Hanken + 33,9 KB JetBrains. Es el
+ * suelo con estas dos tipografías; el único recorte posible sería renunciar a
+ * la monoespaciada, que es la que da el registro técnico de todo el sitio.
+ */
 const hanken = Hanken_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-hanken",
   display: "swap",
 });
@@ -37,7 +50,7 @@ const materialSymbols = localFont({
 
 const TITULO = "Catálogo de repuestos y autopartes por número OEM";
 const DESCRIPCION =
-  "Busca repuestos por número OEM, marca, modelo y año. Verifica la compatibilidad con tu vehículo y cotiza al instante por WhatsApp con AutopartesRG.";
+  "Busca repuestos por número OEM, marca, modelo y año. Verifica la compatibilidad con tu vehículo y cotiza al instante por WhatsApp con Autopartes ERG.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -99,6 +112,14 @@ export const viewport: Viewport = {
   colorScheme: "light",
   width: "device-width",
   initialScale: 1,
+  /*
+   * `cover` extiende el lienzo hasta los bordes físicos de la pantalla, que es
+   * lo que hace que `env(safe-area-inset-*)` devuelva algo distinto de cero.
+   * Sin esto, el relleno de área segura de la barra inferior no se aplica y en
+   * un iPhone con indicador de inicio el último destino queda debajo de él.
+   */
+  viewportFit: "cover",
+  // Sin `maximumScale`: bloquear el zoom es una barrera de accesibilidad.
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -107,8 +128,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="es-CO"
       className={`${hanken.variable} ${jetbrains.variable} ${materialSymbols.variable}`}
     >
-      {/* pb para dejar sitio a la barra de navegación inferior en móvil */}
-      <body className="flex min-h-dvh flex-col pb-[60px] antialiased md:pb-0">
+      {/*
+       * El relleno inferior deja sitio a la barra de navegación móvil. Sale de
+       * `--alto-barra-inferior`, que ya incluye el área segura del dispositivo
+       * y vale 0 a partir de `lg`, donde la barra desaparece.
+       */}
+      <body className="flex min-h-dvh flex-col pb-[var(--alto-barra-inferior)] antialiased">
         {/*
          * Datos estructurados: la organización y el sitio con su buscador.
          * Se serializan con `serializarJsonLd`, que escapa `<`, `>`, `&` y los
@@ -131,7 +156,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <div id="tope-pagina" aria-hidden className="absolute top-0 h-px w-full" />
         <Navbar />
-        <main id="contenido" className="flex-grow pt-14 md:pt-16">
+        <main id="contenido" className="flex-grow pt-[var(--alto-cabecera)]">
           {children}
         </main>
         <Footer />

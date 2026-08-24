@@ -9,7 +9,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { relacionados } from "@/lib/productos";
 import { LABEL_CATEGORIA, LABEL_MARCA, LABEL_SECCION } from "@/lib/taxonomia";
 import type { Producto } from "@/lib/types";
-import { rangoAniosLegible } from "@/lib/utils";
+import { listarCompatibles, nombrarVehiculo, rangoAniosLegible } from "@/lib/utils";
 import { enlaceWhatsApp, mensajeCotizacion } from "@/lib/whatsapp";
 
 interface Props {
@@ -60,26 +60,28 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
     );
   }
 
-  const compatibles = producto.modelos
-    .map((m) => `${LABEL_MARCA[producto.marca]} ${m}`)
-    .join(", ");
+  const compatibles = listarCompatibles(producto);
   const anios = rangoAniosLegible(producto.anioDesde, producto.anioHasta);
 
   // Sin condición ni disponibilidad: son datos de inventario que el catálogo
-  // no puede sostener todavía. Se confirman por WhatsApp.
+  // no puede sostener todavía. Se confirman por WhatsApp. La fila del número de
+  // parte solo se dibuja cuando el repuesto trae referencia impresa.
   const especificaciones: Array<{ etiqueta: string; valor: React.ReactNode }> = [
     { etiqueta: "Marca", valor: LABEL_MARCA[producto.marca] },
     { etiqueta: "Modelos", valor: producto.modelos.join(", ") },
     { etiqueta: "Años", valor: <span className="tabular">{anios}</span> },
     { etiqueta: "Categoría", valor: LABEL_CATEGORIA[producto.categoria] },
     { etiqueta: "Sección", valor: LABEL_SECCION[producto.seccion] },
+    ...(producto.oem
+      ? [{ etiqueta: "N.º de parte", valor: <span className="tabular">{producto.oem}</span> }]
+      : []),
   ];
 
   const sugeridos = relacionados(producto);
 
   return (
     <Modal abierto onCerrar={onCerrar} labelledBy="ficha-titulo">
-      <div className="flex h-dvh flex-col sm:h-auto sm:max-h-[calc(100dvh-2rem)]">
+      <div className="flex h-dvh flex-col sm:h-auto sm:max-h-[calc(100dvh-var(--gutter)*2)]">
         <header className="flex shrink-0 items-center justify-between border-b border-outline-variant bg-surface-bright px-md py-sm md:px-lg md:py-md">
           <span className="flex items-center gap-sm">
             <Icon name="verified" size={24} className="text-primary" />
@@ -93,7 +95,7 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
             aria-label="Cerrar ficha técnica"
             className="group grid size-11 place-items-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-high"
           >
-            <Icon name="close" size={26} className="group-hover:text-error" />
+            <Icon name="close" size={24} className="group-hover:text-error" />
           </button>
         </header>
 
@@ -102,15 +104,18 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
             {/* Imagen */}
             {/* En escritorio la imagen queda fija mientras se leen las
                 especificaciones, en vez de estirarse con la columna de datos. */}
-            <div className="group relative flex min-h-[280px] items-center justify-center bg-surface-container-low p-lg lg:sticky lg:top-0 lg:col-span-7 lg:h-[560px] lg:self-start lg:border-r lg:border-outline-variant lg:p-xl">
+            {/* Alto fluido: fijo en 560px, en una pantalla de portátil de 720px
+                la imagen se comía la ficha entera y las especificaciones
+                quedaban siempre por debajo del pliegue. */}
+            <div className="group relative flex aspect-[4/3] max-h-[45svh] items-center justify-center bg-surface-container-low lg:sticky lg:top-0 lg:col-span-7 lg:aspect-auto lg:h-[clamp(24rem,38vw,35rem)] lg:max-h-none lg:self-start lg:border-r lg:border-outline-variant">
               <Image
                 src={producto.imagen}
-                alt={`${producto.nombre} para ${LABEL_MARCA[producto.marca]} ${producto.modelos[0]}`}
+                alt={`${producto.nombre} para ${nombrarVehiculo(producto, producto.modelos[0])}`}
                 fill
                 sizes="(min-width: 1024px) 55vw, 100vw"
-                className="object-contain p-lg transition-transform duration-500 group-hover:scale-105"
+                className="object-contain p-lg transition-transform duration-[var(--dur-panel)] motion-safe:group-hover:scale-105 lg:p-xl"
               />
-              <span className="absolute bottom-md right-md flex items-center rounded-lg border border-outline-variant bg-surface-container-lowest/80 p-sm text-on-surface-variant shadow-sm backdrop-blur-md">
+              <span className="absolute bottom-md right-md flex items-center rounded-lg border border-outline-variant bg-surface-container-lowest/80 p-sm text-on-surface-variant shadow-e1 backdrop-blur-md">
                 <Icon name="zoom_in" size={20} />
               </span>
             </div>
@@ -125,13 +130,12 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
                 </p>
 
                 <div>
-                  <h2
-                    id="ficha-titulo"
-                    className="mb-sm text-headline-lg-mobile text-on-surface lg:text-headline-lg"
-                  >
+                  <h2 id="ficha-titulo" className="mb-sm text-headline-lg text-on-surface">
                     {producto.nombre}
                   </h2>
-                  <BadgeTecnico>OEM: {producto.oem}</BadgeTecnico>
+                  {/* La insignia solo aparece si hay referencia impresa. Un
+                      "OEM: —" ocuparía el mismo sitio sin decir nada. */}
+                  {producto.oem && <BadgeTecnico>OEM: {producto.oem}</BadgeTecnico>}
                 </div>
 
                 <div className="mt-sm flex items-start gap-sm rounded-lg border border-primary-fixed-dim bg-primary-fixed p-md">
@@ -147,19 +151,32 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
                   </div>
                 </div>
 
-                {/* Especificaciones, con filas alternas */}
-                <dl className="mt-md overflow-hidden rounded-lg border border-outline-variant font-mono text-label-technical">
-                  {especificaciones.map((fila, i) => (
-                    <div
-                      key={fila.etiqueta}
-                      className={`grid grid-cols-3 p-sm ${
-                        i % 2 === 0 ? "bg-surface-container-low" : "bg-surface-container-lowest"
-                      } ${i < especificaciones.length - 1 ? "border-b border-outline-variant" : ""}`}
-                    >
-                      <dt className="col-span-1 text-on-surface-variant">{fila.etiqueta}</dt>
-                      <dd className="col-span-2 font-semibold text-on-surface">{fila.valor}</dd>
-                    </div>
-                  ))}
+                {/*
+                 * Especificaciones, con filas alternas.
+                 *
+                 * Una sola retícula para toda la lista, no una por fila: así
+                 * las dos columnas se alinean entre filas y la de etiquetas se
+                 * mide por la etiqueta más larga en vez de llevarse un tercio
+                 * fijo. En un móvil estrecho ese tercio dejaba valores como
+                 * "Corolla, Yaris, Camry" partidos en cuatro líneas.
+                 */}
+                <dl className="mt-md grid grid-cols-[minmax(min-content,auto)_minmax(0,1fr)] overflow-hidden rounded-lg border border-outline-variant font-mono text-label-technical">
+                  {especificaciones.map((fila, i) => {
+                    const fondo =
+                      i % 2 === 0 ? "bg-surface-container-low" : "bg-surface-container-lowest";
+                    const borde =
+                      i < especificaciones.length - 1 ? "border-b border-outline-variant" : "";
+                    return (
+                      <div key={fila.etiqueta} className="col-span-2 grid grid-cols-subgrid">
+                        <dt className={`p-sm pr-md text-on-surface-variant ${fondo} ${borde}`}>
+                          {fila.etiqueta}
+                        </dt>
+                        <dd className={`p-sm pl-0 font-semibold text-on-surface ${fondo} ${borde}`}>
+                          {fila.valor}
+                        </dd>
+                      </div>
+                    );
+                  })}
                 </dl>
 
                 <p className="text-body-md leading-relaxed text-on-surface-variant">
@@ -171,7 +188,7 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
               <div className="mt-lg flex flex-col gap-md border-t border-outline-variant pt-lg">
                 {/* Sin precio publicado: la cotización se resuelve por WhatsApp. */}
                 <p className="flex items-start gap-sm text-body-md text-on-surface-variant">
-                  <Icon name="forum" size={22} className="mt-0.5 text-primary" />
+                  <Icon name="forum" size={24} className="mt-0.5 text-primary" />
                   Confirmamos disponibilidad y precio por WhatsApp el mismo día.
                 </p>
 
@@ -187,11 +204,11 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
                       id="modelo-cotizacion"
                       value={modelo}
                       onChange={(e) => cambiarModelo(e.target.value)}
-                      className="h-11 w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 text-body-md text-on-surface outline-none transition-colors focus:border-primary"
+                      className="h-11 w-full rounded-lg border border-borde-campo bg-surface-container-lowest px-3 text-body-md text-on-surface outline-none transition-colors focus:border-primary"
                     >
                       {producto.modelos.map((m) => (
                         <option key={m} value={m}>
-                          {LABEL_MARCA[producto.marca]} {m}
+                          {nombrarVehiculo(producto, m)}
                         </option>
                       ))}
                     </select>
@@ -245,9 +262,9 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
           {/* Repuestos relacionados */}
           {sugeridos.length > 0 && (
             <section className="bg-surface-bright p-md lg:p-xl">
-              <div className="mb-lg flex items-center justify-between gap-md">
+              <div className="mb-lg flex flex-wrap items-center justify-between gap-x-md gap-y-sm">
                 <h3 className="flex items-center gap-sm text-headline-md text-on-surface">
-                  <Icon name="account_tree" size={22} className="text-primary" />
+                  <Icon name="account_tree" size={24} className="shrink-0 text-primary" />
                   Repuestos Relacionados
                 </h3>
                 <button
@@ -260,29 +277,39 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
                 </button>
               </div>
 
-              <ul className="-mx-md flex snap-x gap-md overflow-x-auto px-md pb-sm hide-scrollbar md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-4">
+              {/*
+               * Carrusel hasta `md` y retícula a partir de ahí. El envoltorio
+               * `carril` añade el degradado en los extremos, que es la única
+               * señal de que hay más fichas fuera del borde; al llegar a cada
+               * tope se apaga solo. En la retícula sobra, y se oculta.
+               */}
+              <div
+                className="carril -mx-[var(--gutter)] md:mx-0 md:before:hidden md:after:hidden"
+                style={{ "--carril-fondo": "var(--color-surface-bright)" } as React.CSSProperties}
+              >
+                <ul className="carril-pista gap-md px-[var(--gutter)] pb-sm md:grid md:grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] md:overflow-x-visible md:px-0">
                 {sugeridos.map((rel) => (
                   <li
                     key={rel.id}
-                    className="w-40 shrink-0 snap-start md:w-auto"
+                    className="w-40 shrink-0 md:w-auto"
                   >
                     <button
                       type="button"
                       onClick={() => onAbrirOtro(rel)}
-                      className="group flex h-full w-full flex-col gap-sm rounded-lg border border-outline-variant bg-surface-container-lowest p-sm text-left transition-shadow hover:shadow-md md:p-md"
+                      className="group flex h-full w-full flex-col gap-sm rounded-lg border border-outline-variant bg-surface-container-lowest p-sm text-left transition-shadow hover:shadow-e2 md:p-md"
                     >
-                      <span className="relative mb-sm block h-24 overflow-hidden rounded-md bg-surface-container-low md:h-32">
+                      <span className="relative mb-sm block h-24 overflow-hidden rounded-lg bg-surface-container-low md:h-32">
                         <Image
                           src={rel.imagen}
                           alt=""
                           fill
                           loading="lazy"
                           sizes="200px"
-                          className="object-contain p-2 transition-transform group-hover:scale-110"
+                          className="object-contain p-2 transition-transform motion-safe:group-hover:scale-110"
                         />
                       </span>
                       <span className="font-mono text-label-sm text-on-surface-variant">
-                        OEM: {rel.oem}
+                        {rel.oem ? `OEM: ${rel.oem}` : LABEL_MARCA[rel.marca]}
                       </span>
                       <span className="line-clamp-2 text-label-sm font-semibold leading-tight text-on-surface md:text-body-md">
                         {rel.nombre}
@@ -294,13 +321,14 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
                         <Icon
                           name="chevron_right"
                           size={20}
-                          className="text-primary transition-transform group-hover:translate-x-1"
+                          className="text-primary transition-transform motion-safe:group-hover:translate-x-1"
                         />
                       </span>
                     </button>
                   </li>
                 ))}
-              </ul>
+                </ul>
+              </div>
             </section>
           )}
         </div>
