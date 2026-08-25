@@ -55,8 +55,25 @@ export async function GET(
       "Content-Type": TIPOS[extension] ?? "application/octet-stream",
       "Content-Length": String(info.size),
       ETag: etiqueta,
-      // Se guarda, pero se pregunta siempre antes de reutilizar.
-      "Cache-Control": "public, max-age=0, must-revalidate",
+      /*
+       * Caché permanente, porque el nombre del fichero ya identifica al
+       * contenido: al subir una foto desde el panel se guarda como
+       * `id-marcaDeTiempo.jpg`, así que una foto distinta es siempre una
+       * dirección distinta. Cambiar la imagen de un repuesto no reescribe este
+       * fichero, escribe otro nuevo y actualiza el catálogo para que apunte
+       * ahí. Por eso nunca hay nada rancio que servir.
+       *
+       * Antes iba con `max-age=0, must-revalidate`, que obligaba a preguntar
+       * por cada una de las doce fotos de la portada en cada visita. Peor aún,
+       * el optimizador de imágenes de Next hereda de aquí su propia caducidad:
+       * con cero segundos volvía a leer y a recodificar los WebP una y otra
+       * vez, que es justo el trabajo más caro del servidor. En un alojamiento
+       * compartido eso se nota.
+       *
+       * El ETag se mantiene: si algo revalida de todos modos, la respuesta es
+       * un 304 sin cuerpo.
+       */
+      "Cache-Control": "public, max-age=31536000, immutable",
       // Refuerza que el navegador no intente interpretar esto como otra cosa.
       "X-Content-Type-Options": "nosniff",
     },

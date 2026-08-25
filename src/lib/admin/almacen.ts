@@ -4,6 +4,16 @@ import { join, resolve, sep } from "node:path";
 import { URL_FOTO } from "./esquema";
 import { MARCAS_INICIALES, type Opcion } from "@/lib/taxonomia";
 import type { MarcaId, Producto } from "@/lib/types";
+/*
+ * La semilla se importa como módulo, no se lee del disco.
+ *
+ * Da igual cómo empaquete el hosting la aplicación: si el catálogo viaja como
+ * un `import`, está garantizado que estará ahí. Leyéndolo con `readFile` desde
+ * `process.cwd()` dependía de que el empaquetador adivinara que ese archivo
+ * hace falta en tiempo de ejecución, y en las plataformas que recortan lo que
+ * no ven referenciado eso es justo lo que no pasa.
+ */
+import semillaProductos from "@/data/productos.json";
 
 /**
  * Almacén del catálogo: archivos en el disco del servidor.
@@ -51,15 +61,78 @@ export const rutaMarcas = () => join(directorioDatos(), "marcas.json");
 export const rutaImagenes = () => join(directorioDatos(), "imagenes");
 export const rutaCopias = () => join(directorioDatos(), "copias");
 
-/** Semilla: el catálogo y las fotos que viajan con el código, para el primer arranque. */
-const SEMILLA_CATALOGO = join(process.cwd(), "src", "data", "productos.json");
+/** Semilla: las fotos que viajan con el código, para el primer arranque. */
 const SEMILLA_FOTOS = join(process.cwd(), "public", "images", "parts");
+
+/** El catálogo de partida, ya empaquetado con la aplicación. */
+const CATALOGO_SEMILLA = semillaProductos as unknown as Producto[];
 
 const MAX_COPIAS = 30;
 
 async function asegurarCarpetas(): Promise<void> {
   await mkdir(rutaImagenes(), { recursive: true });
   await mkdir(rutaCopias(), { recursive: true });
+}
+
+/**
+ * ¿Se puede escribir en la carpeta de datos?
+ *
+ * En un alojamiento de disco de solo lectura la respuesta es no, y no hay
+ * arreglo posible desde aquí: es cómo funciona la plataforma. Vercel, Netlify
+ * y en general cualquier alojamiento «sin servidor» montan el código en un
+ * sistema de archivos que no admite escrituras, y aunque admitiera alguna en
+ * `/tmp`, cada petición puede caer en una máquina distinta y todo se borra al
+ * poco rato. Por eso el panel necesita un servidor Node de verdad —Hostinger,
+ * un VPS— con `ADMIN_DATA_DIR` apuntando fuera del proyecto.
+ */
+export async function almacenEscribible(): Promise<boolean> {
+  try {
+    await asegurarCarpetas();
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Avisa una sola vez por proceso de que el disco no admite escrituras.
+ *
+ * Sin esto el fallo es mudo: el sitio se sirve con el catálogo de la semilla y
+ * nada delata por qué el panel no guarda. Una línea en el registro del hosting
+ * ahorra la tarde de buscarlo a ciegas.
+ */
+let avisoSoloLecturaDado = false;
+function avisarSoloLectura(causa: unknown): void {
+  if (avisoSoloLecturaDado) return;
+  avisoSoloLecturaDado = true;
+  const motivo = causa instanceof Error ? causa.message : String(causa);
+  console.warn(
+    `[autopartes] No se puede escribir en ${directorioDatos()} (${motivo}).\n` +
+      "  El sitio público sigue funcionando con el catálogo que viene con el código,\n" +
+      "  pero el panel de administración NO podrá guardar nada en este alojamiento."
+  );
+}
+
+/**
+ * El catálogo de partida, listo para servirse tal cual.
+ *
+ * Sus fotos apuntan a `/images/parts/…`, que son archivos estáticos dentro de
+ * `public/`. No se reescriben a `/api/foto/…` a propósito: esa ruta lee de la
+ * carpeta de datos, y si estamos aquí es precisamente porque esa carpeta no
+ * existe. Reescribirlas dejaría el catálogo visible pero con las cincuenta
+ * fotos rotas.
+ */
+function catalogoDeSemilla(): Producto[] {
+  return Array.isArray(CATALOGO_SEMILLA) ? CATALOGO_SEMILLA : [];
+}
+
+/** Deja la lista de marcas en el orden y con la forma que espera el sitio. */
+function normalizarMarcas(datos: Opcion<MarcaId>[]): Opcion<MarcaId>[] {
+  // Se filtra al leer, no solo al escribir: un archivo editado a mano no debe
+  // poder meter entradas rotas en los filtros del sitio público.
+  return datos
+    .filter((m) => m && typeof m.id === "string" && typeof m.label === "string" && m.id && m.label)
+    .sort((a, b) => a.label.localeCompare(b.label, "es"));
 }
 
 /**
@@ -71,7 +144,22 @@ async function asegurarCarpetas(): Promise<void> {
  * mirar nunca.
  */
 export async function leerCatalogo(): Promise<Producto[]> {
-  await asegurarCarpetas();
+  /*
+   * Solo este primer paso se repliega en silencio.
+   *
+   * Si no se puede ni crear la carpeta, el alojamiento es de solo lectura y no
+   * hay nada que reparar: el sitio muestra el catálogo de la semilla y sigue
+   * vendiendo. Más allá de aquí, cualquier fallo es un problema real —un JSON
+   * a medio escribir, un permiso mal puesto— y tiene que verse, no taparse con
+   * datos viejos que nadie sabría que son viejos.
+   */
+  try {
+    await asegurarCarpetas();
+  } catch (causa) {
+    avisarSoloLectura(causa);
+    return catalogoDeSemilla();
+  }
+
   const ruta = rutaCatalogo();
 
   if (!existsSync(ruta)) await sembrar();
@@ -92,10 +180,7 @@ export async function leerCatalogo(): Promise<Producto[]> {
  * puede pisarlo, y hacer una copia de seguridad es copiar una carpeta.
  */
 async function sembrar(): Promise<void> {
-  let productos: Producto[] = [];
-  if (existsSync(SEMILLA_CATALOGO)) {
-    productos = JSON.parse(await readFile(SEMILLA_CATALOGO, "utf8")) as Producto[];
-  }
+  const productos = catalogoDeSemilla();
 
   if (existsSync(SEMILLA_FOTOS)) {
     for (const archivo of await readdir(SEMILLA_FOTOS)) {
@@ -122,7 +207,15 @@ async function sembrar(): Promise<void> {
  * el código ya no vuelve a mirarse.
  */
 export async function leerMarcas(): Promise<Opcion<MarcaId>[]> {
-  await asegurarCarpetas();
+  // Mismo criterio que en `leerCatalogo`: solo el disco de solo lectura se
+  // repliega sin ruido, todo lo demás debe verse.
+  try {
+    await asegurarCarpetas();
+  } catch (causa) {
+    avisarSoloLectura(causa);
+    return normalizarMarcas(MARCAS_INICIALES);
+  }
+
   const ruta = rutaMarcas();
 
   if (!existsSync(ruta)) {
@@ -133,11 +226,7 @@ export async function leerMarcas(): Promise<Opcion<MarcaId>[]> {
   const datos = JSON.parse(await readFile(ruta, "utf8"));
   if (!Array.isArray(datos)) throw new Error("marcas.json no contiene una lista.");
 
-  // Se filtra al leer, no solo al escribir: un archivo editado a mano no debe
-  // poder meter entradas rotas en los filtros del sitio público.
-  return (datos as Opcion<MarcaId>[])
-    .filter((m) => m && typeof m.id === "string" && typeof m.label === "string" && m.id && m.label)
-    .sort((a, b) => a.label.localeCompare(b.label, "es"));
+  return normalizarMarcas(datos as Opcion<MarcaId>[]);
 }
 
 /** Escribe la lista completa de marcas, de forma atómica. */

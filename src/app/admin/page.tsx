@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PanelCatalogo } from "@/components/admin/PanelCatalogo";
 import {
+  almacenEscribible,
   configuracionCompleta,
   datosDentroDelProyecto,
   directorioDatos,
@@ -42,6 +43,24 @@ export default async function PaginaAdmin() {
     } catch (error) {
       errorInicial =
         error instanceof Error ? error.message : "No se pudo leer el catálogo del servidor.";
+    }
+
+    /*
+     * Disco de solo lectura.
+     *
+     * El sitio público se repliega solo y muestra el catálogo que viene con el
+     * código, así que desde fuera todo parece normal. Aquí dentro no puede
+     * parecerlo: sin este aviso el panel se vería lleno y en orden, la empresa
+     * editaría un repuesto, y el guardado fallaría —o peor, parecería funcionar
+     * hasta el siguiente arranque—. Vale más decirlo antes de que escriban nada.
+     */
+    if (!errorInicial && !(await almacenEscribible())) {
+      errorInicial =
+        "Este alojamiento no permite guardar cambios: su disco es de solo lectura. " +
+        "El catálogo que ves es el que viene con el código y el sitio público funciona con " +
+        "normalidad, pero nada de lo que edites aquí se conservará. El panel necesita un " +
+        "servidor Node con disco propio, como Hostinger o un VPS, y la variable ADMIN_DATA_DIR " +
+        "apuntando a una carpeta fuera del proyecto.";
     }
   }
 
