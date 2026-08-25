@@ -54,27 +54,42 @@ export function Hero() {
         sizes="100vw"
         className="object-cover"
       />
-      {/* Tinte azul de marca, muy tenue: da color sin tapar la fotografía. */}
-      <div aria-hidden className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
-      <div aria-hidden className="reticula absolute inset-0 z-10 opacity-40" />
       {/*
-       * Velo de legibilidad. El titular es casi negro (#1a1c1e) sobre una foto
-       * de medios tonos: sin esto no habría contraste suficiente para leerlo.
+       * Tinte azul de marca, en dos capas.
        *
-       * Es radial y centrado, no un degradado de izquierda a derecha. El de
-       * antes venía de una maqueta con el texto alineado a la izquierda; sobre
-       * un titular centrado dejaba la foto lavada en un lado y oscura en el
-       * otro, como si el velo estuviera descuadrado. Centrado, protege el texto
-       * y deja que la fotografía respire por igual en los cuatro bordes.
+       * La primera usa `color`, no `multiply`. Con `multiply`, un azul oscuro
+       * sobre una fotografía en blanco y negro sobre todo la **oscurece**: por
+       * mucho que se suba la opacidad se obtiene un gris sucio, no azul. El modo
+       * `color` toma el tono y la saturación de esta capa y conserva la
+       * luminosidad de la foto, que es justo lo que convierte un blanco y negro
+       * en un duotono azul de verdad, sin perder ni un punto de contraste.
+       *
+       * La segunda, un `multiply` suave, devuelve algo de profundidad a las
+       * sombras, que el modo `color` deja algo planas.
+       */}
+      <div aria-hidden className="absolute inset-0 bg-primary mix-blend-color" />
+      <div aria-hidden className="absolute inset-0 bg-primary/75 mix-blend-multiply" />
+      <div aria-hidden className="reticula absolute inset-0 z-10 opacity-25" />
+      {/*
+       * Velo de legibilidad, ahora oscuro.
+       *
+       * Antes era blanco, porque el titular era casi negro. Al pasar el banner
+       * al azul de marca a plena intensidad el fondo se oscureció, así que el
+       * texto pasó a blanco y el velo tuvo que invertirse: oscurece el centro
+       * para que el titular claro despegue del fondo.
+       *
+       * Sigue siendo radial y centrado, como el titular. Un degradado de
+       * izquierda a derecha dejaría la fotografía lavada en un lado y oscura en
+       * el otro, descuadrado respecto al texto.
        */}
       <div
         aria-hidden
-        className="absolute inset-0 z-10 bg-[radial-gradient(58%_62%_at_50%_46%,rgba(249,249,252,0.94),rgba(249,249,252,0.72)_45%,rgba(249,249,252,0.28)_100%)]"
+        className="absolute inset-0 z-10 bg-[radial-gradient(62%_66%_at_50%_46%,rgba(0,20,52,0.82),rgba(0,20,52,0.55)_48%,rgba(0,20,52,0.18)_100%)]"
       />
       {/* Filo inferior: marca el corte hacia el catálogo. */}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent"
+        className="absolute inset-x-0 bottom-0 z-20 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
       />
 
       {/*
@@ -84,11 +99,11 @@ export function Hero() {
        * línea del subtítulo, así que crece el continente y no el texto.
        */}
       <div className="hero-entra contenedor-fluido relative z-20 mx-auto max-w-3xl py-xl text-center xl:max-w-4xl 3xl:max-w-5xl">
-        <p className="eyebrow mb-md justify-center">Catálogo técnico</p>
-        <h1 className="display-tight mb-sm text-display-lg text-on-surface">
+        <p className="eyebrow mb-md justify-center !text-on-primary/80">Catálogo técnico</p>
+        <h1 className="display-tight mb-sm text-display-lg text-on-primary">
           Encuentra la pieza exacta
         </h1>
-        <p className="mx-auto mb-lg max-w-[42ch] text-balance text-body-lg text-on-surface-variant">
+        <p className="mx-auto mb-lg max-w-[42ch] text-balance text-body-lg text-on-primary/85">
           Precisión técnica y confiabilidad para tu vehículo.
         </p>
 

@@ -1,3 +1,4 @@
+import { ANIO_MAX, ANIO_MIN } from "./anios";
 import { ORDENES } from "./taxonomia";
 import type { MarcaId, OrdenId } from "./types";
 
@@ -16,9 +17,6 @@ import type { MarcaId, OrdenId } from "./types";
 
 /** Tope de caracteres de los campos libres, para que un enlace no infle el DOM. */
 const MAX_TEXTO = 80;
-
-const ANIO_MIN = 1950;
-const ANIO_MAX = new Date().getFullYear() + 2;
 
 const IDS_ORDEN = new Set<string>(ORDENES.map((o) => o.id));
 

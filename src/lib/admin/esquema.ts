@@ -1,3 +1,4 @@
+import { ANIO_MAX, ANIO_MIN } from "@/lib/anios";
 import { CATEGORIAS, SECCIONES } from "@/lib/taxonomia";
 import type { CategoriaId, MarcaId, Producto, SeccionId } from "@/lib/types";
 
@@ -31,9 +32,6 @@ export const URL_FOTO = "/api/foto/";
 
 const IDS_CATEGORIA = new Set<string>(CATEGORIAS.map((c) => c.id));
 const IDS_SECCION = new Set<string>(SECCIONES.map((s) => s.id));
-
-const ANIO_MIN = 1950;
-const ANIO_MAX = new Date().getFullYear() + 2;
 
 /** Límites de longitud. Generosos para escribir, pero acotados. */
 const LIMITES = {
