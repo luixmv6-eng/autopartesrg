@@ -6,6 +6,11 @@ import { cn } from "@/lib/utils";
  * Al añadir uno aquí hay que volver a ejecutar `npm run iconos`.
  */
 export type IconName =
+  | "photo_camera"
+  | "warning"
+  | "logout"
+  | "delete"
+  | "add"
   | "account_tree"
   | "arrow_forward"
   | "build_circle"

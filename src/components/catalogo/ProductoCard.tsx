@@ -5,6 +5,7 @@ import { Icon } from "@/components/ui/Icon";
 import { LABEL_CATEGORIA } from "@/lib/taxonomia";
 import type { Producto } from "@/lib/types";
 import { nombrarVehiculo, rangoAniosLegible } from "@/lib/utils";
+import { useMarcas } from "./ContextoMarcas";
 
 interface Props {
   producto: Producto;
@@ -31,7 +32,8 @@ interface Props {
  * imagen escala y el pie se rellena.
  */
 export function ProductoCard({ producto, indice, onAbrir, prioridad }: Props) {
-  const compatibilidad = `${nombrarVehiculo(producto, producto.modelos[0])} ${rangoAniosLegible(
+  const { etiqueta } = useMarcas();
+  const compatibilidad = `${nombrarVehiculo(producto, producto.modelos[0], etiqueta)} ${rangoAniosLegible(
     producto.anioDesde,
     producto.anioHasta
   )}`;
@@ -60,9 +62,12 @@ export function ProductoCard({ producto, indice, onAbrir, prioridad }: Props) {
       </div>
 
       <div className="flex flex-grow flex-col p-sm @[15rem]:p-md">
-        {/* Etiqueta técnica: categoría en versalitas monoespaciadas */}
+        {/* Etiqueta técnica en versalitas monoespaciadas. La categoría es
+            opcional desde que dejó de pedirse en el panel; cuando falta, ocupa
+            su lugar la marca, para que todas las tarjetas de una fila mantengan
+            la misma altura. */}
         <p className="mb-xs truncate font-mono text-[10px] uppercase tracking-[0.16em] text-primary">
-          {LABEL_CATEGORIA[producto.categoria]}
+          {producto.categoria ? LABEL_CATEGORIA[producto.categoria] : etiqueta(producto.marca)}
         </p>
 
         {/* Reserva las dos líneas que el recorte permite: sin ella, un nombre

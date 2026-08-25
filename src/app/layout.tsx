@@ -48,9 +48,9 @@ const materialSymbols = localFont({
   variable: "--font-material-symbols",
 });
 
-const TITULO = "Catálogo de repuestos y autopartes por número OEM";
+const TITULO = "Catálogo de repuestos y autopartes por marca y modelo";
 const DESCRIPCION =
-  "Busca repuestos por número OEM, marca, modelo y año. Verifica la compatibilidad con tu vehículo y cotiza al instante por WhatsApp con Autopartes ERG.";
+  "Busca repuestos por marca, modelo y año. Verifica la compatibilidad con tu vehículo y cotiza al instante por WhatsApp con Autopartes ERG.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -64,13 +64,13 @@ export const metadata: Metadata = {
   keywords: [
     "repuestos automotrices",
     "autopartes",
-    "número OEM",
+    "repuestos por modelo",
     "catálogo de repuestos",
     "repuestos Colombia",
     "compatibilidad de repuestos",
     "frenos",
     "suspensión",
-    "alternador",
+    "embrague",
   ],
   authors: [{ name: CONTACTO.nombre, url: SITE_URL }],
   creator: CONTACTO.nombre,

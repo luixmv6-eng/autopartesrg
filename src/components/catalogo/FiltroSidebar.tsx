@@ -1,9 +1,9 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { CATEGORIAS, MARCAS, SECCIONES } from "@/lib/taxonomia";
+import { useMarcas } from "./ContextoMarcas";
 import { filtrarProductos } from "@/lib/productos";
 import type { EstadoFiltros, Producto } from "@/lib/types";
 import type { ClaveMulti } from "@/hooks/useFiltros";
@@ -26,7 +26,7 @@ function conteoSiSeAplica(
   valor: string,
   productos: Producto[]
 ): number {
-  const actuales = filtros[clave] as string[];
+  const actuales = filtros[clave];
   if (actuales.includes(valor)) return filtrarProductos(filtros, productos).length;
   return filtrarProductos({ ...filtros, [clave]: [...actuales, valor] }, productos).length;
 }
@@ -136,6 +136,21 @@ export function FiltroSidebar({
   productos,
 }: Props) {
   const uid = useId();
+  const { marcas } = useMarcas();
+
+  /*
+   * Solo se ofrecen las marcas que tienen al menos un repuesto.
+   *
+   * La lista es editable desde el panel, y quien añade una marca lo hace justo
+   * antes de crear el producto: entre los dos pasos existe un instante en que la
+   * marca no tiene nada. Enseñarla ahí sería ofrecer un filtro que devuelve
+   * cero, que es exactamente lo que este catálogo evita. Las que sí se usan
+   * aparecen solas en cuanto se guarda el repuesto.
+   */
+  const marcasConProductos = useMemo(() => {
+    const usadas = new Set(productos.map((p) => p.marca));
+    return marcas.filter((m) => usadas.has(m.id));
+  }, [marcas, productos]);
 
   const grupos: Array<{
     titulo: string;
@@ -143,14 +158,7 @@ export function FiltroSidebar({
     clave: ClaveMulti;
     opciones: ReadonlyArray<{ id: string; label: string }>;
   }> = [
-    { titulo: "Marca", icono: "directions_car", clave: "marcas", opciones: MARCAS },
-    { titulo: "Categoría", icono: "category", clave: "categorias", opciones: CATEGORIAS },
-    {
-      titulo: "Sección",
-      icono: "settings_input_component",
-      clave: "secciones",
-      opciones: SECCIONES,
-    },
+    { titulo: "Marca", icono: "directions_car", clave: "marcas", opciones: marcasConProductos },
   ];
 
   return (
@@ -221,7 +229,7 @@ export function FiltroSidebar({
               key={g.clave}
               titulo={g.titulo}
               icono={g.icono}
-              activos={(filtros[g.clave] as string[]).length}
+              activos={filtros[g.clave].length}
             >
               <div className="space-y-0.5 pl-6">
                 {g.opciones.map((opcion) => (
@@ -229,7 +237,7 @@ export function FiltroSidebar({
                     key={opcion.id}
                     id={`${uid}-${g.clave}-${opcion.id}`}
                     label={opcion.label}
-                    checked={(filtros[g.clave] as string[]).includes(opcion.id)}
+                    checked={filtros[g.clave].includes(opcion.id)}
                     onChange={() => alternar(g.clave, opcion.id)}
                     conteo={conteoSiSeAplica(filtros, g.clave, opcion.id, productos)}
                   />
@@ -253,7 +261,7 @@ export function FiltroSidebar({
           className="flex h-11 w-full items-center justify-center gap-xs rounded border border-outline font-mono text-label-technical uppercase tracking-[0.08em] text-on-surface-variant transition-colors hover:bg-surface-container disabled:pointer-events-none disabled:opacity-40"
         >
           <Icon name="refresh" size={18} />
-          Limpiar Filtros
+          Limpiar filtros
         </button>
       </div>
     </div>

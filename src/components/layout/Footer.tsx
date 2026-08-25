@@ -3,7 +3,7 @@ import { IconoRed } from "./IconoRed";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { CONTACTO } from "@/lib/contacto";
 import { MENSAJE_GENERICO, enlaceWhatsApp } from "@/lib/whatsapp";
-import { CATEGORIAS } from "@/lib/taxonomia";
+import { MARCAS_INICIALES } from "@/lib/taxonomia";
 
 const NAVEGACION = [
   { href: "/#inicio", label: "Inicio" },
@@ -12,11 +12,21 @@ const NAVEGACION = [
   { href: "/nosotros#vision", label: "Visión" },
   { href: "/nosotros#mision", label: "Misión" },
   { href: "/nosotros#sobre-nosotros", label: "Historia" },
+  { href: "/nosotros#garantias", label: "Garantías" },
+  { href: "/nosotros#envios", label: "Envíos" },
 ];
 
-/** Categorías de mayor rotación, como atajos al catálogo ya filtrado. */
-const ATAJOS = CATEGORIAS.filter((c) =>
-  ["suspension", "motor", "transmision", "refrigeracion", "combustible", "filtros"].includes(c.id)
+/**
+ * Marcas de mayor rotación, como atajos al catálogo ya filtrado.
+ *
+ * Antes eran categorías, pero dejaron de ser un filtro del catálogo: un enlace
+ * a `/?cat=frenos` habría llevado a una portada sin filtrar, que es peor que no
+ * ofrecerlo. Se toman de la lista de arranque y no del archivo de marcas vivas
+ * a propósito: el pie aparece en todas las páginas y no merece una lectura de
+ * disco por visita para seis enlaces que no cambian.
+ */
+const ATAJOS = MARCAS_INICIALES.filter((m) =>
+  ["chevrolet", "toyota", "nissan", "suzuki", "kia", "ford"].includes(m.id)
 );
 
 /** Fila de contacto: icono, etiqueta y valor enlazado cuando aplica. */
@@ -148,7 +158,7 @@ export function Footer() {
           <ColumnaEnlaces
             id="footer-catalogo"
             titulo="Catálogo"
-            enlaces={ATAJOS.map((c) => ({ href: `/?cat=${c.id}#catalogo`, label: c.label }))}
+            enlaces={ATAJOS.map((m) => ({ href: `/?marca=${m.id}#catalogo`, label: m.label }))}
           />
 
           {/* Contacto */}

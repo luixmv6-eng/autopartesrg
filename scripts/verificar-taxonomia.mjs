@@ -36,8 +36,18 @@ function idsDe(constante) {
   return [...bloque[1].matchAll(/id:\s*"([^"]+)"/g)].map((m) => m[1]);
 }
 
+/*
+ * Las marcas ya no viven en el código: se administran desde el panel y se
+ * guardan en `marcas.json`. Si ese archivo existe, manda él; si no (proyecto
+ * recién clonado, sin arrancar todavía), se comprueba contra la semilla.
+ */
+const rutaMarcas = join(process.env.ADMIN_DATA_DIR || join(raiz, "datos"), "marcas.json");
+const marcas = existsSync(rutaMarcas)
+  ? JSON.parse(readFileSync(rutaMarcas, "utf8")).map((m) => m.id)
+  : idsDe("MARCAS_INICIALES");
+
 const grupos = [
-  { campo: "marca", constante: "MARCAS", ids: idsDe("MARCAS") },
+  { campo: "marca", constante: existsSync(rutaMarcas) ? "marcas.json" : "MARCAS_INICIALES", ids: marcas },
   { campo: "categoria", constante: "CATEGORIAS", ids: idsDe("CATEGORIAS") },
   { campo: "seccion", constante: "SECCIONES", ids: idsDe("SECCIONES") },
 ];
@@ -49,6 +59,13 @@ for (const { campo, constante, ids } of grupos) {
 
   for (const id of ids) {
     if (!usados.has(id)) {
+      /*
+       * Una marca sin repuestos no es un problema: la empresa puede crearla y
+       * tardar en asignarle productos, y la barra de filtros solo muestra las
+       * que tienen alguno. Para categorías y secciones sí lo es, porque esas
+       * salen siempre.
+       */
+      if (campo === "marca") continue;
       problemas.push(`${constante}: la opción "${id}" no la usa ningún producto (filtro vacío).`);
     }
   }

@@ -1,5 +1,11 @@
 import { LABEL_MARCA } from "./taxonomia";
-import type { Producto } from "./types";
+import type { MarcaId, Producto } from "./types";
+
+/** Cómo se traduce un identificador de marca a su nombre visible. */
+export type EtiquetaMarca = (id: MarcaId) => string;
+
+/** Respaldo: las marcas con las que se sembró el archivo de datos. */
+const etiquetaPorDefecto: EtiquetaMarca = (id) => LABEL_MARCA[id] ?? id;
 
 /** Une clases condicionales sin arrastrar dependencias. */
 export function cn(...clases: Array<string | false | null | undefined>): string {
@@ -28,12 +34,19 @@ export const MODELO_GENERICO = "Varios modelos";
  * anteponer: concatenar las dos partes daba "Universal / varias Varios
  * modelos". Ahí manda el modelo solo.
  */
-export function nombrarVehiculo(producto: Producto, modelo: string): string {
+export function nombrarVehiculo(
+  producto: Producto,
+  modelo: string,
+  etiqueta: EtiquetaMarca = etiquetaPorDefecto
+): string {
   if (producto.marca === "universal") return modelo;
-  return `${LABEL_MARCA[producto.marca]} ${modelo}`;
+  return `${etiqueta(producto.marca)} ${modelo}`;
 }
 
 /** Todos los modelos compatibles, ya con su marca delante. */
-export function listarCompatibles(producto: Producto): string {
-  return producto.modelos.map((m) => nombrarVehiculo(producto, m)).join(", ");
+export function listarCompatibles(
+  producto: Producto,
+  etiqueta: EtiquetaMarca = etiquetaPorDefecto
+): string {
+  return producto.modelos.map((m) => nombrarVehiculo(producto, m, etiqueta)).join(", ");
 }

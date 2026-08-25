@@ -11,7 +11,9 @@
         "iconos": "node scripts/descargar-iconos.mjs",
         "verificar:taxonomia": "node scripts/verificar-taxonomia.mjs",
         "grafo:verificar": "node scripts/reparar-grafo.mjs",
-        "responsive:auditar": "node scripts/auditar-responsive.mjs"
+        "responsive:auditar": "node scripts/auditar-responsive.mjs",
+        "admin:clave": "node scripts/generar-clave-admin.mjs",
+        "admin:verificar": "node scripts/verificar-clave-admin.mjs"
     },
     "dependencies": {
         "next": "16.3.0",

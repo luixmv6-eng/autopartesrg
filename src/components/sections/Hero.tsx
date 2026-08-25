@@ -34,24 +34,42 @@ export function Hero() {
       id="inicio"
       className="hero-barrido alto-hero relative flex items-center justify-center overflow-hidden"
     >
-      {/* Capas de fondo, de atrás hacia delante: imagen, retícula técnica,
-          halo radial y velo que garantiza el contraste del texto. */}
+      {/*
+       * Capas de fondo, de atrás hacia delante:
+       *   1. la fotografía del motor,
+       *   2. el tinte azul de marca,
+       *   3. la retícula técnica,
+       *   4. el velo que garantiza que el titular se lea.
+       *
+       * El orden importa: el tinte va pegado a la foto, por debajo del velo. Si
+       * fuera al revés teñiría también el texto y lo enturbiaría. Así el azul se
+       * nota donde la foto se ve —la derecha— y desaparece bajo el velo de la
+       * izquierda, que es donde vive el titular.
+       */}
       <Image
-        src="/images/hero.svg"
+        src="/images/hero.png"
         alt=""
         fill
         priority
         sizes="100vw"
         className="object-cover"
       />
-      <div aria-hidden className="reticula absolute inset-0 z-10 opacity-60" />
+      {/* Tinte azul de marca, muy tenue: da color sin tapar la fotografía. */}
+      <div aria-hidden className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
+      <div aria-hidden className="reticula absolute inset-0 z-10 opacity-40" />
+      {/*
+       * Velo de legibilidad. El titular es casi negro (#1a1c1e) sobre una foto
+       * de medios tonos: sin esto no habría contraste suficiente para leerlo.
+       *
+       * Es radial y centrado, no un degradado de izquierda a derecha. El de
+       * antes venía de una maqueta con el texto alineado a la izquierda; sobre
+       * un titular centrado dejaba la foto lavada en un lado y oscura en el
+       * otro, como si el velo estuviera descuadrado. Centrado, protege el texto
+       * y deja que la fotografía respire por igual en los cuatro bordes.
+       */}
       <div
         aria-hidden
-        className="absolute inset-0 z-10 bg-[radial-gradient(65%_75%_at_78%_18%,rgba(255,255,255,0.5),transparent_65%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 z-10 bg-gradient-to-r from-surface/92 via-surface/70 to-surface/35"
+        className="absolute inset-0 z-10 bg-[radial-gradient(58%_62%_at_50%_46%,rgba(249,249,252,0.94),rgba(249,249,252,0.72)_45%,rgba(249,249,252,0.28)_100%)]"
       />
       {/* Filo inferior: marca el corte hacia el catálogo. */}
       <div

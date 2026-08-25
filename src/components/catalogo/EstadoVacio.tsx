@@ -18,8 +18,8 @@ export function EstadoVacio({ termino, onLimpiar }: { termino: string; onLimpiar
         Ningún repuesto coincide con esa combinación
       </h3>
       <p className="mt-sm max-w-[28rem] text-body-md text-on-surface-variant">
-        Prueba quitando algún filtro o busca por número OEM. Si la pieza no está publicada, es
-        probable que igual la consigamos bajo pedido.
+        Prueba quitando algún filtro, o busca por la marca y el modelo del vehículo. Si la pieza
+        no está publicada, es probable que igual la consigamos bajo pedido.
       </p>
       <div className="mt-lg flex flex-col gap-sm sm:flex-row">
         <Button variante="outline" onClick={onLimpiar}>

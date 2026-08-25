@@ -16,6 +16,11 @@ const destino = join(raiz, "src", "app", "fonts");
 
 /** Mantener ordenado y sin duplicados. Cada icono añade unos pocos cientos de bytes. */
 export const ICONOS = [
+  "photo_camera",
+  "warning",
+  "logout",
+  "delete",
+  "add",
   "account_tree",
   "arrow_forward",
   "build_circle",

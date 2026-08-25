@@ -8,15 +8,8 @@ import {
   suscribirAQuery,
 } from "@/lib/urlQuery";
 import type { EstadoFiltros } from "@/lib/types";
-import { LABEL_CATEGORIA, LABEL_MARCA, LABEL_SECCION } from "@/lib/taxonomia";
-import {
-  anioValido,
-  categoriasValidas,
-  marcasValidas,
-  ordenValido,
-  seccionesValidas,
-  textoValido,
-} from "@/lib/validarFiltros";
+import { LABEL_MARCA } from "@/lib/taxonomia";
+import { anioValido, marcasValidas, ordenValido, textoValido } from "@/lib/validarFiltros";
 
 /**
  * Nombres cortos de los parámetros. El estado de los filtros vive en la URL,
@@ -26,14 +19,16 @@ import {
 const CLAVES = {
   q: "q",
   marcas: "marca",
-  categorias: "cat",
-  secciones: "sec",
   modelo: "modelo",
   anio: "anio",
   orden: "orden",
 } as const;
 
-export type ClaveMulti = "marcas" | "categorias" | "secciones";
+/**
+ * Filtros de selección múltiple. Solo queda la marca: categoría y sección se
+ * retiraron del catálogo por innecesarias para buscar un repuesto.
+ */
+export type ClaveMulti = "marcas";
 
 export interface ChipActivo {
   clave: string;
@@ -48,7 +43,13 @@ function leerLista(sp: URLSearchParams, clave: string): string[] {
   return bruto.split(",").filter(Boolean);
 }
 
-export function useFiltros() {
+/**
+ * `etiquetaMarca` traduce el identificador de marca a su nombre para los chips.
+ * Se pasa desde fuera porque la lista de marcas vive en los datos, no en el
+ * código. Sin ella se usa la de siempre, que basta para quien no pinta chips
+ * (el buscador del hero, por ejemplo).
+ */
+export function useFiltros(etiquetaMarca: (id: string) => string = (id) => LABEL_MARCA[id] ?? id) {
   const query = useSyncExternalStore(suscribirAQuery, leerQuery, leerQueryServidor);
   const searchParams = useMemo(() => new URLSearchParams(query), [query]);
 
@@ -61,8 +62,6 @@ export function useFiltros() {
     () => ({
       q: textoValido(searchParams.get(CLAVES.q)),
       marcas: marcasValidas(leerLista(searchParams, CLAVES.marcas)),
-      categorias: categoriasValidas(leerLista(searchParams, CLAVES.categorias)),
-      secciones: seccionesValidas(leerLista(searchParams, CLAVES.secciones)),
       modelo: textoValido(searchParams.get(CLAVES.modelo)),
       anio: anioValido(searchParams.get(CLAVES.anio)),
       orden: ordenValido(searchParams.get(CLAVES.orden)),
@@ -136,18 +135,16 @@ export function useFiltros() {
 
   const chips = useMemo<ChipActivo[]>(() => {
     const lista: ChipActivo[] = [];
-    const multi: Array<[ClaveMulti, string, Record<string, string>]> = [
-      ["marcas", "Marca", LABEL_MARCA],
-      ["categorias", "Categoría", LABEL_CATEGORIA],
-      ["secciones", "Sección", LABEL_SECCION],
+    const multi: Array<[ClaveMulti, string, (v: string) => string]> = [
+      ["marcas", "Marca", etiquetaMarca],
     ];
 
-    for (const [clave, grupo, etiquetas] of multi) {
+    for (const [clave, grupo, etiquetar] of multi) {
       for (const valor of filtros[clave] as string[]) {
         lista.push({
           clave: `${clave}-${valor}`,
           grupo,
-          valor: etiquetas[valor] ?? valor,
+          valor: etiquetar(valor),
           quitar: () => alternar(clave, valor),
         });
       }
@@ -177,7 +174,7 @@ export function useFiltros() {
       });
     }
     return lista;
-  }, [filtros, alternar, definir]);
+  }, [filtros, alternar, definir, etiquetaMarca]);
 
   /** Firma estable del estado, para disparar el skeleton solo cuando algo cambia. */
   const firma = useMemo(
@@ -185,8 +182,6 @@ export function useFiltros() {
       [
         filtros.q,
         filtros.marcas.join(),
-        filtros.categorias.join(),
-        filtros.secciones.join(),
         filtros.modelo,
         filtros.anio,
         filtros.orden,

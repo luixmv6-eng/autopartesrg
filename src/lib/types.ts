@@ -1,18 +1,13 @@
-export type MarcaId =
-  | "toyota"
-  | "chevrolet"
-  | "nissan"
-  | "suzuki"
-  | "kia"
-  | "hyundai"
-  | "ford"
-  | "mazda"
-  | "renault"
-  | "volkswagen"
-  | "mitsubishi"
-  | "isuzu"
-  | "lexus"
-  | "universal";
+/**
+ * Identificador de marca de vehículo.
+ *
+ * Es `string` y no una lista cerrada de literales porque las marcas se
+ * administran desde el panel: la empresa puede añadir una que hoy no existe. El
+ * conjunto válido vive en los datos (`marcas.json`), no en el código, así que el
+ * compilador ya no puede comprobarlo — de eso se encarga `validarProducto`
+ * contra la lista real en cada guardado.
+ */
+export type MarcaId = string;
 
 export type CategoriaId =
   | "motor"
@@ -61,8 +56,16 @@ export interface Producto {
   modelos: string[];
   anioDesde: number;
   anioHasta: number;
-  categoria: CategoriaId;
-  seccion: SeccionId;
+  /**
+   * Clasificación interna, opcional.
+   *
+   * Dejó de ser un filtro del catálogo y de pedirse en el panel: el negocio la
+   * consideró innecesaria para buscar un repuesto, que se localiza por marca,
+   * modelo y año. Los productos cargados antes conservan la suya y se sigue
+   * mostrando en la ficha; los nuevos simplemente no la llevan.
+   */
+  categoria?: CategoriaId;
+  seccion?: SeccionId;
   /** Ruta pública de la foto del repuesto. */
   imagen: string;
   destacado?: boolean;
@@ -72,8 +75,6 @@ export interface Producto {
 export interface EstadoFiltros {
   q: string;
   marcas: MarcaId[];
-  categorias: CategoriaId[];
-  secciones: SeccionId[];
   modelo: string;
   anio: number | null;
   orden: OrdenId;

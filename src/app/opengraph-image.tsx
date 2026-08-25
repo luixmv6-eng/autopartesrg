@@ -55,7 +55,7 @@ export default function OpengraphImage() {
             Encuentra la pieza exacta
           </div>
           <div style={{ marginTop: 26, fontSize: 30, color: "rgba(255,255,255,0.82)" }}>
-            Catálogo por número OEM, marca, modelo y año. Cotiza por WhatsApp.
+            Catálogo por marca, modelo y año. Cotiza por WhatsApp.
           </div>
         </div>
       </div>

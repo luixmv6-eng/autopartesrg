@@ -7,19 +7,25 @@ import { BadgeTecnico } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
 import { ButtonLink } from "@/components/ui/Button";
 import { relacionados } from "@/lib/productos";
-import { LABEL_CATEGORIA, LABEL_MARCA, LABEL_SECCION } from "@/lib/taxonomia";
+import { LABEL_CATEGORIA, LABEL_SECCION } from "@/lib/taxonomia";
+import { useMarcas } from "./ContextoMarcas";
 import type { Producto } from "@/lib/types";
 import { listarCompatibles, nombrarVehiculo, rangoAniosLegible } from "@/lib/utils";
 import { enlaceWhatsApp, mensajeCotizacion } from "@/lib/whatsapp";
 
 interface Props {
   producto: Producto | null;
+  /** Catálogo completo, para calcular los repuestos relacionados. */
+  productos: Producto[];
   onCerrar: () => void;
   onAbrirOtro: (producto: Producto) => void;
 }
 
-const mensajeInicial = (producto: Producto | null, modelo: string) =>
-  producto ? mensajeCotizacion(producto, modelo) : "";
+const mensajeInicial = (
+  producto: Producto | null,
+  modelo: string,
+  etiquetaMarca: (id: string) => string
+) => (producto ? mensajeCotizacion(producto, modelo, etiquetaMarca) : "");
 
 /**
  * Ficha técnica. Réplica de la pantalla "Detalle de Producto" de Stitch:
@@ -28,27 +34,28 @@ const mensajeInicial = (producto: Producto | null, modelo: string) =>
  * WhatsApp con vista previa del mensaje y repuestos relacionados. Sin precio:
  * el catálogo no publica importes, la cotización se resuelve por WhatsApp.
  */
-export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
+export function ProductoModal({ producto, productos, onCerrar, onAbrirOtro }: Props) {
+  const { etiqueta: etiquetaMarca } = useMarcas();
   const modeloInicial = producto?.modelos[0] ?? "";
   const [productoPrevio, setProductoPrevio] = useState(producto);
   const [modelo, setModelo] = useState(modeloInicial);
-  const [mensaje, setMensaje] = useState(() => mensajeInicial(producto, modeloInicial));
+  const [mensaje, setMensaje] = useState(() => mensajeInicial(producto, modeloInicial, etiquetaMarca));
   const [editando, setEditando] = useState(false);
 
   if (producto !== productoPrevio) {
     setProductoPrevio(producto);
     setModelo(modeloInicial);
-    setMensaje(mensajeInicial(producto, modeloInicial));
+    setMensaje(mensajeInicial(producto, modeloInicial, etiquetaMarca));
     setEditando(false);
   }
 
   const cambiarModelo = (valor: string) => {
     setModelo(valor);
-    if (!editando) setMensaje(mensajeInicial(producto, valor));
+    if (!editando) setMensaje(mensajeInicial(producto, valor, etiquetaMarca));
   };
 
   const alternarEdicion = () => {
-    if (editando) setMensaje(mensajeInicial(producto, modelo));
+    if (editando) setMensaje(mensajeInicial(producto, modelo, etiquetaMarca));
     setEditando((v) => !v);
   };
 
@@ -60,24 +67,28 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
     );
   }
 
-  const compatibles = listarCompatibles(producto);
+  const compatibles = listarCompatibles(producto, etiquetaMarca);
   const anios = rangoAniosLegible(producto.anioDesde, producto.anioHasta);
 
   // Sin condición ni disponibilidad: son datos de inventario que el catálogo
   // no puede sostener todavía. Se confirman por WhatsApp. La fila del número de
   // parte solo se dibuja cuando el repuesto trae referencia impresa.
   const especificaciones: Array<{ etiqueta: string; valor: React.ReactNode }> = [
-    { etiqueta: "Marca", valor: LABEL_MARCA[producto.marca] },
+    { etiqueta: "Marca", valor: etiquetaMarca(producto.marca) },
     { etiqueta: "Modelos", valor: producto.modelos.join(", ") },
     { etiqueta: "Años", valor: <span className="tabular">{anios}</span> },
-    { etiqueta: "Categoría", valor: LABEL_CATEGORIA[producto.categoria] },
-    { etiqueta: "Sección", valor: LABEL_SECCION[producto.seccion] },
+    // Categoría y sección son opcionales: los repuestos dados de alta después
+    // de retirarlas del panel no las llevan, y una fila vacía no informa.
+    ...(producto.categoria
+      ? [{ etiqueta: "Categoría", valor: LABEL_CATEGORIA[producto.categoria] }]
+      : []),
+    ...(producto.seccion ? [{ etiqueta: "Sección", valor: LABEL_SECCION[producto.seccion] }] : []),
     ...(producto.oem
       ? [{ etiqueta: "N.º de parte", valor: <span className="tabular">{producto.oem}</span> }]
       : []),
   ];
 
-  const sugeridos = relacionados(producto);
+  const sugeridos = relacionados(producto, productos);
 
   return (
     <Modal abierto onCerrar={onCerrar} labelledBy="ficha-titulo">
@@ -86,7 +97,7 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
           <span className="flex items-center gap-sm">
             <Icon name="verified" size={24} className="text-primary" />
             <span className="font-mono text-label-sm uppercase tracking-wider text-on-surface-variant md:text-label-technical">
-              Ficha Técnica de Autoparte
+              Ficha técnica de autoparte
             </span>
           </span>
           <button
@@ -110,7 +121,7 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
             <div className="group relative flex aspect-[4/3] max-h-[45svh] items-center justify-center bg-surface-container-low lg:sticky lg:top-0 lg:col-span-7 lg:aspect-auto lg:h-[clamp(24rem,38vw,35rem)] lg:max-h-none lg:self-start lg:border-r lg:border-outline-variant">
               <Image
                 src={producto.imagen}
-                alt={`${producto.nombre} para ${nombrarVehiculo(producto, producto.modelos[0])}`}
+                alt={`${producto.nombre} para ${nombrarVehiculo(producto, producto.modelos[0], etiquetaMarca)}`}
                 fill
                 sizes="(min-width: 1024px) 55vw, 100vw"
                 className="object-contain p-lg transition-transform duration-[var(--dur-panel)] motion-safe:group-hover:scale-105 lg:p-xl"
@@ -123,10 +134,22 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
             {/* Datos */}
             <div className="flex flex-col justify-between bg-surface-container-lowest p-md lg:col-span-5 lg:p-xl">
               <div className="flex flex-col gap-md">
+                {/* Miga de pan de clasificación. Sin categoría no hay nada que
+                    migar, y en su lugar se enseña la marca del vehículo. */}
                 <p className="flex items-center gap-xs font-mono text-label-technical text-on-surface-variant">
-                  <span>{LABEL_CATEGORIA[producto.categoria]}</span>
-                  <Icon name="chevron_right" size={16} />
-                  <span>{LABEL_SECCION[producto.seccion]}</span>
+                  {producto.categoria ? (
+                    <>
+                      <span>{LABEL_CATEGORIA[producto.categoria]}</span>
+                      {producto.seccion && (
+                        <>
+                          <Icon name="chevron_right" size={16} />
+                          <span>{LABEL_SECCION[producto.seccion]}</span>
+                        </>
+                      )}
+                    </>
+                  ) : (
+                    <span>{etiquetaMarca(producto.marca)}</span>
+                  )}
                 </p>
 
                 <div>
@@ -208,7 +231,7 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
                     >
                       {producto.modelos.map((m) => (
                         <option key={m} value={m}>
-                          {nombrarVehiculo(producto, m)}
+                          {nombrarVehiculo(producto, m, etiquetaMarca)}
                         </option>
                       ))}
                     </select>
@@ -265,7 +288,7 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
               <div className="mb-lg flex flex-wrap items-center justify-between gap-x-md gap-y-sm">
                 <h3 className="flex items-center gap-sm text-headline-md text-on-surface">
                   <Icon name="account_tree" size={24} className="shrink-0 text-primary" />
-                  Repuestos Relacionados
+                  Repuestos relacionados
                 </h3>
                 <button
                   type="button"
@@ -309,7 +332,7 @@ export function ProductoModal({ producto, onCerrar, onAbrirOtro }: Props) {
                         />
                       </span>
                       <span className="font-mono text-label-sm text-on-surface-variant">
-                        {rel.oem ? `OEM: ${rel.oem}` : LABEL_MARCA[rel.marca]}
+                        {rel.oem ? `OEM: ${rel.oem}` : etiquetaMarca(rel.marca)}
                       </span>
                       <span className="line-clamp-2 text-label-sm font-semibold leading-tight text-on-surface md:text-body-md">
                         {rel.nombre}

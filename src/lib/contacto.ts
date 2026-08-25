@@ -7,21 +7,43 @@
  * `LocalBusiness`, que exigen una ubicación real y penalizarían al declararla
  * en falso.
  *
- * Los valores son de ejemplo: sustitúyelos por los reales antes de publicar.
+ * Es la única fuente de estos datos: el pie de página, los metadatos y los
+ * datos estructurados los leen de aquí, así que se cambian en un solo sitio.
  */
 export const CONTACTO = {
   nombre: "Autopartes ERG",
   descripcion:
     "Catálogo digital de repuestos y autopartes con cotización directa por WhatsApp.",
-  correo: "ventas@autopartes-erg.com",
-  telefono: "+57 601 742 8890",
+  correo: "autoparteserg@gmail.com",
+  telefono: "+57 316 401 5318",
   /** Zona a la que se despacha. Sustituye a la dirección física. */
   cobertura: "Cobertura nacional en Colombia",
   pais: "CO",
+  /**
+   * Número de WhatsApp, solo dígitos y con código de país.
+   *
+   * Vive aquí y no en una variable de entorno porque es un dato público del
+   * negocio, igual que el teléfono: incrustado en el enlace `wa.me` que va en el
+   * HTML, no hay nada que ocultar. Tenerlo en el código evita el fallo silencioso
+   * de desplegar sin configurarlo, que dejaba el botón de cotizar sin destinatario
+   * en las cincuenta fichas.
+   */
+  whatsapp: "573164015318",
+  /**
+   * Solo las redes que existen de verdad.
+   *
+   * Añadir una obliga a añadir su glifo en `IconoRed`; el compilador lo exige,
+   * porque `RedId` sale de esta misma lista.
+   */
   redes: [
-    { id: "facebook", nombre: "Facebook", url: "https://facebook.com/autopartaserg" },
-    { id: "instagram", nombre: "Instagram", url: "https://instagram.com/autopartaserg" },
-    { id: "tiktok", nombre: "TikTok", url: "https://tiktok.com/@autopartaserg" },
+    {
+      id: "facebook",
+      nombre: "Facebook",
+      url: "https://www.facebook.com/profile.php?id=100089236563161",
+    },
+    // Sin el parámetro `igsi` del enlace para compartir: es un identificador de
+    // seguimiento de la sesión desde la que se copió, no forma parte del perfil.
+    { id: "instagram", nombre: "Instagram", url: "https://www.instagram.com/autoparteserg" },
   ],
 } as const;
 

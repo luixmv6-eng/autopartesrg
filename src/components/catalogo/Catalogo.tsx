@@ -6,13 +6,15 @@ import { Chip } from "@/components/ui/Chip";
 import { Icon } from "@/components/ui/Icon";
 import { Modal } from "@/components/ui/Modal";
 import { useFiltros } from "@/hooks/useFiltros";
-import { PRODUCTOS, filtrarProductos, rangoAnios } from "@/lib/productos";
+import { filtrarProductos, rangoAnios } from "@/lib/productos";
 import { ORDENES } from "@/lib/taxonomia";
 import type { OrdenId, Producto } from "@/lib/types";
 import { EstadoVacio } from "./EstadoVacio";
 import { FiltroSidebar } from "./FiltroSidebar";
 import { ProductoCard } from "./ProductoCard";
 import { ProductoModal } from "./ProductoModal";
+import { MarcasProvider, useMarcas } from "./ContextoMarcas";
+import type { Opcion } from "@/lib/taxonomia";
 
 /*
  * Múltiplo de 2, 3 y 4: la retícula usa esas tres cuentas de columna según la
@@ -20,10 +22,37 @@ import { ProductoModal } from "./ProductoModal";
  * 9 quedaba una fila coja en cuanto había 4 columnas.
  */
 const POR_PAGINA = 12;
-const ANIOS = rangoAnios();
 
-export function Catalogo() {
-  const { filtros, alternar, definir, limpiar, chips, firma } = useFiltros();
+interface Props {
+  /**
+   * El catálogo, leído del disco por la página en cada visita.
+   *
+   * Antes se importaba aquí como constante del módulo, lo que lo congelaba en el
+   * momento de compilar. Ahora llega por propiedad para que lo que edite el
+   * panel de administración se vea sin reconstruir el sitio.
+   */
+  productos: Producto[];
+  /** Marcas vivas, leídas de los datos. Alimentan el filtro y las etiquetas. */
+  marcas: Opcion<string>[];
+}
+
+/**
+ * Envoltorio: instala el contexto de marcas antes de montar el catálogo.
+ *
+ * Va aparte porque `useMarcas` solo puede leerse por debajo del proveedor, y el
+ * propio catálogo lo necesita para las etiquetas de los chips.
+ */
+export function Catalogo({ productos, marcas }: Props) {
+  return (
+    <MarcasProvider marcas={marcas}>
+      <CatalogoInterno productos={productos} />
+    </MarcasProvider>
+  );
+}
+
+function CatalogoInterno({ productos }: { productos: Producto[] }) {
+  const { etiqueta: etiquetaMarca } = useMarcas();
+  const { filtros, alternar, definir, limpiar, chips, firma } = useFiltros(etiquetaMarca);
 
   const [texto, setTexto] = useState(filtros.q);
   const [qPrevio, setQPrevio] = useState(filtros.q);
@@ -64,7 +93,8 @@ export function Catalogo() {
    */
   const esperandoBusqueda = texto.trim() !== filtros.q;
 
-  const resultados = useMemo(() => filtrarProductos(filtros), [filtros]);
+  const anios = useMemo(() => rangoAnios(productos), [productos]);
+  const resultados = useMemo(() => filtrarProductos(filtros, productos), [filtros, productos]);
   const mostrados = resultados.slice(0, visibles);
   const hayFiltros = chips.length > 0;
 
@@ -75,8 +105,8 @@ export function Catalogo() {
       definir={definir}
       limpiar={limpiar}
       hayFiltros={hayFiltros}
-      anios={ANIOS}
-      productos={PRODUCTOS}
+      anios={anios}
+      productos={productos}
     />
   );
 
@@ -88,12 +118,12 @@ export function Catalogo() {
           id="titulo-catalogo"
           className="display-tight max-w-[22ch] text-headline-lg text-on-surface"
         >
-          Todo el inventario, filtrado por compatibilidad
+          Todo el catálogo, filtrado por compatibilidad
         </h2>
         {/* La medida se fija en caracteres, no en rem: así sigue siendo cómoda
             de leer aunque el tamaño de letra base del usuario no sea 16px. */}
         <p className="mt-sm max-w-[60ch] text-body-md text-on-surface-variant">
-          Busca por repuesto, marca o modelo, o acota con los filtros de la izquierda.
+          Busca por nombre, marca o modelo, o acota con los filtros de la izquierda.
         </p>
       </div>
 
@@ -307,7 +337,7 @@ export function Catalogo() {
               Limpiar
             </Button>
             <Button className="w-2/3" onClick={() => setPanelFiltros(false)}>
-              Aplicar Filtros ({resultados.length})
+              Aplicar filtros ({resultados.length})
             </Button>
           </div>
         </div>
@@ -315,6 +345,7 @@ export function Catalogo() {
 
       <ProductoModal
         producto={seleccionado}
+        productos={productos}
         onCerrar={() => setSeleccionado(null)}
         onAbrirOtro={setSeleccionado}
       />

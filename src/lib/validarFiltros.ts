@@ -1,5 +1,5 @@
-import { CATEGORIAS, MARCAS, ORDENES, SECCIONES } from "./taxonomia";
-import type { CategoriaId, MarcaId, OrdenId, SeccionId } from "./types";
+import { ORDENES } from "./taxonomia";
+import type { MarcaId, OrdenId } from "./types";
 
 /**
  * Saneado de los parámetros de la URL.
@@ -20,27 +20,34 @@ const MAX_TEXTO = 80;
 const ANIO_MIN = 1950;
 const ANIO_MAX = new Date().getFullYear() + 2;
 
-const IDS_MARCA = new Set<string>(MARCAS.map((m) => m.id));
-const IDS_CATEGORIA = new Set<string>(CATEGORIAS.map((c) => c.id));
-const IDS_SECCION = new Set<string>(SECCIONES.map((s) => s.id));
 const IDS_ORDEN = new Set<string>(ORDENES.map((o) => o.id));
 
-/** Deja solo los valores que existen en la taxonomía, sin repetidos. */
-function filtrarConocidos<T extends string>(valores: string[], validos: Set<string>): T[] {
+/**
+ * Marcas: se sanean por forma, no contra una lista.
+ *
+ * Las demás taxonomías viven en el código y se comprueban contra su lista
+ * cerrada. Las marcas no: la empresa las añade desde el panel, así que el
+ * conjunto válido cambia y este módulo —que también corre en el navegador— no
+ * lo conoce.
+ *
+ * A cambio se acota la forma: minúsculas, dígitos y guiones, con un tope de
+ * longitud. Un valor inventado no puede inyectar nada; simplemente no coincide
+ * con ningún producto y el catálogo sale vacío, que es el comportamiento
+ * correcto para un filtro que no existe.
+ */
+const FORMA_MARCA = /^[a-z0-9-]{1,40}$/;
+
+export function marcasValidas(valores: string[]): MarcaId[] {
   const vistos = new Set<string>();
-  const salida: T[] = [];
+  const salida: MarcaId[] = [];
   for (const valor of valores) {
-    if (validos.has(valor) && !vistos.has(valor)) {
+    if (FORMA_MARCA.test(valor) && !vistos.has(valor)) {
       vistos.add(valor);
-      salida.push(valor as T);
+      salida.push(valor);
     }
   }
   return salida;
 }
-
-export const marcasValidas = (v: string[]) => filtrarConocidos<MarcaId>(v, IDS_MARCA);
-export const categoriasValidas = (v: string[]) => filtrarConocidos<CategoriaId>(v, IDS_CATEGORIA);
-export const seccionesValidas = (v: string[]) => filtrarConocidos<SeccionId>(v, IDS_SECCION);
 
 /**
  * ¿Es un carácter de control? Se comprueba por punto de código en vez de con

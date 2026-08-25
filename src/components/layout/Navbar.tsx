@@ -27,6 +27,8 @@ const SUB_NOSOTROS = [
   { href: "/nosotros#vision", label: "Visión" },
   { href: "/nosotros#mision", label: "Misión" },
   { href: "/nosotros#sobre-nosotros", label: "Sobre nosotros" },
+  { href: "/nosotros#garantias", label: "Garantías" },
+  { href: "/nosotros#envios", label: "Envíos" },
 ];
 
 export function Navbar() {
@@ -187,7 +189,7 @@ export function Navbar() {
             className="hidden items-center rounded-full border border-borde-campo bg-surface-container-low px-4 py-2 transition-[border-color,box-shadow] duration-[var(--dur-rapida)] focus-within:border-primary focus-within:ring-1 focus-within:ring-primary xl:flex"
           >
             <label htmlFor="buscador-nav" className="sr-only">
-              Buscar por número OEM o nombre de repuesto
+              Buscar repuesto por nombre, marca o modelo
             </label>
             <Icon name="search" size={20} className="mr-2 text-on-surface-variant" />
             <input
@@ -197,7 +199,7 @@ export function Navbar() {
               onChange={(e) => setTermino(e.target.value)}
               /* El marcador de posición cabe entero: uno más largo se cortaba
                  a media palabra, que es peor que decir menos. */
-              placeholder="Buscar por OEM o nombre"
+              placeholder="Buscar repuesto, marca o modelo"
               /* Anchura fija: al enfocarlo se ensanchaba animando `width`, que
                  recalcula el layout de toda la cabecera y empuja el logotipo.
                  El campo ya cabe entero, así que el ensanchado no aportaba
@@ -253,7 +255,7 @@ export function Navbar() {
           >
           <form onSubmit={buscar} role="search" className="contenedor flex gap-sm">
             <label htmlFor="buscador-compacto-input" className="sr-only">
-              Buscar por número OEM o nombre de repuesto
+              Buscar repuesto por nombre, marca o modelo
             </label>
             <div className="flex flex-grow items-center rounded-lg border border-borde-campo bg-surface-container-low px-sm">
               <Icon name="search" size={20} className="mr-sm text-on-surface-variant" />
@@ -263,7 +265,7 @@ export function Navbar() {
                 type="search"
                 value={termino}
                 onChange={(e) => setTermino(e.target.value)}
-                placeholder="Buscar por número OEM o palabra clave..."
+                placeholder="Buscar repuesto, marca o modelo…"
                 className="h-11 w-full border-none bg-transparent text-body-md text-on-surface outline-none placeholder:text-on-surface-variant"
               />
             </div>
