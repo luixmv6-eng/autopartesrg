@@ -22,13 +22,24 @@ export const DESTINOS = [
   { id: "contacto", label: "Contacto", href: "#contacto", ancla: true },
 ] as const;
 
+/*
+ * Cada enlace lleva la sección dos veces, y las dos hacen falta:
+ *
+ *   ?s=envios   lo lee el servidor y decide con qué pestaña sale el HTML;
+ *   #envios     lo usa el navegador para bajar solo hasta esa sección.
+ *
+ * El ancla sola no bastaba: nunca llega al servidor, así que la página se
+ * pintaba siempre en «Visión» y la sección pedida solo aparecía cuando React
+ * terminaba de hidratar. En un móvil lento eso eran cuatro segundos mirando
+ * la pestaña equivocada.
+ */
 /** El orden lo fija el encargo: Visión, Misión, Sobre nosotros. */
 const SUB_NOSOTROS = [
-  { href: "/nosotros#vision", label: "Visión" },
-  { href: "/nosotros#mision", label: "Misión" },
-  { href: "/nosotros#sobre-nosotros", label: "Sobre nosotros" },
-  { href: "/nosotros#garantias", label: "Garantías" },
-  { href: "/nosotros#envios", label: "Envíos" },
+  { href: "/nosotros?s=vision#vision", label: "Visión" },
+  { href: "/nosotros?s=mision#mision", label: "Misión" },
+  { href: "/nosotros?s=sobre-nosotros#sobre-nosotros", label: "Sobre nosotros" },
+  { href: "/nosotros?s=garantias#garantias", label: "Garantías" },
+  { href: "/nosotros?s=envios#envios", label: "Envíos" },
 ];
 
 export function Navbar() {
@@ -120,7 +131,7 @@ export function Navbar() {
                en un objetivo táctil de 40, por debajo del mínimo de 44. */
             className="flex min-h-11 shrink-0 items-center"
           >
-            <Logo prioridad className="h-10 xs:h-[2.75rem] lg:h-[3.75rem]" />
+            <Logo prioridad className="h-12 xs:h-14 lg:h-[4.5rem]" />
           </Link>
 
           <nav aria-label="Navegación principal" className="hidden lg:block xl:ml-lg">
@@ -221,9 +232,18 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Progreso de lectura. Va atado al scroll del documento por CSS, sin
-          JavaScript ni listeners; donde no hay soporte simplemente no aparece. */}
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 overflow-hidden">
+      {/*
+       * Progreso de lectura. Va atado al scroll del documento por CSS, sin
+       * JavaScript ni listeners; donde no hay soporte simplemente no aparece.
+       *
+       * `pointer-events-none` no es adorno. Esta franja mide dos píxeles y vive
+       * en el borde inferior de la cabecera, que es exactamente por donde cae el
+       * primer elemento del desplegable de «Nosotros»: el centro de «Visión»
+       * aterrizaba dentro de ella y la barra se comía el clic, así que ese
+       * enlace no respondía. Al ser decorativa y `aria-hidden`, no tiene ningún
+       * motivo para recibir clics.
+       */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-0.5 overflow-hidden">
         <div className="barra-progreso h-full w-full origin-left scale-x-0 bg-gradient-to-r from-primary to-accent" />
       </div>
 

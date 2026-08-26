@@ -224,22 +224,36 @@ function Parrafos({ textos }: { textos: string[] }) {
   );
 }
 
-export function Nosotros() {
+/** ¿Ese texto nombra a una de las pestañas? */
+function esPestana(id: string | undefined): id is string {
+  return Boolean(id) && PESTANAS.some((p) => p.id === id);
+}
+
+export function Nosotros({ seccionInicial }: { seccionInicial?: string }) {
   const refs = useRef<Record<string, HTMLButtonElement | null>>({});
 
-  // Los enlaces del menú (#sobre-nosotros, #mision, #vision…) activan su pestaña.
+  /*
+   * La pestaña de partida la decide el servidor, a partir de `?s=` de la
+   * dirección. Así el HTML ya sale con la sección correcta y no hay que
+   * esperar a que React hidrate para verla —que es lo que hacía que en un
+   * teléfono lento se viera «Visión» durante unos segundos—.
+   */
+  const inicial = esPestana(seccionInicial) ? seccionInicial : PESTANAS[0].id;
+
+  // El ancla se sigue atendiendo: cubre los enlaces antiguos que solo llevan
+  // `#seccion` y los saltos entre secciones sin recargar la página.
   const hash = useSyncExternalStore(
     suscribirAlHash,
     () => window.location.hash.replace("#", ""),
     () => ""
   );
 
-  const [activa, setActiva] = useState(PESTANAS[0].id);
-  const [hashPrevio, setHashPrevio] = useState("");
+  const [activa, setActiva] = useState(inicial);
+  const [hashPrevio, setHashPrevio] = useState(inicial);
 
   if (hash !== hashPrevio) {
     setHashPrevio(hash);
-    if (PESTANAS.some((p) => p.id === hash)) setActiva(hash);
+    if (esPestana(hash)) setActiva(hash);
   }
 
   const alPulsarTecla = (evento: React.KeyboardEvent) => {

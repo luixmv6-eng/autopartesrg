@@ -2,8 +2,14 @@ import Image from "next/image";
 import { CONTACTO } from "@/lib/contacto";
 import { cn } from "@/lib/utils";
 
-/** Proporción del archivo original (325 x 277). */
-const RELACION = 325 / 277;
+/**
+ * Proporción del archivo original (552 x 600).
+ *
+ * El logotipo pasó a ser más alto que ancho. Antes era apaisado (325 x 277),
+ * así que a igual alto ahora ocupa menos anchura: por eso los tamaños de la
+ * cabecera y del pie subieron, para que la marca pese lo mismo en pantalla.
+ */
+const RELACION = 552 / 600;
 
 /**
  * Logotipo de la empresa.
@@ -14,10 +20,12 @@ const RELACION = 325 / 277;
  *
  * `alto` es el tamaño **intrínseco** que se pide al optimizador, y es el mismo
  * en toda la web a propósito: el tamaño **mostrado** lo controla `className`.
- * Con dos valores distintos (60 en la cabecera, 88 en el footer) el optimizador
- * generaba dos AVIF diferentes y el navegador se bajaba los dos, 5 KB para
- * enseñar una vez la misma imagen. Con uno solo hay una descarga y un acierto
- * de caché en la segunda aparición.
+ * Con un valor distinto por sitio el optimizador generaba dos AVIF diferentes y
+ * el navegador se bajaba los dos, para enseñar una vez la misma imagen. Con uno
+ * solo hay una descarga y un acierto de caché en la segunda aparición.
+ *
+ * El valor está por encima del mayor tamaño mostrado (128 px en el pie) para
+ * que en pantallas de alta densidad siga viéndose nítido.
  *
  * Antes de eso había además dos instancias alternadas con `hidden`/`block`: el
  * navegador descargaba las dos y ambas iban con `priority`, así que la cabecera
@@ -28,7 +36,7 @@ const RELACION = 325 / 277;
  */
 export function Logo({
   className,
-  alto = 88,
+  alto = 200,
   prioridad = false,
 }: {
   className?: string;

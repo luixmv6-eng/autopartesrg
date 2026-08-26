@@ -9,11 +9,11 @@ const NAVEGACION = [
   { href: "/#inicio", label: "Inicio" },
   { href: "/#catalogo", label: "Catálogo" },
   { href: "/nosotros", label: "Nosotros" },
-  { href: "/nosotros#vision", label: "Visión" },
-  { href: "/nosotros#mision", label: "Misión" },
-  { href: "/nosotros#sobre-nosotros", label: "Historia" },
-  { href: "/nosotros#garantias", label: "Garantías" },
-  { href: "/nosotros#envios", label: "Envíos" },
+  { href: "/nosotros?s=vision#vision", label: "Visión" },
+  { href: "/nosotros?s=mision#mision", label: "Misión" },
+  { href: "/nosotros?s=sobre-nosotros#sobre-nosotros", label: "Historia" },
+  { href: "/nosotros?s=garantias#garantias", label: "Garantías" },
+  { href: "/nosotros?s=envios#envios", label: "Envíos" },
 ];
 
 /**
@@ -120,7 +120,7 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-xl sm:grid-cols-2 lg:grid-cols-[1.5fr_0.9fr_0.9fr_1.3fr] lg:gap-lg 2xl:gap-xl">
           {/* Identidad y llamada a la acción */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Logo className="mb-md h-16 sm:h-[5.5rem]" />
+            <Logo className="mb-md h-[7.5rem] sm:h-40" />
             <p className="mb-lg max-w-[52ch] text-label-technical leading-relaxed text-on-panel-suave">
               Catálogo digital de repuestos con compatibilidad verificada por marca, modelo y año.
               Cotiza por WhatsApp y te confirmamos disponibilidad el mismo día.
