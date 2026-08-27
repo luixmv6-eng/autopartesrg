@@ -32,6 +32,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# La plantilla sí se versiona: no lleva ningún valor real (el hash del panel es
+# un marcador y el secreto de sesión va vacío) y el README manda copiarla con
+# `cp .env.example .env.local`, que sin esto falla en un clon recién hecho.
+!.env.example
 
 # vercel
 .vercel

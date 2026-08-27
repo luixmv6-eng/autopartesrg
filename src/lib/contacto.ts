@@ -51,6 +51,21 @@ export const CONTACTO = {
 export type RedId = (typeof CONTACTO.redes)[number]["id"];
 
 /**
+ * Dominio definitivo del negocio, registrado el 2026-08-27.
+ *
+ * Es el respaldo de `NEXT_PUBLIC_SITE_URL` y vive en un único sitio a
+ * propósito: antes había dos copias literales aquí y otra variante distinta en
+ * `.env.example`, y ninguna de ellas era el dominio real. Con un solo valor no
+ * pueden desincronizarse.
+ *
+ * Sin `www` y en `https`: es la forma canónica que se declara en el canonical,
+ * el sitemap y `robots.txt`. Si algún día se sirve también `www`, tiene que
+ * redirigir aquí con 301 y no responder por su cuenta: dos dominios sirviendo
+ * el mismo catálogo reparten la señal entre los dos.
+ */
+const SITE_URL_POR_DEFECTO = "https://autopartesergsas.com";
+
+/**
  * URL pública del sitio. Se usa en metadatos, sitemap y datos estructurados.
  *
  * Se normaliza a origen sin barra final y se valida el protocolo: una variable
@@ -59,7 +74,7 @@ export type RedId = (typeof CONTACTO.redes)[number]["id"];
  */
 function resolverSiteUrl(): string {
   const bruto = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (!bruto) return "https://autopartes-erg.com";
+  if (!bruto) return SITE_URL_POR_DEFECTO;
   try {
     const url = new URL(bruto);
     if (url.protocol !== "https:" && url.protocol !== "http:") {
@@ -70,7 +85,7 @@ function resolverSiteUrl(): string {
     if (process.env.NODE_ENV !== "production") {
       console.warn(`NEXT_PUBLIC_SITE_URL no es una URL válida: ${bruto}`);
     }
-    return "https://autopartes-erg.com";
+    return SITE_URL_POR_DEFECTO;
   }
 }
 

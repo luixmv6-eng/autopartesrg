@@ -42,7 +42,7 @@ Plantilla en `.env.example`.
 | Variable | Obligatoria | Descripción |
 |---|---|---|
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Sí | Número de destino, **solo dígitos y con código de país**, sin `+` ni espacios. Ejemplo para Colombia: `573001234567`. Si se deja vacío, los enlaces abren WhatsApp con el mensaje listo pero sin destinatario. |
-| `NEXT_PUBLIC_SITE_URL` | Recomendada | URL pública. Alimenta los metadatos canónicos, Open Graph, `sitemap.xml` y `robots.txt`. |
+| `NEXT_PUBLIC_SITE_URL` | Recomendada | URL pública. Alimenta los metadatos canónicos, Open Graph, `sitemap.xml` y `robots.txt`. El dominio definitivo es `https://autopartesergsas.com`, sin `www` y sin barra final; si se deja vacía se usa ese mismo valor desde `src/lib/contacto.ts`. En local, `http://localhost:3000`. |
 
 Llevan el prefijo `NEXT_PUBLIC_` porque se leen en el navegador. Al desplegar hay
 que registrarlas también en el panel del hosting.
@@ -260,8 +260,30 @@ scripts/                  generadores de imágenes y del subconjunto de iconos
    `NEXT_PUBLIC_SITE_URL` para Production, Preview y Development.
 5. Despliega. Cada push a la rama principal publica una versión.
 
-Tras el primer despliegue conviene actualizar `NEXT_PUBLIC_SITE_URL` al dominio
-definitivo y volver a desplegar, para que los canónicos y el sitemap apunten bien.
+`NEXT_PUBLIC_SITE_URL` debe valer `https://autopartesergsas.com` desde el primer
+despliegue en el dominio. Si se publica con otro valor, los canónicos, el
+sitemap y `robots.txt` apuntan a donde no es, y corregirlo después de que Google
+haya indexado cuesta semanas.
+
+### Dominio y puesta en marcha del SEO
+
+El dominio es **`autopartesergsas.com`**, sin `www`. Una vez apuntado el DNS al
+hosting:
+
+1. `NEXT_PUBLIC_SITE_URL=https://autopartesergsas.com` en las variables del
+   hosting, y volver a desplegar.
+2. Comprobar que `https://autopartesergsas.com/robots.txt` y `/sitemap.xml`
+   responden y nombran el dominio, no `localhost`.
+3. Verificar el sitio en [Google Search Console](https://search.google.com/search-console).
+   Lo más cómodo es el método **Dominio**, con un registro `TXT` en el DNS: vale
+   para `www` y para los subdominios a la vez y no toca el código.
+4. Enviar `https://autopartesergsas.com/sitemap.xml` en Search Console >
+   *Sitemaps*.
+5. Poner el dominio en las fichas de Facebook e Instagram del negocio: son los
+   `sameAs` de los datos estructurados y ayudan a asociar la marca al sitio.
+
+El `www` lo redirige Next al dominio sin prefijo (`redirects()` en
+`next.config.ts`), por si el registrador crea el CNAME por su cuenta.
 
 ### Otro hosting con Node
 

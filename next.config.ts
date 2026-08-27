@@ -111,6 +111,32 @@ const nextConfig: NextConfig = {
     remotePatterns: [],
   },
 
+  /**
+   * `www` redirige al dominio sin prefijo, que es el canónico.
+   *
+   * Si el DNS acaba resolviendo las dos formas —lo habitual, porque el
+   * registrador suele crear el CNAME de `www` por su cuenta—, el mismo catálogo
+   * respondería en dos dominios distintos y la señal de posicionamiento se
+   * repartiría entre ambos. El `canonical` de cada página ya apunta al apex,
+   * pero es una sugerencia; el 308 lo zanja antes de que se sirva nada.
+   *
+   * Se conserva la ruta y la query: quien llegue a `www.…/nosotros?s=envios`
+   * aterriza en esa misma pestaña.
+   *
+   * Si el hosting ya hace esta redirección, esta regla no llega a dispararse:
+   * la petición nunca alcanza a Next con el host `www`.
+   */
+  async redirects() {
+    return [
+      {
+        source: "/:ruta*",
+        has: [{ type: "host", value: "www.autopartesergsas.com" }],
+        destination: "https://autopartesergsas.com/:ruta*",
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       { source: "/:path*", headers: CABECERAS_SEGURIDAD },
