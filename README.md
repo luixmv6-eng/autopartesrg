@@ -190,7 +190,7 @@ Para poner material real:
 
 Después actualiza la ruta en `src/data/productos.json` (productos) y las
 extensiones en `Hero.tsx` y `Nosotros.tsx`. Cuando no queden SVG puedes poner
-`dangerouslyAllowSVG: false` en `next.config.ts`.
+`dangerouslyAllowSVG: false` en `next.config.mjs`.
 
 ---
 
@@ -283,7 +283,7 @@ hosting:
    `sameAs` de los datos estructurados y ayudan a asociar la marca al sitio.
 
 El `www` lo redirige Next al dominio sin prefijo (`redirects()` en
-`next.config.ts`), por si el registrador crea el CNAME por su cuenta.
+`next.config.mjs`), por si el registrador crea el CNAME por su cuenta.
 
 ### Otro hosting con Node
 
@@ -432,7 +432,7 @@ Cada página tiene **un solo `<h1>`**, jerarquía de encabezados sin saltos y
 
 ## Seguridad
 
-Cabeceras aplicadas a todas las rutas desde `next.config.ts`. La política
+Cabeceras aplicadas a todas las rutas desde `next.config.mjs`. La política
 **distingue entorno**: producción va cerrada, desarrollo abre lo justo para que
 las herramientas de Next funcionen.
 

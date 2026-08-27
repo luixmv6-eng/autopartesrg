@@ -1,4 +1,23 @@
-import type { NextConfig } from "next";
+/*
+ * Este archivo es `.mjs`, no `.ts`, y no es una preferencia de estilo.
+ *
+ * Para leer un `next.config.ts` Next tiene que compilarlo antes con SWC, que es
+ * un binario nativo. En el hosting compartido de Hostinger ese binario no carga
+ * —el servidor trae una glibc anterior a la 2.29—, Next se repliega a la
+ * versión WebAssembly y la compilación del config se queda a medias:
+ *
+ *   Failed to load next.config.ts
+ *   Cannot find module '.../<hash>.next.config'
+ *
+ * Un config en JavaScript no necesita compilarse: Node lo importa tal cual, así
+ * que el problema desaparece de raíz. Los tipos no se pierden, viajan en el
+ * `@type` de JSDoc de abajo y el editor los sigue comprobando.
+ *
+ * Por el mismo motivo el script `build` lleva `--webpack`: las vinculaciones
+ * WASM no soportan Turbopack, que es el empaquetador por defecto desde Next 16.
+ * Si algún día el sitio se muda a un servidor con glibc moderna, se pueden
+ * revertir las dos cosas y el build vuelve a ser bastante más rápido.
+ */
 
 const EN_DESARROLLO = process.env.NODE_ENV === "development";
 
@@ -25,7 +44,7 @@ const EN_DESARROLLO = process.env.NODE_ENV === "development";
  * Todo lo demás queda cerrado en ambos entornos: sin `object-src`, sin marcos,
  * sin base arbitraria y sin destinos de formulario fuera del propio origen.
  */
-function construirCSP(): string {
+function construirCSP() {
   const script = ["'self'", "'unsafe-inline'"];
   const connect = ["'self'"];
 
@@ -82,7 +101,8 @@ if (!EN_DESARROLLO) {
   });
 }
 
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   // No anunciar el framework ni su versión.
   poweredByHeader: false,
   reactStrictMode: true,
