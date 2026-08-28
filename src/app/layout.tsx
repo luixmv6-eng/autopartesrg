@@ -48,9 +48,21 @@ const materialSymbols = localFont({
   variable: "--font-material-symbols",
 });
 
-const TITULO = "Catálogo de repuestos y autopartes por marca y modelo";
+/*
+ * Título y descripción: lo que Google enseña en sus resultados, no lo que se
+ * lee en la página. Ningún texto de la web depende de estas dos constantes.
+ *
+ * Llevan «Colombia» y «carros» a propósito. El título es la señal de
+ * posicionamiento más fuerte que tiene una página, y antes no nombraba ni el
+ * país ni la palabra con la que la gente busca de verdad: nadie escribe
+ * «autopartes por marca y modelo», escribe «repuestos de carros en Colombia».
+ *
+ * El largo está medido para que Google no lo corte: 67 caracteres con el nombre
+ * de la marca incluido, y 155 la descripción. Pasarse hace que termine en «…».
+ */
+const TITULO = "Repuestos de carros en Colombia por marca y modelo";
 const DESCRIPCION =
-  "Busca repuestos por marca, modelo y año. Verifica la compatibilidad con tu vehículo y cotiza al instante por WhatsApp con Autopartes ERG.";
+  "Catálogo de autopartes y repuestos para carros en Colombia. Busca por marca, modelo y año, verifica la compatibilidad con tu vehículo y cotiza por WhatsApp.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

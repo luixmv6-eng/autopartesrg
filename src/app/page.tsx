@@ -2,6 +2,8 @@ import { Hero } from "@/components/sections/Hero";
 import { Catalogo } from "@/components/catalogo/Catalogo";
 import { leerCatalogo, leerMarcas } from "@/lib/admin/almacen";
 import { MARCAS_INICIALES, type Opcion } from "@/lib/taxonomia";
+import { serializarJsonLd } from "@/lib/jsonld";
+import { catalogoSchema } from "@/lib/seo";
 import type { Producto } from "@/lib/types";
 
 /**
@@ -46,8 +48,31 @@ export default async function Home() {
     marcas = MARCAS_INICIALES;
   }
 
+  /*
+   * Las etiquetas de marca salen de los datos, no del código, porque la empresa
+   * puede añadir marcas desde el panel. Un `Map` en vez de un `find` por
+   * producto: son cincuenta productos por unas quince marcas y así no se
+   * recorre la lista una vez por cada uno.
+   */
+  const etiquetas = new Map(marcas.map((m) => [m.id, m.label]));
+  const etiquetaMarca = (id: string) => etiquetas.get(id) ?? id;
+
   return (
     <>
+      {/*
+       * El catálogo como datos estructurados. No pinta nada: le dice a Google
+       * que cada tarjeta es un repuesto, de qué marca y para qué vehículos y
+       * años, que es como se busca una pieza. Solo cuando hay algo que declarar
+       * — con el catálogo vacío no se emite una lista de cero elementos.
+       */}
+      {productos.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: serializarJsonLd(catalogoSchema(productos, etiquetaMarca)),
+          }}
+        />
+      )}
       <Hero />
       <Catalogo productos={productos} marcas={marcas} />
     </>
