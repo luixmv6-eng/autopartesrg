@@ -1,5 +1,5 @@
 import { CONTACTO, SITE_URL } from "./contacto";
-import { nombrarVehiculo, rangoAniosLegible, type EtiquetaMarca } from "./utils";
+import { listarCompatibles, rangoAniosLegible, type EtiquetaMarca } from "./utils";
 import type { Producto } from "./types";
 
 /**
@@ -94,27 +94,29 @@ export function migasSchema(items: Array<{ nombre: string; ruta: string }>) {
  * El catálogo completo como datos estructurados.
  *
  * Los cincuenta repuestos ya viajan en el HTML, así que Google puede leerlos;
- * lo que no puede es deducir qué es cada cosa. Con esto pasa de ver una lista de
- * frases a saber que cada tarjeta es un **repuesto**, de qué **marca**, para qué
- * **vehículos** y con qué **años** — que es exactamente como busca la gente
- * («bomba de agua Spark GT 2015») y lo que hoy no está declarado en ninguna
- * parte.
+ * lo que no puede es deducir que la portada es un catálogo ni qué hay en cada
+ * entrada. Con esto pasa de ver una lista de frases a ver una lista declarada,
+ * con el nombre, la foto y la compatibilidad de cada repuesto.
  *
- * ## Por qué no lleva `offers`
+ * ## Por qué las entradas ya no son `Product`
  *
- * `offers` es lo que habilita los resultados enriquecidos de producto (el
- * precio y la disponibilidad bajo el enlace). Este catálogo no publica precio
- * ni stock a propósito —es un índice de compatibilidad, no un inventario— y
- * declarar precios inventados en el marcado es motivo de acción manual. Se
- * omite, y con ello se renuncia al adorno del precio en el resultado, no a que
- * Google entienda el producto.
+ * Lo fueron, y Search Console lo marcó como error crítico de «Fragmentos de
+ * productos»: *debe especificarse `offers`, `review` o `aggregateRating`*.
+ * Ninguno de los tres se puede declarar aquí sin mentir: el catálogo no publica
+ * precio ni disponibilidad a propósito —es un índice de compatibilidad, no un
+ * inventario— y no hay reseñas. `offers` sin `price` tampoco vale: cambia un
+ * error por otro, y precios o valoraciones inventados en el marcado son motivo
+ * de acción manual.
  *
- * ## Por qué los productos no llevan `url`
+ * Sin ninguno de los tres, el repuesto nunca podía salir como resultado
+ * enriquecido de producto. El tipo `Product` no ganaba nada, y a cambio dejaba
+ * cincuenta elementos inválidos en el informe. Los datos siguen aquí, ahora en
+ * las propiedades que `ListItem` sí admite, que es además el marcado que Google
+ * pide para una página de listado.
  *
- * No existe una página por repuesto: la ficha se abre en un modal sobre la
- * portada. Apuntar los cincuenta a la misma URL sería declarar cincuenta
- * productos en la misma dirección, que es peor que no declarar ninguna. El día
- * que cada repuesto tenga ruta propia, este es el campo que hay que añadir.
+ * El día que el negocio publique precio y disponibilidad reales por repuesto,
+ * y cada uno tenga su propia URL, esto vuelve a ser `Product` con su `offers`
+ * — y entonces sí opta al resultado enriquecido.
  */
 export function catalogoSchema(
   productos: Producto[],
@@ -130,37 +132,27 @@ export function catalogoSchema(
     itemListElement: productos.map((producto, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      item: {
-        "@type": "Product",
-        name: producto.nombre,
-        description: producto.descripcion,
-        image: `${SITE_URL}${producto.imagen}`,
-        brand: { "@type": "Brand", name: etiquetaMarca(producto.marca) },
-        // El OEM solo se declara donde consta de verdad. `mpn` es el campo que
-        // los buscadores cruzan con el número de parte del fabricante.
-        ...(producto.oem ? { mpn: producto.oem } : {}),
-        /*
-         * La compatibilidad, que es el dato por el que se busca un repuesto.
-         * `isAccessoryOrSparePartFor` es el campo que schema.org reserva
-         * justamente para «esta pieza sirve para este vehículo».
-         */
-        isAccessoryOrSparePartFor: producto.modelos.map((modelo) => ({
-          "@type": "Vehicle",
-          name: nombrarVehiculo(producto, modelo, etiquetaMarca),
-          ...(producto.marca !== "universal"
-            ? { brand: { "@type": "Brand", name: etiquetaMarca(producto.marca) } }
-            : {}),
-        })),
-        // El rango de años no cabe en ningún campo propio de `Vehicle`, que
-        // espera una fecha única. Como propiedad adicional sí queda declarado.
-        additionalProperty: [
-          {
-            "@type": "PropertyValue",
-            name: "Años compatibles",
-            value: rangoAniosLegible(producto.anioDesde, producto.anioHasta),
-          },
-        ],
-      },
+      name: producto.nombre,
+      description: descripcionListada(producto, etiquetaMarca),
+      image: `${SITE_URL}${producto.imagen}`,
     })),
   };
+}
+
+/**
+ * Descripción de una entrada del listado, con la compatibilidad dentro.
+ *
+ * `ListItem` no tiene dónde colgar la marca, el OEM ni los vehículos: esas son
+ * propiedades de `Product`. Así que el dato por el que de verdad se busca una
+ * pieza —«bomba de agua Spark GT 2015»— se escribe en la descripción, que sí
+ * admite. No añade nada nuevo: es la misma información que ya muestra la ficha.
+ */
+function descripcionListada(
+  producto: Producto,
+  etiquetaMarca: EtiquetaMarca
+): string {
+  const anios = rangoAniosLegible(producto.anioDesde, producto.anioHasta);
+  const compatibilidad = `Compatible con ${listarCompatibles(producto, etiquetaMarca)} (${anios}).`;
+  const oem = producto.oem ? ` Referencia OEM ${producto.oem}.` : "";
+  return `${producto.descripcion} ${compatibilidad}${oem}`;
 }

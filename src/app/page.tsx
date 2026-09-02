@@ -61,9 +61,10 @@ export default async function Home() {
     <>
       {/*
        * El catálogo como datos estructurados. No pinta nada: le dice a Google
-       * que cada tarjeta es un repuesto, de qué marca y para qué vehículos y
-       * años, que es como se busca una pieza. Solo cuando hay algo que declarar
-       * — con el catálogo vacío no se emite una lista de cero elementos.
+       * que esto es un listado de repuestos y qué hay en cada entrada —nombre,
+       * foto y compatibilidad—, que es como se busca una pieza. Solo cuando hay
+       * algo que declarar: con el catálogo vacío no se emite una lista de cero
+       * elementos.
        */}
       {productos.length > 0 && (
         <script
