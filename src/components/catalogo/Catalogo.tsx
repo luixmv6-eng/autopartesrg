@@ -1,18 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Chip } from "@/components/ui/Chip";
 import { Icon } from "@/components/ui/Icon";
 import { Modal } from "@/components/ui/Modal";
 import { useFiltros } from "@/hooks/useFiltros";
 import { filtrarProductos, rangoAnios } from "@/lib/productos";
+import { RUTA_CATALOGO } from "@/lib/rutas";
 import { ORDENES } from "@/lib/taxonomia";
 import type { OrdenId, Producto } from "@/lib/types";
 import { EstadoVacio } from "./EstadoVacio";
 import { FiltroSidebar } from "./FiltroSidebar";
 import { ProductoCard } from "./ProductoCard";
-import { ProductoModal } from "./ProductoModal";
 import { MarcasProvider, useMarcas } from "./ContextoMarcas";
 import type { Opcion } from "@/lib/taxonomia";
 
@@ -59,7 +60,6 @@ function CatalogoInterno({ productos }: { productos: Producto[] }) {
   const [visibles, setVisibles] = useState(POR_PAGINA);
   const [firmaPrevia, setFirmaPrevia] = useState(firma);
   const [panelFiltros, setPanelFiltros] = useState(false);
-  const [seleccionado, setSeleccionado] = useState<Producto | null>(null);
 
   if (filtros.q !== qPrevio) {
     setQPrevio(filtros.q);
@@ -125,6 +125,22 @@ function CatalogoInterno({ productos }: { productos: Producto[] }) {
         <p className="mt-sm max-w-[60ch] text-body-md text-on-surface-variant">
           Busca por nombre, marca o modelo, o acota con los filtros de la izquierda.
         </p>
+        {/*
+         * Enlace al índice del catálogo.
+         *
+         * Esta retícula carga de doce en doce y se pinta en el navegador: quien
+         * rastrea el HTML solo ve las doce primeras tarjetas y no tiene por dónde
+         * seguir. `/repuestos` es la misma lista en HTML plano y completa, así que
+         * este enlace es el camino por el que se alcanzan las fichas que quedan
+         * más allá del primer bloque.
+         */}
+        <Link
+          href={RUTA_CATALOGO}
+          className="mt-md inline-flex items-center gap-xs font-mono text-label-technical text-primary hover:underline"
+        >
+          <Icon name="category" size={18} />
+          Ver el índice completo de repuestos
+        </Link>
       </div>
 
       <div className="contenedor flex flex-col gap-lg py-lg lg:flex-row lg:gap-xl lg:py-xl">
@@ -289,7 +305,6 @@ function CatalogoInterno({ productos }: { productos: Producto[] }) {
                     producto={producto}
                     indice={i}
                     prioridad={i < 4}
-                    onAbrir={setSeleccionado}
                   />
                 ))}
               </div>
@@ -343,12 +358,6 @@ function CatalogoInterno({ productos }: { productos: Producto[] }) {
         </div>
       </Modal>
 
-      <ProductoModal
-        producto={seleccionado}
-        productos={productos}
-        onCerrar={() => setSeleccionado(null)}
-        onAbrirOtro={setSeleccionado}
-      />
     </section>
   );
 }

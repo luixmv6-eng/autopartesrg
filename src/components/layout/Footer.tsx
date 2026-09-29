@@ -2,12 +2,13 @@ import { Logo } from "./Logo";
 import { IconoRed } from "./IconoRed";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { CONTACTO } from "@/lib/contacto";
+import { RUTA_CATALOGO, rutaMarca } from "@/lib/rutas";
 import { MENSAJE_GENERICO, enlaceWhatsApp } from "@/lib/whatsapp";
 import { MARCAS_INICIALES } from "@/lib/taxonomia";
 
 const NAVEGACION = [
   { href: "/#inicio", label: "Inicio" },
-  { href: "/#catalogo", label: "Catálogo" },
+  { href: RUTA_CATALOGO, label: "Catálogo" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/nosotros?s=vision#vision", label: "Visión" },
   { href: "/nosotros?s=mision#mision", label: "Misión" },
@@ -17,13 +18,19 @@ const NAVEGACION = [
 ];
 
 /**
- * Marcas de mayor rotación, como atajos al catálogo ya filtrado.
+ * Marcas de mayor rotación, como atajos a su página de catálogo.
  *
  * Antes eran categorías, pero dejaron de ser un filtro del catálogo: un enlace
  * a `/?cat=frenos` habría llevado a una portada sin filtrar, que es peor que no
  * ofrecerlo. Se toman de la lista de arranque y no del archivo de marcas vivas
  * a propósito: el pie aparece en todas las páginas y no merece una lectura de
  * disco por visita para seis enlaces que no cambian.
+ *
+ * Apuntan a `/repuestos/marca/<id>` y ya no a `/?marca=<id>#catalogo`. La vista
+ * filtrada de la portada declara la portada como canonical —es decir, le pide a
+ * Google que no la indexe—, así que esos seis enlaces del pie, repetidos en todas
+ * las páginas del sitio, no llevaban a ningún sitio indexable. Ahora apuntan a
+ * seis páginas reales, cada una con su título y su listado de piezas.
  */
 const ATAJOS = MARCAS_INICIALES.filter((m) =>
   ["chevrolet", "toyota", "nissan", "suzuki", "kia", "ford"].includes(m.id)
@@ -158,7 +165,7 @@ export function Footer() {
           <ColumnaEnlaces
             id="footer-catalogo"
             titulo="Catálogo"
-            enlaces={ATAJOS.map((m) => ({ href: `/?marca=${m.id}#catalogo`, label: m.label }))}
+            enlaces={ATAJOS.map((m) => ({ href: rutaMarca(m.id), label: m.label }))}
           />
 
           {/* Contacto */}

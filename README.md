@@ -229,8 +229,13 @@ design/stitch/            maquetas de referencia (capturas + HTML exportado)
 src/
   app/
     layout.tsx            fuentes, metadatos, JSON-LD, navegación, footer
-    page.tsx              landing: hero + catálogo
+    page.tsx              landing: hero + catálogo interactivo
+    repuestos/
+      page.tsx            índice del catálogo, en HTML plano y completo
+      [id]/page.tsx       una página por repuesto (la ficha indexable)
+      marca/[marca]/      una página por marca de vehículo
     nosotros/page.tsx     página Nosotros, fuera de la landing
+    not-found.tsx         404 con salida al catálogo y a WhatsApp
     globals.css           tokens Material 3, escala tipográfica, motion
     fonts/                subconjunto de Material Symbols
     opengraph-image.tsx   imagen de Open Graph generada en build
@@ -238,12 +243,12 @@ src/
   components/
     layout/               Navbar, BottomNav, Footer, WhatsAppFab, Logo
     sections/             Hero, Nosotros
-    catalogo/             Catalogo, ProductoCard, ProductoModal, FiltroSidebar,
-                          EstadoVacio
-    ui/                   Button, Badge, Chip, Checkbox, Icon, Modal, Skeleton
+    catalogo/             Catalogo, ProductoCard, FichaProducto, ListaRepuestos,
+                          CotizadorWhatsApp, Migas, FiltroSidebar, EstadoVacio
   data/productos.json     catálogo de ejemplo (22 repuestos)
   hooks/useFiltros.ts     estado de filtros sobre la URL
-  lib/                    tipos, taxonomía, datos, contacto, WhatsApp, utilidades
+  lib/                    tipos, taxonomía, datos, contacto, WhatsApp, rutas,
+                          carga del catálogo, SEO, utilidades
 scripts/                  generadores de imágenes y del subconjunto de iconos
 ```
 
@@ -284,6 +289,23 @@ hosting:
 
 El `www` lo redirige Next al dominio sin prefijo (`redirects()` en
 `next.config.mjs`), por si el registrador crea el CNAME por su cuenta.
+
+#### Después de desplegar las páginas de repuesto
+
+El sitemap pasó de 2 URLs a 67. Google las encontrará solo, pero tarda semanas en
+rastrear un sitio nuevo sin historial, y hay dos cosas que aceleran el arranque:
+
+1. En Search Console > **Inspección de URLs**, pegar la ficha de tres o cuatro
+   repuestos representativos y pulsar *Solicitar indexación*. Es manual y está
+   limitado a unas pocas al día, así que se usa en las piezas que más se venden,
+   no en las cincuenta.
+2. En **Sitemaps**, volver a enviar `sitemap.xml` para que Google vea que cambió,
+   y a los pocos días comprobar en *Páginas* cuántas de las 67 están indexadas.
+   Es la cifra que dice si esto funcionó.
+
+Lo que **no** hay que hacer: pedir indexación de las cincuenta a la vez, ni
+volver a enviar el sitemap todos los días. No acelera nada y son señales de sitio
+automatizado.
 
 ### Otro hosting con Node
 
@@ -403,27 +425,101 @@ Para reextraer la parte semántica hay que relanzar `/graphify` (o exportar
 
 ## SEO
 
+### Una página por repuesto
+
+Es la decisión de la que depende todo lo demás, así que conviene entender por qué.
+
+Durante un tiempo el sitio tuvo **dos** URLs indexables —`/` y `/nosotros`— y
+cincuenta repuestos que solo existían dentro de una ventana modal abierta desde el
+catálogo. La modal no tenía dirección: no se podía compartir, el botón atrás del
+móvil no la cerraba y, sobre todo, un buscador no tenía ninguna URL que devolver.
+El síntoma era exactamente este: buscar «culata Nissan X-Trail» no traía el sitio,
+y solo aparecía al escribir además el nombre del negocio, porque el nombre del
+negocio era lo único que la portada nombraba.
+
+Un buscador no posiciona productos, posiciona **páginas**. Una portada con un
+`<h1>` genérico compite a la vez por cincuenta búsquedas distintas y no gana
+ninguna. Hoy hay tres familias de rutas:
+
+| Ruta | Qué es | Para qué búsqueda |
+|---|---|---|
+| `/repuestos/<id>` | La ficha, con su `<h1>`, título, descripción y canonical propios | «culata nissan x-trail t30» |
+| `/repuestos/marca/<marca>` | Listado de una marca, con los modelos cubiertos | «repuestos nissan colombia» |
+| `/repuestos` | Índice completo en HTML plano | «catálogo de repuestos» |
+
+Las rutas se escriben desde `src/lib/rutas.ts` y nunca a mano: las usan las
+tarjetas, la ficha, el pie y el sitemap, y una ruta suelta mal escrita es un
+enlace roto que no se nota hasta que lo rastrea Google.
+
+**El índice `/repuestos` no es decorativo.** La retícula de la portada es un
+componente de cliente que pinta doce tarjetas y espera un clic en «cargar más»:
+quien rastrea el HTML ve doce y no tiene por dónde seguir. `/repuestos` es la
+misma lista en HTML plano y completa, así que ninguna ficha queda a más de dos
+clics de la raíz.
+
+### Dónde está cada cosa
+
 | Elemento | Dónde |
 |---|---|
 | Título y plantilla, descripción, keywords, canonical, `hreflang` | `src/app/layout.tsx` |
-| Título y canónica propios por página | `src/app/nosotros/page.tsx` |
+| Título, descripción y canónica por ficha y por marca | `generateMetadata` en `src/app/repuestos/…` |
+| Constructores de título y descripción | `tituloProducto`, `descripcionProducto`, `tituloMarca`, `descripcionMarca` en `src/lib/seo.ts` |
 | Open Graph y Twitter Card | `layout.tsx` y sobrescritura por página |
 | Imagen OG generada en build | `src/app/opengraph-image.tsx` |
 | `robots.txt` y `sitemap.xml` | `src/app/robots.ts`, `src/app/sitemap.ts` |
 | Datos estructurados | `src/lib/seo.ts` |
 
-Los datos estructurados son tres:
+Los datos estructurados:
 
 - **`Organization`** con `contactPoint` y `areaServed`. No es `Store` ni
   `LocalBusiness` porque no hay sede física, y no declara horario porque el
   sitio no lo publica.
 - **`WebSite`** con `SearchAction`, que declara el buscador del catálogo.
-- **`BreadcrumbList`** en `/nosotros`.
+- **`ItemList`** en la portada, en `/repuestos` y en cada marca, con la **URL de
+  cada ficha**. Sin esa `url` el listado le decía a Google que hay cincuenta cosas
+  y ninguna a la que ir.
+- **`ItemPage`** en cada ficha, con la foto del repuesto como
+  `primaryImageOfPage`.
+- **`BreadcrumbList`** en `/nosotros`, en `/repuestos`, en cada marca y en cada
+  ficha.
 
-**El sitemap solo lista URLs canónicas.** Las vistas filtradas (`/?cat=frenos`)
-no aparecen: todas declaran `canonical` hacia la portada, así que listarlas
-sería pedir la indexación de algo marcado a la vez como duplicado. Se llega a
-ellas desde los enlaces del footer.
+### Por qué las fichas no declaran `Product`
+
+Porque `Product` exige `offers`, `review` o `aggregateRating`, y ninguno de los
+tres se puede declarar sin mentir: el catálogo no publica precio ni disponibilidad
+a propósito —es un índice de compatibilidad, no un inventario— y no hay reseñas.
+Search Console ya lo marcó una vez como error crítico de «Fragmentos de
+productos», y precios inventados en el marcado son motivo de acción manual.
+
+`ItemPage` da lo que aquí importa sin ese coste. **El día que se publique precio y
+disponibilidad reales por repuesto**, `fichaSchema` pasa a ser `Product` con su
+`offers` y las fichas optan al resultado enriquecido con precio en el propio
+resultado de búsqueda. Es la mejora de SEO más grande que le queda al sitio.
+
+### El sitemap
+
+Lista las 67 URLs canónicas: portada, índice, una por marca con repuestos, una por
+repuesto y Nosotros. Cada foto cuelga de **su** ficha y ya no de la portada, que
+es lo que hace que un resultado de Google Imágenes aterrice en la pieza y no en
+una portada donde hay que volver a buscarla.
+
+Las vistas filtradas (`/?marca=nissan`) siguen fuera: declaran `canonical` hacia
+la portada, así que listarlas sería pedir la indexación de algo marcado a la vez
+como duplicado. Su equivalente indexable es `/repuestos/marca/nissan`.
+
+Las marcas **sin repuestos publicados** no se listan y responden 404: una página
+de marca vacía es contenido escaso, y una 404 en el sitemap es un error en Search
+Console.
+
+### `robots.txt`
+
+Cierra `/admin` y `/api/admin`. **`/api/foto` se queda abierta a propósito**: las
+cincuenta fotos se sirven desde ahí y no desde `public/`, así que cerrar `/api`
+entero —el reflejo habitual— bloquearía el rastreo de todas las imágenes del
+sitio. En repuestos Google Imágenes es una vía de entrada de primer orden, porque
+mucha gente busca con la pieza vieja en la mano.
+
+### Invariantes
 
 Cada página tiene **un solo `<h1>`**, jerarquía de encabezados sin saltos y
 `alt` en todas las imágenes (verificado sobre el HTML servido).

@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
+import { rutaProducto } from "@/lib/rutas";
 import { LABEL_CATEGORIA } from "@/lib/taxonomia";
 import type { Producto } from "@/lib/types";
 import { nombrarVehiculo, rangoAniosLegible } from "@/lib/utils";
@@ -10,7 +12,6 @@ import { useMarcas } from "./ContextoMarcas";
 interface Props {
   producto: Producto;
   indice: number;
-  onAbrir: (producto: Producto) => void;
   prioridad?: boolean;
 }
 
@@ -19,6 +20,13 @@ interface Props {
  *
  * Muestra solo lo que el catálogo puede sostener: categoría, nombre, número de
  * parte y compatibilidad. Nada de condición, disponibilidad ni precio.
+ *
+ * El nombre es un **enlace** a `/repuestos/<id>`, no un botón que abría una
+ * ventana modal. La modal no tenía dirección: no se podía compartir, el botón
+ * atrás del móvil no la cerraba y, sobre todo, un buscador no tenía ningún enlace
+ * por el que llegar a las fichas. Cincuenta repuestos y ninguna página propia era
+ * la razón de que el catálogo solo apareciera en Google al escribir el nombre del
+ * negocio junto al de la pieza.
  *
  * Responsive por **consulta de contenedor**, no por anchura de ventana. La
  * tarjeta vive en una retícula auto-ajustable cuyo número de columnas depende
@@ -31,7 +39,7 @@ interface Props {
  * posición de scroll por CSS) y al pasar el puntero se enciende el borde, la
  * imagen escala y el pie se rellena.
  */
-export function ProductoCard({ producto, indice, onAbrir, prioridad }: Props) {
+export function ProductoCard({ producto, indice, prioridad }: Props) {
   const { etiqueta } = useMarcas();
   const compatibilidad = `${nombrarVehiculo(producto, producto.modelos[0], etiqueta)} ${rangoAniosLegible(
     producto.anioDesde,
@@ -75,13 +83,15 @@ export function ProductoCard({ producto, indice, onAbrir, prioridad }: Props) {
             compatibilidad quedaba a distinta altura en cada tarjeta de la
             misma fila. */}
         <h3 className="mb-xs line-clamp-2 text-label-sm font-semibold leading-snug tracking-[-0.01em] text-on-surface transition-colors duration-[var(--dur-rapida)] group-hover:text-primary @[15rem]:min-h-12 @[15rem]:text-body-md @[15rem]:leading-6">
-          <button
-            type="button"
-            onClick={() => onAbrir(producto)}
+          {/* El pseudoelemento extiende el área pulsable a la tarjeta entera
+              sin anidar el resto del contenido dentro del enlace, que dejaría
+              un texto de enlace kilométrico. */}
+          <Link
+            href={rutaProducto(producto.id)}
             className="text-left after:absolute after:inset-0 after:content-['']"
           >
             {producto.nombre}
-          </button>
+          </Link>
         </h3>
 
         {/* Número de parte. No se parte: es un código, y romperlo por la mitad
